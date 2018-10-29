@@ -5,6 +5,12 @@
     <title>Main Home Page</title>
 </head>
 <body>
-    <p>This page will have option for SignUp and LogIn Option for Delivery Guy.</p>
+<p>This page will have option for <a href="{% url 'Del_signup' %}">SignUp</a> and LogIn Option for Delivery Guy.</p>
+
+    <form action="">
+        Username : <input type="text"><br>
+        Password : <input type="password"><br>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>

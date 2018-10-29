@@ -2,5 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("This is MainPage of Delivery after Logging In")
+    return render(request, 'Delivery/index.html')
 
+def signup(request):
+    return render(request, 'Delivery/signup.html')
