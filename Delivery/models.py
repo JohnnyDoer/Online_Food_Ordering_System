@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from Restaurants.models import Restaurant, FoodCategory, Food
-from Customers.models import Customer, Address, Order, Item
+from Customers.models import Profile, Address, Order, Item
 
 # Create your models here.
 
