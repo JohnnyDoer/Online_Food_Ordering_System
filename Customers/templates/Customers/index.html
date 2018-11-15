@@ -6,6 +6,15 @@
 </head>
 <body>
     <p>This is the page that the customer will see when he/she logs in.</p>
-    <a href="{% url 'Cus_categories' %}">Categories</a>
+    <p><b>Select one address of yours</b></p>
+    <a href="{% url 'Cus_categories' %}">Categories</a><br>
+    {% for value in vals %}
+
+        {{ value.Address_id }}
+        <a href="{% url 'Res_index' %}">{{ value.home }}</a>
+        {{ value.society }}
+        {{ value.Area }}
+        <br>
+    {% endfor %}<br>
 </body>
 </html>
