@@ -1,2 +1,4 @@
 .idea
 HTML Templates/
+*/__pychache__
+db.sqlite3
