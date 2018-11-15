@@ -1,4 +1,8 @@
 .idea
 HTML Templates/
-*/__pychache__
+Customers/__pychache__/
+Delivery/__pychache__/
+ASE_Project/__pychache__/
+Restaurants/__pychache__/
+Main/__pychache__/
 db.sqlite3
