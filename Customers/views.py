@@ -1,16 +1,24 @@
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from .forms import signupform
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from .forms import UserProfileInfoForm,Addressinfoform
 from django.core.mail import send_mail
 from .models import Address, Profile
+#from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 
 cuisines = ["Afghani", "American", "Fried Chicken", "Hawaiian", "Malaysian", "Modern Indian", "Pan Asian",
               "Portuguese", "Salad", "South Indian", "Steak", "Tea", ]
 
+@login_required
+def user_logout(request):
+    # Log out the user.
+    logout(request)
+    # Return to homepage.
+    return redirect('http://127.0.0.1:8000/')
 
 
 def index(request):
