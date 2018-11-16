@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from Restaurants.models import Restaurant, FoodCategory, Food
-from Customers.models import Profile, Address, Order, Item
+# from Customers.models import Address, Order, Item, Profile
 
 # Create your models here.
 
@@ -18,6 +18,4 @@ class Delivery(models.Model):
     Delivery_Pin = models.CharField(max_length=6, default=000000)
     Delivery_City = models.CharField(max_length=250)
     Delivery_State = models.CharField(max_length=250)
-    Delivery_Pic = models.ImageField
-    Delivery_Order_ID = models.ForeignKey(Order, on_delete=models.CASCADE)
-
+    #Delivery_Pic = models.ImageField

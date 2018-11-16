@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from Customers.models import Profile, Address
 
 
-class signupform(UserCreationForm):
+class SignUpForm(UserCreationForm):
     # first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     # last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
@@ -20,7 +20,7 @@ class UserProfileInfoForm(forms.ModelForm):
         fields = ('Customer_FName', 'Customer_LName', 'Customer_Num')
 
 
-class Addressinfoform(forms.ModelForm):
+class AddressInfoForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = ('Home', 'Society', 'Area', 'City', 'State')

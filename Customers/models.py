@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import MaxValueValidator
 from Restaurants.models import Restaurant, FoodCategory, Food
-# from Delivery.models import Delivery
+from Delivery.models import Delivery
 # Create your models here.
 
 
@@ -47,6 +47,7 @@ class Order(models.Model):
     Order_ID = models.AutoField(primary_key=True)
     Order_Customer_ID = models.ForeignKey(Profile, on_delete=models.CASCADE)
     Order_Restaurant_ID = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    Order_Delivery_ID = models.ForeignKey(Delivery, on_delete=models.CASCADE)
     Order_Status = models.IntegerField(MaxValueValidator(5))
     Order_Time = models.DateTimeField(default=timezone.now)
     # Order_Discount =

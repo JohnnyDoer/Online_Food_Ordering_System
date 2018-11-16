@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from .forms import signupform
-from .forms import UserProfileInfoForm, Addressinfoform
+from .forms import SignUpForm
+from .forms import UserProfileInfoForm, AddressInfoForm
 from django.core.mail import send_mail
 from .models import Address
 
@@ -19,10 +19,10 @@ def index(request):
     return render(request, 'Customers/index.html')
 
 
-def profilepage(request):
+def profile_page(request):
     if request.method == 'POST':
         profile_form = UserProfileInfoForm(data=request.POST)
-        address_form = Addressinfoform(data=request.POST)
+        address_form = AddressInfoForm(data=request.POST)
         # print(form)
         if profile_form.is_valid():
             profile = profile_form.save(commit=False)
@@ -38,7 +38,7 @@ def profilepage(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = signupform(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -49,10 +49,10 @@ def signup(request):
             #         fail_silently=False)
             return redirect('http://127.0.0.1:8000/')
         else:
-            return render(request, 'Customers/signup.html', {'form': form,})
+            return render(request, 'Customers/signup.html', {'form': form, })
     else:
-        form = signupform()
-    return render(request, 'Customers/signup.html', {'form': form,})
+        form = SignUpForm()
+    return render(request, 'Customers/signup.html', {'form': form, })
 
 
 def categories(request):
