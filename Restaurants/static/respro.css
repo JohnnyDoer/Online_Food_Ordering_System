@@ -42,25 +42,12 @@ body {
 }
 .login .message {
   margin: 15px 0 0;
-  color: darkslategrey;
-  font-size: 16px;
+  color: #b3b3b3;
+  font-size: 14px;
   font-family: "Roboto", sans-serif;
 }
 .login .message a {
-  color:darkslategrey;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-.text {
-  margin: 15px 0 0;
-  color: floralwhite;
-  font-size: 16px;
-  font-family: "Roboto", sans-serif;
-
-}
-.text a{
   color:white;
   text-decoration: none;
-  font-size: 16px;
 }
+
