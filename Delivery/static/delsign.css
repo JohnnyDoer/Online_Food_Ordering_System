@@ -1,0 +1,54 @@
+.signform
+{
+  position: relative;
+  max-width: 360px;
+  margin: 5% auto 100px;
+  text-align: center;
+}
+.signform label{
+  font-size: 18px;
+  font-family: "verdana", Sans-Serif;
+  color: darkslategrey;
+}
+
+
+.signform input
+{
+  background: #f2f2f2;
+  width: 75%;
+  border: 0;
+  margin: 0 0 5px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+
+}
+.signform button
+{
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  background: #800000;
+  width: 75%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+}
+.signform .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 14px;
+}
+.signform .message a {
+  color:darkslategrey;
+  text-decoration: none;
+}
+.signform button:hover,.signform button:active,.signform button:focus {background:#ff0000;}
+body
+{
+  background-size:100%;
+  background-repeat:no-repeat;
+  background-position:center;
+  font-family: "Roboto", sans-serif;
+}
