@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from Customers.models import Profile,Address
+Areas = (('thames','thames'),
+       ('lambeth', 'lambeth'),
+       ('southpark', 'southpark'),
+       ('nova', 'nova'))
+
 
 class Order(models.Model):
     Order_id = models.CharField(max_length=100,unique=True)
@@ -14,9 +19,9 @@ class DelProfile(models.Model):
     Delivery_Fname = models.CharField(max_length=200)
     Delivery_Lname = models.CharField(max_length=200)
     Delivery_Num = models.CharField(max_length=10,unique=True)
-    Delivery_Area = models.CharField(max_length=105,unique=True)
-    Delivery_City = models.CharField(max_length=200,unique=True)
-    Delivery_State = models.CharField(max_length=200,unique=True)
+    Delivery_Area = models.CharField(max_length=105,choices=Areas)
+    Delivery_City = models.CharField(max_length=200)
+    Delivery_State = models.CharField(max_length=200)
     #order_id = models.ForeignKey(Order,on_delete=models.CASCADE)
 
     def __str__(self):
