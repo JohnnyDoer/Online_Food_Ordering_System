@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Rstaurants</title>
 </head>
 <body>
-
+{% if user.is_authenticated %}
+            <a style="text-align: left ; color: maroon;font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;font-size: 30px" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    {% endif %}
+    <br>
+<p>These are the restaurants near by ,for the given address</p>
+{% for value in filter_res %}
+        {{ value.Area }}
+        {{ value.Restaurant_Name }}
+        {{ value.Restaurant_City }}
+        <br>
+    {% endfor %}
 </body>
 </html>

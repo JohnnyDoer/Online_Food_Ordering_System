@@ -77,7 +77,9 @@ def cusindex(request):
 
 @login_required(login_url='Main_index')
 def restaurants(req):
-
-    filter_res = ResProfile.objects.filter()
-    con = {}
+    data = req.POST['areas']
+    print(data)
+    filter_res = ResProfile.objects.filter(Restaurant_Area=data)
+    print(filter_res)
+    con = {'filter_res':filter_res}
     return render(req,'Customers/res.html',context=con)
