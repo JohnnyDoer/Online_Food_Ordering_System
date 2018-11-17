@@ -16,9 +16,9 @@
     {% for value in vals %}
 
         {{ value.Address_id }}
-        <a href="{% url 'Res_index' %}">{{ value.home }}</a>
+        {{ value.home }}
         {{ value.society }}
-        {{ value.Area }}
+        <a href="{% url 'Res_index' %}">{{ value.Area }}</a>
         <br>
     {% endfor %}<br>
 </body>

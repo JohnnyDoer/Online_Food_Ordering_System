@@ -7,11 +7,13 @@ from django.http import HttpResponse,HttpResponseRedirect
 from .forms import UserProfileInfoForm,Addressinfoform
 from django.core.mail import send_mail
 from .models import Address, Profile
-#from django.core.urlresolvers import reverse
+from Main.views import index
 from django.contrib.auth.decorators import login_required
+from Restaurants.models import ResProfile
 
 cuisines = ["Afghani", "American", "Fried Chicken", "Hawaiian", "Malaysian", "Modern Indian", "Pan Asian",
               "Portuguese", "Salad", "South Indian", "Steak", "Tea", ]
+
 
 @login_required
 def user_logout(request):
@@ -21,20 +23,12 @@ def user_logout(request):
     return redirect('http://127.0.0.1:8000/')
 
 
-def index(request):
-    #data = Profile.objects.all()
-    vals = Address.objects.filter(username=request.user)
-    #print(data)
-    context = { 'vals':vals}
-    return render(request, 'Customers/index.html', context=context)
-
-
+@login_required(login_url = 'Main_index')
 def profilepage(request):
     if request.method == 'POST':
         profile_form = UserProfileInfoForm(data=request.POST)
         address_form = Addressinfoform(data=request.POST)
-        # print(form)
-        if  profile_form.is_valid() and address_form.is_valid() :
+        if profile_form.is_valid() and address_form.is_valid() :
             profile = profile_form.save(commit=False)
             address = address_form.save(commit=False)
             profile.user = request.user
@@ -72,3 +66,18 @@ def signup(request):
 def categories(request):
     context = {'cuisines': cuisines, }
     return render(request, 'Customers/categories.html', context)
+
+
+@login_required(login_url='Main_index')
+def cusindex(request):
+    vals = Address.objects.filter(username=request.user)
+    context = {'vals': vals}
+    return render(request, 'Customers/index.html', context=context)
+
+
+@login_required(login_url='Main_index')
+def restaurants(req):
+
+    filter_res = ResProfile.objects.filter()
+    con = {}
+    return render(req,'Customers/res.html',context=con)
