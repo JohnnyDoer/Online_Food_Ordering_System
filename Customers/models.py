@@ -6,6 +6,10 @@ from Restaurants.models import Restaurant, FoodCategory, Food
 from Delivery.models import Delivery
 # Create your models here.
 
+Areas=(('thames','thames'),
+       ('lambeth', 'lambeth'),
+       ('southpark', 'southpark'),
+       ('nova', 'nova'))
 
 # class Customer(models.Model):
 #    Customer_ID = models.AutoField(primary_key=True)
@@ -20,13 +24,13 @@ from Delivery.models import Delivery
 
 
 class Profile(models.Model):
-    Customer_ID = models.AutoField(primary_key=True)
+    Customer_ID = models.AutoField(primary_key=True, auto_created=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     Customer_FName = models.CharField(max_length=200)
     Customer_LName = models.CharField(max_length=200)
     Customer_Num = models.CharField(max_length=10, unique=True)
-    Customer_Pic = models.ImageField(upload_to='Customers/Pictures/Profiles')
-    Customer_Email = models.EmailField()
+    # Customer_Pic = models.ImageField(upload_to='Customers/Pictures/Profiles')
+    Customer_Email = models.EmailField(default="asd@rew.com")
 
     def __str__(self):
         return self.user.username
@@ -34,10 +38,11 @@ class Profile(models.Model):
 
 class Address(models.Model):
     Address_ID = models.AutoField(primary_key=True)
-    Customer_ID = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    # Customer_ID = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    username = models.OneToOneField(User, on_delete=models.CASCADE)
     Home = models.CharField(max_length=250)
     Society = models.CharField(max_length=250)
-    Area = models.CharField(max_length=250)
+    Area = models.CharField(max_length=250, choices=Areas)
     City = models.CharField(max_length=250)
     State = models.CharField(max_length=250)
     Pin = models.CharField(max_length=6, default=000000)

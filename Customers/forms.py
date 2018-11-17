@@ -23,4 +23,4 @@ class UserProfileInfoForm(forms.ModelForm):
 class AddressInfoForm(forms.ModelForm):
     class Meta:
         model = Address
-        fields = ('Home', 'Society', 'Area', 'City', 'State')
+        fields = ('Home', 'Society', 'Area', 'City', 'State', 'Pin')

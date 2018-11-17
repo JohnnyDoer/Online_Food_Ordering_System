@@ -9,6 +9,7 @@ from django.core.mail import send_mail
 from .models import Address, Profile
 #from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from Restaurants.models import Restaurant
 
 cuisines = ["Afghani", "American", "Fried Chicken", "Hawaiian", "Malaysian", "Modern Indian", "Pan Asian",
               "Portuguese", "Salad", "South Indian", "Steak", "Tea", ]
@@ -26,8 +27,15 @@ def index(request):
     #data = Profile.objects.all()
     vals = Address.objects.filter(username=request.user)
     #print(data)
-    context = { 'vals': vals}
+    context = {'vals': vals}
     return render(request, 'Customers/index.html', context=context)
+
+
+def restaurants(request):
+    data = request.POST['area']
+    filter_res = Restaurant.objects.filter(Restaurant_Area=data)
+    con = {'filter_res': filter_res}
+    return render(request, 'Customers/filter_res.html', context=con)
 
 
 def profile_page(request):
