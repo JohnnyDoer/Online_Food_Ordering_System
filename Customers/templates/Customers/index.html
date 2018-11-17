@@ -14,15 +14,15 @@
     <p><b>Select one address of yours</b></p>
     <a href="{% url 'Cus_categories' %}">Categories</a><br>
     <p>These are yours address areas select one </p><br>
-    <form method="post" action="{% url "res_area" %}" id="formid">
-        {% csrf_token %}
-        <button type="submit" value="submit">Submit</button>
-    </form>
  <select name="areas" form="formid">
         {% for value in vals %}
         <option value="{{ value.Area }}">{{ value.Area }}</option>
         <br>
     {% endfor %}
     </select><br>
-</body>
+    <form method="post" action="{% url "res_area" %}" id="formid">
+        {% csrf_token %}
+        <button type="submit" value="submit">Submit</button>
+    </form>
+ </body>
 </html>
