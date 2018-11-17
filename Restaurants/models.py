@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.core.validators import RegexValidator, MaxValueValidator
 # from Delivery.models import Delivery
 # from Customers.models import Customer, Address, Order, Item
@@ -9,6 +10,7 @@ from django.core.validators import RegexValidator, MaxValueValidator
 class Restaurant(models.Model):
     Restaurant_ID = models.AutoField(primary_key=True)
     Restaurant_Name = models.CharField(max_length=250)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     Restaurant_Logo = models.ImageField(upload_to='Restaurants/Pictures/Logo')
     # + str(Restaurant_ID) + '/' + str(Restaurant_Name))
     Restaurant_Area = models.CharField(max_length=250)
@@ -20,8 +22,8 @@ class Restaurant(models.Model):
                                             " '+999999999'. Up to 15 digits allowed.")
     Restaurant_Num = models.CharField(validators=[Restaurant_Regex], max_length=17)
     Restaurant_Email = models.CharField(max_length=250)
-    Restaurant_Ratings_Count = models.IntegerField()
-    Restaurant_Rating = models.IntegerField(MaxValueValidator(10))
+    Restaurant_Ratings_Count = models.IntegerField(default=0)
+    Restaurant_Rating = models.IntegerField(MaxValueValidator(10), default=0)
 
 
 class FoodCategory(models.Model):
