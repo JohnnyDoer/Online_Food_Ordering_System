@@ -44,8 +44,8 @@ def index(request):
 def restaurants(request):
     data = request.POST['area']
     filter_res = Restaurant.objects.filter(Restaurant_Area=data)
-    con = {'filter_res': filter_res}
-    return render(request, 'Customers/filter_res.html', context=con)
+    context = {'filter_res': filter_res}
+    return render(request, 'Customers/filter_res.html', context=context)
 
 
 def profile_page(request):

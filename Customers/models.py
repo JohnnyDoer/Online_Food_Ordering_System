@@ -6,10 +6,10 @@ from Restaurants.models import Restaurant, FoodCategory, Food
 from Delivery.models import Delivery
 # Create your models here.
 
-Areas=(('thames','thames'),
-       ('lambeth', 'lambeth'),
-       ('southpark', 'southpark'),
-       ('nova', 'nova'))
+Areas=(('Thames', 'Thames'),
+       ('Lambeth', 'Lambeth'),
+       ('Southpark', 'Southpark'),
+       ('Nova', 'Nova'))
 
 # class Customer(models.Model):
 #    Customer_ID = models.AutoField(primary_key=True)
