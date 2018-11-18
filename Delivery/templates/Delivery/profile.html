@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="{% static   "delpro.css" %}"/>
 </head>
 <body>
-
+{% if user.is_authenticated %}
+            <a style="text-align: left ; color: maroon;font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;font-size: 30px"href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    {% endif %}
 {% block content %}
   <div class="login">
   <center><h2 style="color: orange;font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;font-size: 35px">Deliver guy profile</h2></center>
@@ -27,9 +30,3 @@
 {% endblock %}
 </body>
 </html>
-
-
-
-
-
-

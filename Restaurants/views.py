@@ -13,14 +13,14 @@ def index(request):
             user = form.get_user()
             login(request, user)
             if Restaurant.objects.filter(user=user).exists():
-                return HttpResponse('u have logged in and u have a profile')
+                return render(request, 'Restaurant/res_profile.html')
             else:
                 return redirect('http://127.0.0.1:8000/restaurant/profile')
         else:
             return render(request, 'Restaurant/index.html', {'form': form})
     else:
         form = AuthenticationForm()
-        return render(request,'Restaurant/index.html',{'form': form})
+        return render(request, 'Restaurant/index.html', {'form': form})
 
 
 def signup(request):
@@ -33,10 +33,10 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             return redirect('http://127.0.0.1:8000/restaurant')
         else:
-            return render(request, 'Restaurant/signup.html', {'form': form,})
+            return render(request, 'Restaurant/signup.html', {'form': form, })
     else:
         form = SignUpForm()
-    return render(request, 'Restaurant/signup.html', {'form': form,})
+    return render(request, 'Restaurant/signup.html', {'form': form, })
 
 
 def profile_page(request):
@@ -47,7 +47,7 @@ def profile_page(request):
             profile = profile_form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return HttpResponse('u have logged in and u have a profile')
+            return render(request, 'Restaurant/res_profile.html')
         else:
             return render(request, 'Restaurant/profile.html', {'Profile_form': profile_form})
     else:

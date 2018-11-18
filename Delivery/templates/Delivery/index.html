@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load staticfiles %}
 <head>
     <meta charset="UTF-8">
-    <title>Main Home Page</title>
+    <title>Home page Delivery</title>
+    <link rel="stylesheet" href="{% static   "dellogin.css"%}"/>
 </head>
 <body>
-<p>This page will have option for <a href="{% url 'Del_signup' %}">SignUp</a> and LogIn Option for Delivery Guy.</p>
 
-    <form action="">
-        Username : <input type="text"><br>
-        Password : <input type="password"><br>
-        <button type="submit">Submit</button>
-    </form>
+{% block content %}
+<center><h1 style="color: #43A047;font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;font-size: 50px">Login</h1></center>
+  <div class="login">
+  <form class="logform" method="post">
+    {% csrf_token %}
+    {{ form.as_p     }}
+    <button type="submit">Login</button>
+  </form>
+  <p class="message">Not registered? <a href="{% url "Del_signup" %}">SignUp</a></p><br>
+  </div>
+{% endblock %}
 </body>
 </html>

@@ -1,20 +1,38 @@
+
 <!DOCTYPE html>
 <html lang="en">
+{% load staticfiles %}
 <head>
     <meta charset="UTF-8">
-    <title>SignUp</title>
+    <title>signup</title>
+    <link rel="stylesheet" href="{% static   "delsign.css" %}"/>
 </head>
 <body>
-<form>
-    First Name : <input type="text">
-    Last Name : <input type="text">
-    Address : <input type="text">
-    City : <input type="text">
-    <input type="submit">
-</form>
+
+{% block content %}
+   <!-- <center><h2>Sign up</h2></center>-->
+  <div class="signform">
+  <form  method="POST" action="{% url "Del_signup" %}">
+    {% csrf_token %}
+      {% for field in form %}
+        {{ field.label_tag }}<br>
+        {{ field }}<br>
+        {% if field.help_text %}
+          <small ></small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      {% endfor %}
+    <button type="submit" value="signup">Sign up</button>
+  </form>
+  </div>
+{% endblock %}
+
 
 <p>A pop up window will come displaying if SignUp is successful or not.<br>
-    The person will be redirected to main page.
-</p>
+    The person will be redirected to main page.</p>
+
 </body>
 </html>
+
