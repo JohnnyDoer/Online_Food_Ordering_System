@@ -1,6 +1,6 @@
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.shortcuts import render,redirect
 from Customers.models import Profile
 from django.http import HttpResponse
 
@@ -19,5 +19,5 @@ def index(request):
             return render(request, 'Main/login.html', {'form': form})
     else:
         form = AuthenticationForm()
-        return render(request, 'Main/login.html', {'form': form})
+        return render(request,'Main/login.html',{'form': form})
 

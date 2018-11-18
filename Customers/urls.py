@@ -1,9 +1,13 @@
-from django.urls import path
+from django.urls import path,re_path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='Cus_index'),
+    path('', views.cusindex, name='Cus_index'),
+    path('profile/',views.profilepage,name='cus_profile'),
     path('signup/', views.signup, name='Cus_signup'),
-    path('profile/', views.profilepage, name='Cus_profile'),
     path('categories/', views.categories, name='Cus_categories'),
+    path('logout/', views.user_logout, name='logout'),
+    path('res_area/',views.restaurants,name='res_area'),
+    re_path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.activate, name='activate'),
 ]

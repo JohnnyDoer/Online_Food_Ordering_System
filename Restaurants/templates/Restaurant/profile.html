@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static   "respro.css" %}"/>
+</head>
+<body>
+
+{% block content %}
+  <div class="login">
+  <center><h2 style="color: orange;font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;font-size: 35px">Deliver guy profile</h2></center>
+  <form  method="POST" action="{% url "Res_profile" %}">
+    {% csrf_token %}
+      {% for field in Profile_form %}
+        {{ field.label_tag }}<br>
+        {{ field }}<br>
+      {% endfor %}
+      {% for field in address_form %}
+        {{ field.label_tag }}<br>
+        {{ field }}<br>
+      {% endfor %}
+    <button type="submit" value="submit">Submit</button>
+  </form>
+  </div>
+{% endblock %}
+</body>
+</html>
+
+
+
+
+
+

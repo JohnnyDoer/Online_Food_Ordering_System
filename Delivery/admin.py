@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Delivery
+from Delivery.models import DelProfile
 
 # Register your models here.
-admin.site.register(Delivery)
+admin.site.register(DelProfile)
