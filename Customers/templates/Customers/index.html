@@ -5,12 +5,23 @@
     <title>Customer Homepage</title>
 </head>
 <body>
+    {% if user.is_authenticated %}
+            <a style="text-align: left ; color: maroon;font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;font-size: 30px"href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    {% endif %}
+    <br>
     <p>This is the page that the customer will see when he/she logs in.</p>
-    <a href="{% url 'Cus_categories' %}">Categories</a>
-
-    {% for value in vals %}
-        {{ value.Home }}
-        {{ value.Area }}
-    {% endfor %}<br>
+    <p><b>Select one address of yours</b></p>
+    <a href="{% url 'Cus_categories' %}">Categories</a><br>
+    <select name="area" form="formid">
+        {% for value in vals %}
+        <option value="{{ value.Area}}">{{ value.Area}}</option>
+        {% endfor %}<br>
+    </select>
+    <br>
+    <form method="post" id="formid" action="{% url "res_area" %}">
+        {% csrf_token %}
+        <button value="submit" type="submit">Submit</button>
+        </form>
 </body>
 </html>
