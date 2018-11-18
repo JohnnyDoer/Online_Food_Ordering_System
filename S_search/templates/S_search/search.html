@@ -1,0 +1,142 @@
+
+
+<!DOCTYPE html>
+<head>
+</head>
+<body background="color:rgb(0,0,0)">
+
+<nav>
+        <!-- items-->
+            <form class="navbar-form navbar-left">
+                    <input type="text" id = "filt" class="form-control" placeholder="Search Question" size="50" onkeyup="search()">
+                      <button type="submit">Submit
+                      </button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <br><br><br><br>
+    <br><br>
+
+    <div>
+        total questions :<br>
+                {% for obj in objs %}
+                {{ obj.Food_ID }}<br>
+                {{ obj.Keywords }}<br>
+                {% endfor %}
+        <table style="width:90%;padding:10px;" id="ta">
+
+
+            {% for q in objs %}
+                <tr>
+                <td>{{ q.Food_ID }}</td>
+                    <td>0</td>
+                </tr>
+            {% endfor %}
+            {% for q1 in objs%}
+                <tr>
+                <td>{{ q1.Keywords }}</td>
+                    <td>0</td>
+                </tr>
+            {% endfor %}
+
+
+
+
+    </table>
+    </div>
+
+</body>
+<script>
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("ta");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 0; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[1];
+      y = rows[i + 1].getElementsByTagName("TD")[1];
+      //check if the two rows should switch place:
+      if (Number(x.innerHTML) < Number(y.innerHTML)) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch= true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+function search() {
+	var input, filter, table, tr, td, i;
+	input = document.getElementById("filt");
+  	filter = input.value.toUpperCase();
+  	lst = filter.split(" ");
+  	var ind = 0;
+  	nlst = [];
+  	for (var k in lst){
+  		if (lst[k] != '')
+  		{
+  			nlst[ind] = lst[k];
+  			ind++;
+  		}
+  	}
+  	table = document.getElementById("ta");
+  	tr = table.getElementsByTagName("tr");
+ 	for (i = 0; i < tr.length; i++) {
+    	td = tr[i].getElementsByTagName("td")[0];
+    	tr[i].style.display = "";
+    	if (td) {
+    		var count = 0;
+    		for (var j in lst){
+	      		if (td.innerHTML.toUpperCase().indexOf(lst[j]) > -1 && lst[j]) {
+        			tr[i].style.display = "";
+        			count = count + 1;
+      			}
+    		}
+			tr[i].getElementsByTagName("td")[1].innerHTML = count;
+      		if(count == 0 && nlst.length && lst.length &&filter.length) {
+        		tr[i].style.display = "none";
+      		}
+    	}
+  	}
+  	sortTable();
+}
+
+</script>
+</html>
+<!--a = {"Restaurant1": {'Restaurant_ID': "454f31", 'Restaurant_Name': '1234355j4', 'ID': '5hhjm31', 'Category_Name': "Desserts",
+                    'Food_ID': "fc6dc", 'Food_Name': 'grgrg', 'Food_Discount': 3, 'Food_Price': 34, 'Keywords': "DESSERTS BROWNIE PASTRIES TRIFFLE"},
+         "Restaurant2": {'Restaurant_ID': "4ee45431", 'Restaurant_Name': '12g23435j54', 'ID': '3rugfxg531', 'Category_Name': "Desserts",
+                    'Food_ID': "ddjg", 'Food_Name': 'grgrg', 'Food_Discount': 3, 'Food_Price': 34, 'Keywords': "DESSERTS BROWNIE PASTRIES TRIFFLE"}
+         }
+    for k in ['Restaurant1', 'Restaurant2']:
+        foodid = a[k]['Food_ID']
+        foodname = a[k]['Food_Name']
+        fooddiscount = a[k]['Food_Discount']
+        foodprice = a[k]['Food_Price']
+        keywords = a[k]['Keywords']
+        restaurantid = a[k]['Restaurant_ID']
+        restaurantname = a[k]['Restaurant_Name']
+        categoryid = a[k]['ID']
+        categoryname = a[k]['Category_Name']
+        restaurant = Restaurant.objects.create(Restaurant_ID=restaurantid, Restaurant_Name=restaurantname)
+        foodcategory = Food_Category.objects.create(ID=categoryid, Category_Name=categoryname)
+        Food.objects.create(Food_ResID=restaurant, Food_Category_ID=foodcategory, Food_ID=foodid, Food_Name=foodname, Food_Discount=fooddiscount, Food_Price=foodprice, Keywords=keywords)-->
+
