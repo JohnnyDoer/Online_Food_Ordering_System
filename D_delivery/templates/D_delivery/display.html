@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Orders Received</title>
+
+
+</head>
+
+<body>
+
+  <h1><span class="yellow">Orders Received</pan></h1>
+
+<table class="container">
+	<head>
+		<tr bgcolor="#dc143c">
+			<th><h1>Customer ID</h1></th>
+			<th><h1>Address ID</h1></th>
+			<th><h1>Order ID</h1></th>
+			<th><h1>Discount</h1></th>
+			<th><h1>Total Price</h1></th>
+			<th><h1>Order Status</h1></th>
+		</tr>
+	</head>
+	<body>
+        {% for obj in objs %}
+		<tr>
+			<td>{{ obj.customer.Customer_ID }}</td>
+			<td>{{ obj.address.Address_ID }}</td>
+			<td>{{ obj.Order_ID }}</td>
+			<td>{{ obj.Discount }}</td>
+			<td>{{ obj.Total_Price }}</td>
+            <td>
+                <form action="{% url 'D_delivery:result1' %}" method="post">
+                    {%  csrf_token %}
+                    {% if obj.Status == False %}
+                                            <button type="submit" name="Delivered" value={{ obj.Order_ID }}>{{ obj.Status }}</button>
+
+                        {% else %}
+                                            {{ obj.Status }}
+
+                    {% endif %}
+                </form>
+            </td>
+		</tr>
+        {% endfor %}
+	</body>
+</table>
+
+
+
+</body>
+
+</html>

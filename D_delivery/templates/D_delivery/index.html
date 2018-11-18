@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+<h1>ORDER</h1>>
+<form action="result/" method="post">
+    {%  csrf_token %}
+    Order_ID:<br>
+    <input type="text" name="Order_ID" id="Order_ID"><br>
+    Customer_ID:<br>
+    <input type="text" name="Customer_ID" id="Customer_ID"><br>
+    Address_ID:<br>
+    <input type="text" name="Address_ID" id="Address_ID"><br>
+    Discount:<br>
+    <input type="text" name="Discount" id="Discount"><br><br>
+    Total_Price:<br>
+    <input type="text" name="Total_Price" id="Total_Price"><br><br>
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
