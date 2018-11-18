@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Orders Received</title>
+
+
+</head>
+
+<body>
+
+  <h1><span class="yellow">Orders Received</pan></h1>
+
+<table class="container">
+	<head>
+		<tr bgcolor="#dc143c">
+			<th><h1>Item_ID</h1></th>
+			<th><h1>Order_ID</h1></th>
+			<th><h1>Food_ID</h1></th>
+			<th><h1>Quantity</h1></th>
+			<th><h1>Price</h1></th>
+		</tr>
+	</head>
+	<body>
+        {% for obj in objs %}
+		<tr>
+			<td>{{ obj.Item_ID }}</td>
+			<td>{{ obj.Order_ID }}</td>
+			<td>{{ obj.Food_ID }}</td>
+			<td>{{ obj.Quantity }}</td>
+			<td>{{ obj.Price }}</td>
+		</tr>
+        {% endfor %}
+	</body>
+</table>
+
+
+
+</body>
+
+</html>
