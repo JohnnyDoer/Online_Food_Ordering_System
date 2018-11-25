@@ -134,3 +134,5 @@ def res_info(request):
     catg_data = FoodCategory.objects.all()
     context = {'data' : data , 'rest_data': rest_data, 'catg_data': catg_data}
     return render(request, 'Customers/res_info.html',context=context)
+
+
