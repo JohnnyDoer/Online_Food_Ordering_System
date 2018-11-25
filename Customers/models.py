@@ -11,17 +11,6 @@ Areas=(('Thames', 'Thames'),
        ('Southpark', 'Southpark'),
        ('Nova', 'Nova'))
 
-# class Customer(models.Model):
-#    Customer_ID = models.AutoField(primary_key=True)
-#    Customer_Fname = models.CharField(max_length=250)
-#    Customer_Lname = models.CharField(max_length=250)
-#    Customer_Regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
-#                                    message="Phone number must be entered in the format:" +
-#                                            " '+999999999'. Up to 15 digits allowed.")
-#    Customer_Num = models.CharField(validators=[Customer_Regex], max_length=17)
-#    Customer_Pic = models.ImageField(upload_to='Customers/Pictures/Profiles')
-#    Customer_Email = models.EmailField()
-
 
 class Profile(models.Model):
     Customer_ID = models.AutoField(primary_key=True, auto_created=True)

@@ -25,10 +25,16 @@ class Restaurant(models.Model):
     Restaurant_Ratings_Count = models.IntegerField(default=0)
     Restaurant_Rating = models.IntegerField(MaxValueValidator(10), default=0)
 
+    def __str__(self):
+        return str(self.Restaurant_Name) + ' ' + str(self.Restaurant_Area)
+
 
 class FoodCategory(models.Model):
     FoodCategory_ID = models.AutoField(primary_key=True)
     FoodCategory_Name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return str(self.FoodCategory_Name)
 
 
 class Food(models.Model):
@@ -40,3 +46,5 @@ class Food(models.Model):
     Food_Discount = models.IntegerField(default=0)
     Food_Res_ID = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.Food_Name) + ' in ' + str(self.Food_Category_ID.FoodCategory_Name) + ' from ' + str(self.Food_Res_ID.Restaurant_Name)

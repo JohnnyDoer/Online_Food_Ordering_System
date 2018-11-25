@@ -9,7 +9,7 @@ from django.core.mail import send_mail
 from .models import Address, Profile
 #from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from Restaurants.models import Restaurant
+from Restaurants.models import Restaurant,Food,FoodCategory
 
 #-------------
 
@@ -41,11 +41,17 @@ def index(request):
     return render(request, 'Customers/index.html', context=context)
 
 
+
 def restaurants(request):
-    data = request.POST['area']
-    filter_res = Restaurant.objects.filter(Restaurant_Area=data)
-    context = {'filter_res': filter_res}
-    return render(request, 'Customers/filter_res.html', context=context)
+    global res_id
+    if request.GET.get('res_id'):
+        res_id=request.GET.get('res_id')
+        return redirect('http://127.0.0.1:8000/customer/res_info')
+    else:
+        data = request.POST['area']
+        filter_res = Restaurant.objects.filter(Restaurant_Area=data)
+        context = {'filter_res': filter_res}
+        return render(request, 'Customers/filter_res.html', context=context)
 
 
 def profile_page(request):
@@ -118,3 +124,13 @@ def activate(request, uidb64, token):
         return render(request, 'Customers/After_Activation.html')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+
+def res_info(request):
+    #print('working')
+    data = Food.objects.filter(Food_Res_ID=res_id)
+    rest_data = Restaurant.objects.all()
+    catg_data = FoodCategory.objects.all()
+    context = {'data' : data , 'rest_data': rest_data, 'catg_data': catg_data}
+    return render(request, 'Customers/res_info.html',context=context)

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% for dt in data %}
+            {{ dt.Food_Res_ID.Restaurant_Name }} Restaurant
+            {{ break }}
+        {% endfor %}
+    </title>
+</head>
+
+<body>
+
+    <table>
+    <tr>
+        <th>  Food name   </th>
+        <th>  Category Name   </th>
+        <th>  Rest name   </th>
+        <th>  Price   </th>
+        <th>  Discount   </th>
+        <th>  Keyword   </th>
+   <!--     <th>  Item pic </th>  -->
+    </tr>
+
+    {% for dt in data %}
+        <tr>
+            <td> {{ dt.Food_Name }} </td>
+            <td> {{ dt.Food_Category_ID.FoodCategory_Name }} </td>
+            <td> {{ dt.Food_Res_ID.Restaurant_Name }} </td>
+            <td> {{ dt.Food_Price }} </td>
+            <td> {{ dt.Food_Discount }} </td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>

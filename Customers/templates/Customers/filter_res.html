@@ -6,14 +6,13 @@
 </head>
 <body>
 {% if user.is_authenticated %}
-            <a style="text-align: left ; color: maroon;font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;font-size: 30px"href="{% url 'logout' %}">Logout</a>
+            <a style="text-align: right ; color: maroon;font-family:'sans-serif';font-size: 20px"href="{% url 'logout' %}">Logout</a>
     {% else %}
     {% endif %}
     <br>
 <p>These are the restaurants near by </p>
 {% for value in filter_res %}
-    {{ value.Restaurant_Name }}
-    {{ value.Restaurant_City }}
+    <tr> <td><a href="/customer/res_area/?res_id={{ value.Restaurant_ID }}" >{{ value.Restaurant_Name }}</a></td></tr>
     <br>
 {% endfor %}
 
