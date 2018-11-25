@@ -36,6 +36,9 @@ class Address(models.Model):
     State = models.CharField(max_length=250)
     Pin = models.CharField(max_length=6, default=000000)
 
+    def __str__(self):
+        return self.Area + ' ' + self.City
+
 
 class Order(models.Model):
     Order_ID = models.AutoField(primary_key=True)
