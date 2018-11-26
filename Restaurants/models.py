@@ -17,9 +17,9 @@ class Restaurant(models.Model):
     Restaurant_Pin = models.CharField(max_length=6, default=132658)
     Restaurant_City = models.CharField(max_length=250)
     Restaurant_State = models.CharField(max_length=250)
-    Restaurant_Regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
+    Restaurant_Regex = RegexValidator(regex=r'^\+?1?\d{10,10}$',
                                             message="Phone number must be entered in the format:" +
-                                            " '+999999999'. Up to 15 digits allowed.")
+                                            " '+999999999'. Up to 10 digits allowed.")
     Restaurant_Num = models.CharField(validators=[Restaurant_Regex], max_length=17)
     Restaurant_Email = models.CharField(max_length=250)
     Restaurant_Ratings_Count = models.IntegerField(default=0)

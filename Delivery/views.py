@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import DeliveryGuyProfileInfoForm, SignUpForm
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
+from .forms import DeliveryGuyProfileInfoForm, SignUpForm
 from .models import Delivery
 
 
@@ -17,10 +17,12 @@ def index(request):
             else:
                 return redirect('http://127.0.0.1:8000/delivery/profile')
         else:
-            return render(request, 'Delivery/index.html', {'form': form})
+            context = {'form': form}
+            return render(request, 'Delivery/index.html', context=context)
     else:
         form = AuthenticationForm()
-        return render(request, 'Delivery/index.html', {'form': form})
+        context = {'form': form}
+        return render(request, 'Delivery/index.html', context=context)
 
 
 def signup(request):
@@ -33,10 +35,12 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             return redirect('http://127.0.0.1:8000/delivery')
         else:
-            return render(request, 'Delivery/signup.html', {'form': form,})
+            context = {'form': form, }
+            return render(request, 'Delivery/signup.html', context=context)
     else:
         form = SignUpForm()
-    return render(request, 'Delivery/signup.html', {'form': form,})
+        context = {'form': form, }
+    return render(request, 'Delivery/signup.html', context=context)
 
 
 def profile_page(request):
@@ -48,8 +52,10 @@ def profile_page(request):
             profile.save()
             return render(request, 'Delivery/filter_order.html')
         else:
-            return render(request, 'Delivery/profile.html', {'Profile_form': profile_form})
+            context = {'Profile_form': profile_form}
+            return render(request, 'Delivery/profile.html', context=context)
     else:
         profile_form = DeliveryGuyProfileInfoForm()
-    return render(request, 'Delivery/profile.html', {'Profile_form': profile_form})
+        context = {'Profile_form': profile_form}
+    return render(request, 'Delivery/profile.html', context=context)
 

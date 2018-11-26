@@ -27,7 +27,6 @@ class Profile(models.Model):
 
 class Address(models.Model):
     Address_ID = models.AutoField(primary_key=True)
-    # Customer_ID = models.ForeignKey(Profile, on_delete=models.CASCADE)
     username = models.OneToOneField(User, on_delete=models.CASCADE)
     Home = models.CharField(max_length=250)
     Society = models.CharField(max_length=250)
@@ -49,6 +48,9 @@ class Order(models.Model):
     Order_Time = models.DateTimeField(default=timezone.now)
     # Order_Discount =
     # Order_Total_Price =
+
+    def __str__(self):
+        return self.Order_Customer_ID.Customer_Email + ' from ' + self.Order_Restaurant_ID.Restaurant_Name
 
 
 class Item(models.Model):
