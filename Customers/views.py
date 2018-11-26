@@ -16,9 +16,7 @@ from .forms import SignUpForm, UserProfileInfoForm, AddressInfoForm
 from .tokens import account_activation_token
 from Restaurants.models import Restaurant, Food, FoodCategory
 
-
 cuisines = ['Lunch', 'Brunch', 'Dinner']
-
 
 def index(request):
     #data = Profile.objects.all()
