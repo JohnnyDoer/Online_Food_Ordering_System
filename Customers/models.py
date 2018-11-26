@@ -27,7 +27,9 @@ class Profile(models.Model):
 
 class Address(models.Model):
     Address_ID = models.AutoField(primary_key=True)
-    username = models.OneToOneField(User, on_delete=models.CASCADE)
+    Customer_ID = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    #username = models.ManyToOneRel( )
+    #username=models.CharField(max_length=200)
     Home = models.CharField(max_length=250)
     Society = models.CharField(max_length=250)
     Area = models.CharField(max_length=250, choices=Areas)

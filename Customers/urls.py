@@ -15,6 +15,7 @@ urlpatterns = [
     path('res_info/', views.res_info, name='Cus_resinfo'),
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='Customers/password_reset.html'),
          name='password_reset'),
+    path('add_address/',views.add_address,name='add_address'),
     path('password-reset/done/',
          auth_views.PasswordResetDoneView.as_view(template_name=
                                                   'Customers/password_reset_done.html'),

@@ -11,7 +11,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-from .models import Address
+from .models import Address, Profile
 from .forms import SignUpForm, UserProfileInfoForm, AddressInfoForm
 from .tokens import account_activation_token
 from Restaurants.models import Restaurant, Food, FoodCategory
@@ -21,7 +21,9 @@ cuisines = ['Lunch', 'Brunch', 'Dinner']
 
 
 def index(request):
-    vals = Address.objects.filter(username=request.user)
+    #data = Profile.objects.all()
+    vals = Address.objects.filter(Customer_ID=Profile.objects.get(user=request.user))
+    #print(data)
     context = {'vals': vals}
     return render(request, 'Customers/index.html', context=context)
 
@@ -64,8 +66,8 @@ def profile_page(request):
             profile = profile_form.save(commit=False)
             address = address_form.save(commit=False)
             profile.user = request.user
-            address.username = request.user
             profile.save()
+            address.Customer_ID = Profile.objects.get(user=request.user)
             address.save()
             return redirect('http://127.0.0.1:8000/customer')
         else:
@@ -125,4 +127,18 @@ def res_info(request):
     context = {'data': data, 'rest_data': rest_data, 'catg_data': catg_data}
     return render(request, 'Customers/res_info.html', context=context)
 
-
+def add_address(request):
+    if request.method == 'POST':
+        address_form = AddressInfoForm(data=request.POST)
+        if address_form.is_valid():
+            address = address_form.save(commit=False)
+            address.Customer_ID = Profile.objects.get(user=request.user)
+            address.save()
+            return redirect('http://127.0.0.1:8000/customer')
+        else:
+            context={'address_form': address_form}
+            return render(request,'Customers/add_address.html',context=context)
+    else:
+        address_form=AddressInfoForm(data=request.POST)
+        context={'address_form': address_form}
+        return render(request,'Customers/add_address.html',context=context)
