@@ -21,5 +21,5 @@ class DeliveryGuyProfileInfoForm(forms.ModelForm):
                   'Delivery_Num',
                   'Delivery_Area',
                   'Delivery_City',
-                  'Delivery_State')
+                  'Delivery_State',)
 

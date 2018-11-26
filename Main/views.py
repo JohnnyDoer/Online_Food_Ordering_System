@@ -16,8 +16,10 @@ def index(request):
             else:
                 return redirect('http://127.0.0.1:8000/customer/profile')
         else:
-            return render(request, 'Main/login.html', {'form': form})
+            context = {'form': form}
+            return render(request, 'Main/login.html', context=context)
     else:
         form = AuthenticationForm()
-        return render(request, 'Main/login.html', {'form': form})
+        context = {'form': form}
+        return render(request, 'Main/login.html', context=context)
 

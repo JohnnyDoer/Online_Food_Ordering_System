@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Restaurant,Food,FoodCategory
+from .models import Restaurant, Food, FoodCategory
 from .forms import SignUpForm, RestaurantProfileInfoForm
 
 
@@ -17,14 +17,16 @@ def index(request):
                 food = Food.objects.all()
                 foodcatg = FoodCategory.objects.all()
                 context = {'data': data, 'food': food, 'foodcatg': foodcatg}
-                return render(request, 'Restaurant/res_profile.html',context=context)
+                return render(request, 'Restaurant/res_profile.html', context=context)
             else:
                 return redirect('http://127.0.0.1:8000/restaurant/profile')
         else:
-            return render(request, 'Restaurant/index.html', {'form': form})
+            context = {'form': form}
+            return render(request, 'Restaurant/index.html', context=context)
     else:
         form = AuthenticationForm()
-        return render(request, 'Restaurant/index.html', {'form': form})
+        context = {'form': form}
+        return render(request, 'Restaurant/index.html', context=context)
 
 
 def signup(request):
@@ -37,10 +39,12 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             return redirect('http://127.0.0.1:8000/restaurant')
         else:
-            return render(request, 'Restaurant/signup.html', {'form': form, })
+            context = {'form': form}
+            return render(request, 'Restaurant/signup.html', context=context)
     else:
         form = SignUpForm()
-    return render(request, 'Restaurant/signup.html', {'form': form, })
+        context = {'form': form}
+    return render(request, 'Restaurant/signup.html', context=context)
 
 
 def profile_page(request):
@@ -53,7 +57,9 @@ def profile_page(request):
             profile.save()
             return render(request, 'Restaurant/res_profile.html')
         else:
-            return render(request, 'Restaurant/profile.html', {'Profile_form': profile_form})
+            context = {'Profile_form': profile_form}
+            return render(request, 'Restaurant/profile.html', context=context)
     else:
         profile_form = RestaurantProfileInfoForm()
-    return render(request, 'Restaurant/profile.html', {'Profile_form': profile_form})
+        context = {'Profile_form': profile_form}
+    return render(request, 'Restaurant/profile.html', context=context)
