@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>Add address</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+            <a style="text-align: left ; color:darkblue;font-size: 20px" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    {% endif %}
+{% block content %}
+  <div>
+  <center><h2 style=" color:darkblue;font-size: 20px">Add address</h2></center>
+  <form  method="POST" action="{% url "add_address" %}">
+    {% csrf_token %}
+      {% for field in address_form %}
+        {{ field.label_tag }}<br>
+        {{ field }}<br>
+      {% endfor %}
+    <button type="submit" value="submit">Submit</button>
+  </form>
+  </div>
+{% endblock %}
+</body>
+</html>
+
+

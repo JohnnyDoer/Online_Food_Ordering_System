@@ -22,6 +22,8 @@
     <form method="post" id="formid" action="{% url "res_area" %}">
         {% csrf_token %}
         <button value="submit" type="submit">Submit</button>
-        </form>
+    </form><br>
+<a href="{% url 'add_address' %}">Add another address</a>
+
 </body>
 </html>
