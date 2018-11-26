@@ -78,6 +78,24 @@ def profile_page(request):
     return render(request, 'customers/profile.html', {'Profile_form': profile_form, 'address_form': address_form})
 
 
+def loginform(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            if Profile.objects.filter(user=user).exists():
+                return redirect('http://127.0.0.1:8000/customer')
+            else:
+                return redirect('http://127.0.0.1:8000/customer/profile')
+        else:
+            context = {'form': form}
+            return render(request, 'Customers/login.html', context=context)
+    else:
+        form = AuthenticationForm()
+        context = {'form': form}
+        return render(request, 'Customers/login.html', context=context)
+
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
