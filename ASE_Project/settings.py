@@ -142,3 +142,6 @@ EMAIL_HOST_USER = 'aseproject321@gmail.com'
 EMAIL_HOST_PASSWORD = 'ucandoit456'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA = '/media/'

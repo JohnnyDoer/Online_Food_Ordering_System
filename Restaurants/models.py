@@ -11,15 +11,15 @@ class Restaurant(models.Model):
     Restaurant_ID = models.AutoField(primary_key=True)
     Restaurant_Name = models.CharField(max_length=250)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    Restaurant_Logo = models.ImageField(upload_to='Restaurants/Pictures/Logo')
-    # + str(Restaurant_ID) + '/' + str(Restaurant_Name))
+    Restaurant_Logo = models.ImageField(upload_to='Restaurants/static/images/profiles',
+                                        default='Restaurants/static/images/profiles/default_res.jpg')
     Restaurant_Area = models.CharField(max_length=250)
     Restaurant_Pin = models.CharField(max_length=6, default=132658)
     Restaurant_City = models.CharField(max_length=250)
     Restaurant_State = models.CharField(max_length=250)
     Restaurant_Regex = RegexValidator(regex=r'^\+?1?\d{10,10}$',
                                             message="Phone number must be entered in the format:" +
-                                            " '+999999999'. Up to 10 digits allowed.")
+                                            " '+999999999'. Exactly 10 digits allowed.")
     Restaurant_Num = models.CharField(validators=[Restaurant_Regex], max_length=17)
     Restaurant_Email = models.CharField(max_length=250)
     Restaurant_Ratings_Count = models.IntegerField(default=0)
@@ -40,7 +40,8 @@ class FoodCategory(models.Model):
 class Food(models.Model):
     Food_ID = models.AutoField(primary_key=True)
     Food_Name = models.CharField(max_length=250)
-    Food_Pic = models.ImageField(upload_to='Restaurants/Pictures/Food')
+    Food_Pic = models.ImageField(upload_to='Restaurants/static/images/food',
+                                 default='Restaurants/static/images/food/default_food.jpg')
     Food_Category_ID = models.ForeignKey(FoodCategory, on_delete=models.CASCADE)
     Food_Price = models.IntegerField()
     Food_Discount = models.IntegerField(default=0)

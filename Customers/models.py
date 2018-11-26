@@ -18,7 +18,8 @@ class Profile(models.Model):
     Customer_FName = models.CharField(max_length=200)
     Customer_LName = models.CharField(max_length=200)
     Customer_Num = models.CharField(max_length=10, unique=True)
-    # Customer_Pic = models.ImageField(upload_to='Customers/Pictures/Profiles')
+    Customer_Pic = models.ImageField(upload_to='Customers/static/images/profiles',
+                                     default='Customers/static/images/profiles/default_cus.jpg')
     Customer_Email = models.EmailField(default="asd@rew.com")
 
     def __str__(self):
@@ -28,8 +29,6 @@ class Profile(models.Model):
 class Address(models.Model):
     Address_ID = models.AutoField(primary_key=True)
     Customer_ID = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    #username = models.ManyToOneRel( )
-    #username=models.CharField(max_length=200)
     Home = models.CharField(max_length=250)
     Society = models.CharField(max_length=250)
     Area = models.CharField(max_length=250, choices=Areas)
