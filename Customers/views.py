@@ -51,10 +51,12 @@ def signup(request):
             # return redirect('http://127.0.0.1:8000/')
             return HttpResponse('Please confirm your email address to complete the registration')
         else:
-            return render(request, 'customers/signup.html', {'form': form, })
+            context={'form': form, }
+            return render(request, 'Customers/signup.html',context=context )
     else:
         form = SignUpForm()
-    return render(request, 'customers/signup.html', {'form': form, })
+        context={'form': form, }
+    return render(request, 'Customers/signup.html',context=context)
 
 
 def profile_page(request):
