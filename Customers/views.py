@@ -115,7 +115,7 @@ def activate(request, uidb64, token):
 def user_logout(request):
     # Log out the user.
     logout(request)
-    # Return to homepage.
+    # Return to FoodBuggy.
     return redirect('http://127.0.0.1:8000/')
 
 

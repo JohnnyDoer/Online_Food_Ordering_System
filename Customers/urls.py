@@ -1,6 +1,5 @@
 from django.urls import path, re_path
 from . import views
-from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -15,20 +14,6 @@ urlpatterns = [
             views.activate, name='activate'),
     path('res_info/', views.res_info, name='Cus_resinfo'),
     path('add_address/',views.add_address,name='add_address'),
-    path('password-reset/', auth_views.PasswordResetView.as_view(template_name='Customers/password_reset.html'),
-         name='Cus_password_reset'),
-    path('password-reset/done/',
-         auth_views.PasswordResetDoneView.as_view(template_name=
-                                                  'Customers/password_reset_done.html'),
-         name='Cus_password_reset_done'),
-    path('password-reset-confirm/<uidb64>/<token>/',
-         auth_views.PasswordResetConfirmView.as_view(template_name=
-                                                     'Customers/password_reset_confirm.html'),
-         name='Cus_password_reset_confirm'),
-    path('password-reset-complete/',
-         auth_views.PasswordResetCompleteView.as_view(template_name=
-                                                      'Customers/password_reset_complete.html'),
-         name='Cus_password_reset_complete'),
     path('add_to_cart/',views.add_to_cart,name='Cus_add_cart'),
     path('cart/', views.cart, name='Cus_cart'),
     path('delete/',views.delete,name='Cus_delete'),
