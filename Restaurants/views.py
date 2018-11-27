@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Restaurant, Food, FoodCategory
-from .forms import SignUpForm, RestaurantProfileInfoForm
+from .forms import SignUpForm, RestaurantProfileInfoForm ,AddItemForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -20,13 +20,10 @@ def index(request):
             user = form.get_user()
             login(request, user)
             if Restaurant.objects.filter(user=user).exists():
-                data = Restaurant.objects.filter(user=user)
-                food = Food.objects.all()
-                foodcatg = FoodCategory.objects.all()
-                context = {'data': data, 'food': food, 'foodcatg': foodcatg}
-                return render(request, 'Restaurant/res_profile.html', context=context)
+
+                return redirect('Res_info')
             else:
-                return redirect('http://127.0.0.1:8000/restaurant/profile')
+                return redirect('Res_profile')
         else:
             context = {'form': form}
             return render(request, 'Restaurant/index.html', context=context)
@@ -79,11 +76,7 @@ def profile_page(request):
             profile.save()
             user = profile.user
             if Restaurant.objects.filter(user=user).exists():
-                data = Restaurant.objects.filter(user=user)
-                food = Food.objects.all()
-                foodcatg = FoodCategory.objects.all()
-                context = {'data': data, 'food': food, 'foodcatg': foodcatg}
-                return render(request, 'Restaurant/res_profile.html', context=context)
+               redirect('Res_info')
             else:
                 return redirect('http://127.0.0.1:8000/restaurant/profile')
             #redirect('http://127.0.0.1:8000/restaurant/')
@@ -110,3 +103,27 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
+
+def restaurant(request):
+    data = Restaurant.objects.get(user=request.user)
+    food = Food.objects.filter(Food_Res_ID=Restaurant.objects.get(user=request.user))
+    context = {'data': data, 'food': food}
+    return render(request, 'Restaurant/res_profile.html', context=context)
+
+
+
+
+def add_item(request):
+    if request.method == 'POST':
+        form =AddItemForm(data=request.POST)
+        if form.is_valid():
+            form.save(commit=False)
+            form.save()
+            return redirect('Res_info')
+        else:
+            context = {'form': form}
+            return render(request, 'Restaurant/add_item.html', context=context)
+    else:
+        form=AddItemForm()
+        context={'form':form}
+        return render(request,'Restaurant/add_item.html',context=context)
