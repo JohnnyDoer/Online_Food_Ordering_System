@@ -19,9 +19,7 @@ from Restaurants.models import Restaurant, Food, FoodCategory
 cuisines = ['Lunch', 'Brunch', 'Dinner']
 
 def index(request):
-    #data = Profile.objects.all()
     vals = Address.objects.filter(Customer_ID=Profile.objects.get(user=request.user))
-    #print(data)
     context = {'vals': vals}
     return render(request, 'Customers/index.html', context=context)
 
@@ -134,7 +132,7 @@ def restaurants(request):
     else:
         data = request.POST['area']
         filter_res = Restaurant.objects.filter(Restaurant_Area=data)
-        context = {'filter_res': filter_res}
+        context = {'filter_res': filter_res, 'data':data}
         return render(request, 'Customers/filter_res.html', context=context)
 
 
