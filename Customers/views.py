@@ -169,7 +169,8 @@ def add_to_cart(request):
         cart_object.Cart_Customer_ID = Profile.objects.get(user=request.user)
         cart_object.Cart_Food_ID = Food.objects.get(Food_ID=Food_ID)
         cart_object.Quantity = int(request.POST.get('Quantity'))
-        cart_object.save()
+        if cart_object.Quantity > 0:
+            cart_object.save()
         my_dict = {'items': CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))}
         return redirect('Cus_resinfo')
 

@@ -1,40 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load staticfiles %}
+    {% load staticfiles %}
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Select one address</title>
 
-    <meta charset="UTF-8">
-    <title>Select an address</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static  'css/style.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}"/>
 
-	<link rel="stylesheet" type="text/css" href="{% static  "css/bootstrap.min.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static  "css/font-awesome.min.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static  "css/main.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static  "css/util.css" %}">
-
+    <link rel="stylesheet" href="{% static 'css/bootstrap1.min.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/simple-line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
 </head>
 
-
 <body>
-    {% if user.is_authenticated %}
-            <a style="text-align: left ; color: maroon;font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;font-size: 30px"href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    {% endif %}
-    <br>
-    <p>This is the page that the customer will see when he/she logs in.</p>
-    <p><b>Select one address of yours</b></p>
-    <a href="{% url 'Cus_categories' %}">Categories</a><br>
-    <select name="area" form="formid">
-        {% for value in vals %}
-        <option value="{{ value.Area}}">{{ value.Area}}</option>
-        {% endfor %}<br>
-    </select>
-    <br>
-    <form method="post" id="formid" action="{% url "res_area" %}">
-        {% csrf_token %}
-        <button value="submit" type="submit">Submit</button>
-    </form><br>
-<a href="{% url 'add_address' %}">Add another address</a>
+
+  <div class="saction1">
+    <div class="container" style="height:65px">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="menu">
+            <nav>
+              <ul>
+                <li><a href="{% url 'Main_index' %}">Homepage</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="login">
+            <ul>
+              <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SLIDER -->
+  <section class="slider d-flex align-items-center">
+      <!-- <img src="images/slider.jpg" class="img-fluid" alt="#"> -->
+      <div class="container">
+          <div class="row d-flex justify-content-center">
+              <div class="col-md-12">
+                  <div class="slider-title_box">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="slider-content_wrap">
+                                  <h2>Select one of your Address</h2>
+                                  <h5>Let's uncover the best places to eat and drink, nearest to you...</h5>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div>
+                      <div class="row d-flex justify-content-center" >
+                          <div class="col-md-10" style="padding-left:190px" >
+                              <form class="form-wrap mt-4" method="post" id="formid" action="{% url "res_area" %}">
+                                  {% csrf_token %}
+                                  <div class="btn-group" role="group" aria-label="Basic example">
+                                      <select class="btn-group1" placeholder="Select an address" name="area" form="formid">
+                                      {% for value in vals %}
+                                        <option value="{{ value.Area}}">{{ value.Area}}</option>
+                                      {% endfor %}<br>
+                                      </select>
+
+
+                                      <button type="submit" class="btn-form"><span class="icon-check search-icon"></span>SUBMIT<i class="pe-7s-angle-right"></i></button>
+                                  </div>
+                              </form>
+                              <div class="slider-link" style="padding-right:170px">
+                                  <span>What to add a new address...</span><a href="{% url 'add_address' %}">Click here</a>
+                              </div>
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <footer class="saction8">
+    <div class="container" id="contact" style="padding-left:50px">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <div class="site" >
+            <h3 style="font-family:Roboto">Site Link</h3>
+          </div>
+          <div class="sitelink">
+            <ul>
+              <li> <span>&#10152;</span><a href="#">About Us</a></li>
+              <li><span>&#10152;</span><a href="#">Contact Us</a></li>
+              <li><span>&#10152;</span><a href="#">Privacy Policy</a></li>
+              <li><span>&#10152;</span><a href="#">Terms of Use</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <div class="site">
+            <h3 style="font-family:Roboto">Follow us on...</h3>
+          </div>
+          <div class="social">
+            <ul>
+              <li> <i class="fa fa-facebook-square"></i><a href="#">Facebook</a></li>
+              <li><i class="fa fa-twitter-square"></i><a href="#">Twitter</a></li>
+              <li><i class="fa fa-linkedin-square"></i><a href="#">Linkedin</a></li>
+              <li><i class="fa fa-google-plus-square"></i><a href="#">Google Plus</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <div class="submit" style="padding-top:85px;padding-left:110px">
+            <h3>Made with love <span class="icon-heart search-icon"></span>by IIIT, Sricity</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
