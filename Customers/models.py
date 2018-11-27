@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core.validators import MaxValueValidator
 from Restaurants.models import Restaurant, FoodCategory, Food
 from Delivery.models import Delivery
+from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 Areas=(('Thames', 'Thames'),
@@ -17,7 +18,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     Customer_FName = models.CharField(max_length=200)
     Customer_LName = models.CharField(max_length=200)
-    Customer_Num = models.CharField(max_length=10, unique=True)
+    Customer_Num = PhoneNumberField(max_length=13)
     Customer_Pic = models.ImageField(upload_to='Customers/static/images/profiles',
                                      default='Customers/static/images/profiles/default_cus.jpg')
     Customer_Email = models.EmailField(default="asd@rew.com")
@@ -42,13 +43,13 @@ class Address(models.Model):
 
 class Order(models.Model):
     Order_ID = models.AutoField(primary_key=True)
-    Order_Customer_ID = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    Order_Restaurant_ID = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    Order_Delivery_ID = models.ForeignKey(Delivery, on_delete=models.CASCADE)
+    Order_Customer_ID = models.ForeignKey(Profile, on_delete=models.PROTECT)
+    Order_Restaurant_ID = models.ForeignKey(Restaurant, on_delete=models.PROTECT)
+    Order_Delivery_ID = models.ForeignKey(Delivery, on_delete=models.PROTECT)
     Order_Status = models.IntegerField(MaxValueValidator(5))
     Order_Time = models.DateTimeField(default=timezone.now)
-    # Order_Discount =
-    # Order_Total_Price =
+    Order_Discount = models.IntegerField(MaxValueValidator(100), default=0)
+    Order_Total_Price = models.IntegerField(default=0)
 
     def __str__(self):
         return self.Order_Customer_ID.Customer_Email + ' from ' + self.Order_Restaurant_ID.Restaurant_Name
@@ -60,3 +61,10 @@ class Item(models.Model):
     Item_Food_ID = models.ForeignKey(Food, on_delete=models.CASCADE)
     Item_Quantity = models.IntegerField(MaxValueValidator(10))
     # Item_Price =
+
+
+class CartItems(models.Model):
+    Cart_ID=models.AutoField(primary_key=True)
+    Cart_Customer_ID = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    Cart_Food_ID = models.ForeignKey(Food, on_delete=models.CASCADE)
+    Quantity = models.IntegerField(MaxValueValidator(5), null=True)

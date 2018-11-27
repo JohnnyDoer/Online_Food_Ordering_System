@@ -29,4 +29,8 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(template_name=
                                                       'Customers/password_reset_complete.html'),
          name='password_reset_complete'),
+    path('add_to_cart/',views.add_to_cart,name='Cus_add_cart'),
+    path('cart/', views.cart, name='Cus_cart'),
+    path('delete/',views.delete,name='Cus_delete'),
+    path('Receipt/',views.receipt,name='Cus_receipt')
 ]

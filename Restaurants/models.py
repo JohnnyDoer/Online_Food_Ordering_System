@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator, MaxValueValidator
+from phonenumber_field.modelfields import PhoneNumberField
 # from Delivery.models import Delivery
 # from Customers.models import Customer, Address, Order, Item
 
@@ -17,10 +18,7 @@ class Restaurant(models.Model):
     Restaurant_Pin = models.CharField(max_length=6, default=132658)
     Restaurant_City = models.CharField(max_length=250)
     Restaurant_State = models.CharField(max_length=250)
-    Restaurant_Regex = RegexValidator(regex=r'^\+?1?\d{10,10}$',
-                                            message="Phone number must be entered in the format:" +
-                                            " '+999999999'. Exactly 10 digits allowed.")
-    Restaurant_Num = models.CharField(validators=[Restaurant_Regex], max_length=17)
+    Restaurant_Num = PhoneNumberField()
     Restaurant_Email = models.CharField(max_length=250)
     Restaurant_Ratings_Count = models.IntegerField(default=0)
     Restaurant_Rating = models.IntegerField(MaxValueValidator(10), default=0)

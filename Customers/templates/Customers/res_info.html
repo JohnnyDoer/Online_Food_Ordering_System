@@ -25,14 +25,20 @@
     </tr>
 
     {% for dt in data %}
+        <form method="POST" action={% url 'Cus_add_cart' %}>
+        {% csrf_token %}
         <tr>
-            <td> {{ dt.Food_Name }} </td>
-            <td> {{ dt.Food_Category_ID.FoodCategory_Name }} </td>
-            <td> {{ dt.Food_Res_ID.Restaurant_Name }} </td>
-            <td> {{ dt.Food_Price }} </td>
-            <td> {{ dt.Food_Discount }} </td>
+            <td><input type="number" value="{{ dt.Food_ID }}" name="Food ID" hidden></td>
+            <td>{{ dt.Food_Name }}</td>
+            <td>{{ dt.Food_Category_ID.FoodCategory_Name }} </td>
+            <td>{{ dt.Food_Price }}</td>
+            <td>{{ dt.Food_Discount }}</td>
+            <td><input type="number" placeholder=" quantity" name="Quantity" ></td>
+            <td><button type="submit" value="add to cart">Add to Cart</button></td>
         </tr>
+        </form>
     {% endfor %}
     </table>
+<a href="{% url 'Cus_cart' %}">Cart</a>
 </body>
 </html>

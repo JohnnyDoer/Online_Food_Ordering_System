@@ -77,14 +77,24 @@ def profile_page(request):
             profile = profile_form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return render(request, 'Restaurant/res_profile.html')
+            user = profile.user
+            if Restaurant.objects.filter(user=user).exists():
+                data = Restaurant.objects.filter(user=user)
+                food = Food.objects.all()
+                foodcatg = FoodCategory.objects.all()
+                context = {'data': data, 'food': food, 'foodcatg': foodcatg}
+                return render(request, 'Restaurant/res_profile.html', context=context)
+            else:
+                return redirect('http://127.0.0.1:8000/restaurant/profile')
+            #redirect('http://127.0.0.1:8000/restaurant/')
+            #return render(request, 'Restaurant/res_profile.html')
         else:
             context = {'Profile_form': profile_form}
             return render(request, 'Restaurant/profile.html', context=context)
     else:
         profile_form = RestaurantProfileInfoForm()
         context = {'Profile_form': profile_form}
-    return render(request, 'Restaurant/profile.html', context=context)
+        return render(request, 'Restaurant/profile.html', context=context)
 
 
 def activate(request, uidb64, token):

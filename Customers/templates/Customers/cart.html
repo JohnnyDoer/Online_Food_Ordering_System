@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CART</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+            <a style="text-align:right;color: maroon;font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;font-size: 15px" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    {% endif %}
+    <h1>HERE ARE UR ITEMS</h1>
+<div>
+    <table>
+         <thead>
+         <th>user</th>
+         <th>Food name</th>
+         <th>Price</th>
+         <th>Discount</th>
+         <th>Quantity</th>
+         </thead>
+    {% for item in items %}
+    <form method="POST" action="{% url 'Cus_delete' %}" >
+    {% csrf_token %}
+       <tr>
+            <td>{{ item.Cart_Customer_ID.user}}"</td>
+            <td><input type="number" value="{{ item.Cart_ID }}" name="Cart ID" hidden></td>
+            <td>{{ item.Cart_Food_ID.Food_Name }}</td>
+            <td>{{ item.Cart_Food_ID.Food_Price }}</td>
+            <td>{{ item.Cart_Food_ID.Food_Discount }}</td>
+            <td>{{ item.Quantity}}" name="Quantity" ></td>
+            <td><button type="submit" name="delete" value={{ item.menu }}>Delete</button></td>
+       </tr>
+    </form>
+    {% endfor %}
+    </table>
+</div>
+
+<a href="{% url 'Cus_receipt' %}">Confirm Order</a>
+</body>
+</html>

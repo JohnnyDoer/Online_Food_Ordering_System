@@ -11,7 +11,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-from .models import Address, Profile
+from .models import Address, Profile, CartItems, Item, Order
 from .forms import SignUpForm, UserProfileInfoForm, AddressInfoForm
 from .tokens import account_activation_token
 from Restaurants.models import Restaurant, Food, FoodCategory
@@ -139,7 +139,7 @@ def restaurants(request):
 
 
 def res_info(request):
-    data = Food.objects.filter(Food_Res_ID=res_id)
+    data = Food.objects.filter(Food_Res_ID=res_id).order_by('Food_ID')
     rest_data = Restaurant.objects.all()
     catg_data = FoodCategory.objects.all()
     context = {'data': data, 'rest_data': rest_data, 'catg_data': catg_data}
@@ -160,3 +160,30 @@ def add_address(request):
         address_form=AddressInfoForm(data=request.POST)
         context={'address_form': address_form}
         return render(request,'Customers/add_address.html',context=context)
+
+
+def add_to_cart(request):
+    if request.method == 'POST':
+        Food_ID = request.POST.get('Food ID')
+        cart_object = CartItems()
+        cart_object.Cart_Customer_ID = Profile.objects.get(user=request.user)
+        cart_object.Cart_Food_ID = Food.objects.get(Food_ID=Food_ID)
+        cart_object.Quantity = int(request.POST.get('Quantity'))
+        cart_object.save()
+        my_dict = {'items': CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))}
+        return redirect('Cus_resinfo')
+
+
+def cart(request):
+    items = CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))
+    context = {'items': items}
+    return render(request, 'Customers/cart.html', context=context)
+
+
+def delete(request):
+    Cart_ID = request.POST.get('Cart ID')
+    CartItems.objects.get(Cart_ID=Cart_ID).delete()
+    return redirect('Cus_cart')
+
+def receipt(request):
+    pass
