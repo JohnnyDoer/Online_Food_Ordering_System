@@ -1,0 +1,127 @@
+{% extends 'index.html' %}
+ {% load more_like_this %}
+ {% load highlight %}
+{% load staticfiles %}
+{% block content %}
+ <br><br><br>
+
+    <head>
+    <style>form[type="text"]{
+        width:100%;
+        background-color:white;
+        color:blue;
+    }</style>
+    </head>
+
+
+ <br><br><br>
+    <section class="slider d-flex align-items-center" style="min-height:300px">
+      <!-- <img src="images/slider.jpg" class="img-fluid" alt="#"> -->
+      <div class="container">
+          <div class="row d-flex justify-content-center">
+              <div class="col-md-12">
+                  <div class="slider-title_box">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="slider-content_wrap">
+                                      <h1 style="color:white">Search</h1>
+
+                              </div>
+                          </div>
+                      </div>
+                      <br>
+
+                      <div>
+                      <div class="row d-flex justify-content-center" >
+                          <div class="col-md-10" style="padding-left:190px" >
+                              <form method="get" action=".">
+                                         <table  align="center" style="width:600px;color:"grey">
+                                            <tr align="center" >{{ form.as_table }}</tr>
+                                            <tr>
+                                 <td>&nbsp;</td>
+                                  <td>
+                                <input type="submit" value="Search">
+                                  </td>
+                                            </tr>
+                            </table>
+                           </div>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+        {% if query %}
+            <h1 style="color:black;text-align:center">Results</h1>
+ 
+            {% for result in page.object_list %}
+                <p style="color:black;text-align:center">
+                    {% highlight result with query [css_class "class_name"] [html_tag "span"] [max_length 200] %}
+                {% if result.object.Restaurant_ID %}
+                <div class="col-md-4 featured-responsive">
+                    <div class="featured-place-wrap">
+                        <a href="/customer/res_area/?res_id={{ result.object.Restaurant_ID }}">
+                            <img src="{% static 'images/featured2.jpg' %}" class="img-fluid" alt="#">
+
+                            <div class="featured-title-box">
+                                <h6>{{ result.object.Restaurant_Name }}</h6>
+                                <ul>
+                                    <li><span class="icon-screen-smartphone"></span>
+                                        <p>{{ result.object.Restaurant_Num }}</p>
+                                    </li>
+                                    <li><span class="icon-link"></span>
+                                        <p>{{ result.object.Restaurant_Email }}</p>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+                </p>
+                <p style="color:black;text-align:center">
+                {% highlight result with query [css_class "class_name"] [html_tag "span"] [max_length 200] %}
+                    {% if result.object.Food_Res_ID %}
+                <div class="col-md-4 featured-responsive">
+                    <div class="featured-place-wrap">
+                        <a href="/customer/res_area/?res_id={{ result.object.Food_Res_ID }}">
+                            <img src="{% static 'images/featured2.jpg' %}" class="img-fluid" alt="#">
+
+                            <div class="featured-title-box">
+                                <h6>{{ result.object.Food_Res_ID.Restaurant_Name }}</h6>
+                                <ul>
+                                    <li><span class="icon-screen-smartphone"></span>
+                                        <p>{{ result.object.Food_Res_ID.Restaurant_Num }}</p>
+                                    </li>
+                                    <li><span class="icon-link"></span>
+                                        <p>{{ result.object.Food_Res_ID.Restaurant_Email }}</p>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+                </p>
+            {% empty %}
+                <p>No results found.</p>
+            {% endfor %}
+ 
+            {% if page.has_previous or page.has_next %}
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            {# Show some example queries to run, maybe query syntax, something else? #}
+            {% more_like_this entry as related_content limit 10  %}
+
+        {% endif %}
+    </form>
+{% endblock %}
