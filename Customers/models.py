@@ -7,10 +7,10 @@ from Delivery.models import Delivery
 from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
-Areas=(('Thames', 'Thames'),
-       ('Lambeth', 'Lambeth'),
-       ('Southpark', 'Southpark'),
-       ('Nova', 'Nova'))
+Areas=(('Bandra', 'Bandra'),
+       ('Green Park', 'Green Park'),
+       ('Anna Salai', 'Anna Salai'),
+       ('Mount Road', 'Mount Road'))
 
 
 class Profile(models.Model):
