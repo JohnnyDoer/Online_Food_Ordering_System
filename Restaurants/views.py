@@ -56,7 +56,7 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return render(request,'Restaurant/checkemail.html')
         else:
             context = {'form': form}
             return render(request, 'Restaurant/signup.html', context=context)

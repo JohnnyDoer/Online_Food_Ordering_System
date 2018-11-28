@@ -44,8 +44,7 @@ def signup(request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            # return redirect('http://127.0.0.1:8000/')
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return render(request,'Customers/checkemail.html')
         else:
             context={'form': form, }
             return render(request, 'Customers/signup.html',context=context )
