@@ -19,9 +19,7 @@ from Restaurants.models import Restaurant, Food, FoodCategory
 cuisines = ['Lunch', 'Brunch', 'Dinner']
 
 def index(request):
-    #data = Profile.objects.all()
     vals = Address.objects.filter(Customer_ID=Profile.objects.get(user=request.user))
-    #print(data)
     context = {'vals': vals}
     return render(request, 'Customers/index.html', context=context)
 
@@ -46,8 +44,7 @@ def signup(request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            # return redirect('http://127.0.0.1:8000/')
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return render(request,'Customers/checkemail.html')
         else:
             context={'form': form, }
             return render(request, 'Customers/signup.html',context=context )
@@ -117,7 +114,7 @@ def activate(request, uidb64, token):
 def user_logout(request):
     # Log out the user.
     logout(request)
-    # Return to homepage.
+    # Return to FoodBuggy.
     return redirect('http://127.0.0.1:8000/')
 
 
@@ -134,7 +131,7 @@ def restaurants(request):
     else:
         data = request.POST['area']
         filter_res = Restaurant.objects.filter(Restaurant_Area=data)
-        context = {'filter_res': filter_res}
+        context = {'filter_res': filter_res, 'data':data}
         return render(request, 'Customers/filter_res.html', context=context)
 
 
@@ -169,7 +166,8 @@ def add_to_cart(request):
         cart_object.Cart_Customer_ID = Profile.objects.get(user=request.user)
         cart_object.Cart_Food_ID = Food.objects.get(Food_ID=Food_ID)
         cart_object.Quantity = int(request.POST.get('Quantity'))
-        cart_object.save()
+        if cart_object.Quantity > 0:
+            cart_object.save()
         my_dict = {'items': CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))}
         return redirect('Cus_resinfo')
 
