@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from . import views
 from django.contrib.auth import views as auth_views
 
@@ -32,5 +32,6 @@ urlpatterns = [
     path('add_to_cart/',views.add_to_cart,name='Cus_add_cart'),
     path('cart/', views.cart, name='Cus_cart'),
     path('delete/',views.delete,name='Cus_delete'),
-    path('Receipt/',views.receipt,name='Cus_receipt')
+    path('Receipt/',views.receipt,name='Cus_receipt'),
+    path('search/', include('haystack.urls')),
 ]
