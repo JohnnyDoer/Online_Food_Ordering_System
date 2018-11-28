@@ -23,6 +23,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css'%}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css'%}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/simple-line-icons.css'%}"/>
 
 <!--JS-->
 
@@ -47,14 +48,17 @@
         </div>
         <div class="login">
           <ul>
+
+              <li> <a href="/customer/search/"><button type="submit" style="padding:10px;background-color:#4CAF50;border:none;color:white;display:inline-block"><span class="icon-magnifier search-icon"></span>  SEARCH</button></a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
+
           </ul>
         </div>
       </div>
     </div>
   </div>
 </section>
-
+<br><br><br>
 <div id="section1" class="container-fluid" style="backgroud-color:white" >
 
 <section id="menu" class="main-block light-bg">

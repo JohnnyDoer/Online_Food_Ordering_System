@@ -142,6 +142,7 @@ def res_info(request):
     context = {'data': data, 'rest_data': rest_data, 'catg_data': catg_data}
     return render(request, 'Customers/res_info.html', context=context)
 
+
 def add_address(request):
     if request.method == 'POST':
         address_form = AddressInfoForm(data=request.POST)
@@ -179,7 +180,7 @@ def cart(request):
 
 
 def delete(request):
-    Cart_ID = request.POST.get('Cart ID')
+    Cart_ID = request.POST.get('delete')
     CartItems.objects.get(Cart_ID=Cart_ID).delete()
     return redirect('Cus_cart')
 
