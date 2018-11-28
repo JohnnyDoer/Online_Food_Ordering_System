@@ -24,7 +24,7 @@
                       <div class="row">
                           <div class="col-md-12">
                               <div class="slider-content_wrap">
-                                      <h1 style="color:white">Search</h1>
+                                      <h1 style="color:white;font-size:45px">Search</h1>
 
                               </div>
                           </div>
@@ -35,15 +35,17 @@
                       <div class="row d-flex justify-content-center" >
                           <div class="col-md-10" style="padding-left:190px" >
                               <form method="get" action=".">
-                                         <table  align="center" style="width:600px;color:"grey">
+                                         <table  align="center" style="width:600px;color:#bfbfbf">
                                             <tr align="center" >{{ form.as_table }}</tr>
                                             <tr>
                                  <td>&nbsp;</td>
                                   <td>
-                                <input type="submit" value="Search">
+                                <input type="submit" value="Search" style="color:black">
                                   </td>
                                             </tr>
+
                             </table>
+                              </form>
                            </div>
                       </div>
                       </div>
@@ -54,7 +56,7 @@
   </section>
 
         {% if query %}
-            <h1 style="color:black;text-align:center">Results</h1>
+            <h1 style="color:white;text-align:center;font-size:45px;">Results</h1>
  
             {% for result in page.object_list %}
                 <p style="color:black;text-align:center">
@@ -87,7 +89,7 @@
                     {% if result.object.Food_Res_ID %}
                 <div class="col-md-4 featured-responsive">
                     <div class="featured-place-wrap">
-                        <a href="/customer/res_area/?res_id={{ result.object.Food_Res_ID }}">
+                        <a href="/customer/res_area/?res_id={{ result.object.Food_Res_ID.Restaurant_ID }}">
                             <img src="{% static 'images/featured2.jpg' %}" class="img-fluid" alt="#">
 
                             <div class="featured-title-box">
@@ -108,7 +110,7 @@
                 {% endif %}
                 </p>
             {% empty %}
-                <p>No results found.</p>
+                <h4>No results found.</h4>
             {% endfor %}
  
             {% if page.has_previous or page.has_next %}

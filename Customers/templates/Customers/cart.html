@@ -1,41 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
+{% load staticfiles %}
 <head>
-    <meta charset="UTF-8">
-    <title>CART</title>
+  <meta charset="UTF-8">
+  <title>Responsive Shopping Cart</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+  <link rel="stylesheet" href={% static "css/stylex.css" %}>
+    <link rel="stylesheet" href={% static "css/stylex1.css" %}>
+    <link rel="stylesheet" href={% static "css/bootstrapx.css" %}>
 </head>
+
 <body>
-    {% if user.is_authenticated %}
-            <a style="text-align:right;color: maroon;font-family: 'Operator Mono', 'Source Sans Pro', Menlo, Monaco, Consolas, Courier New, monospace;font-size: 15px" href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    {% endif %}
-    <h1>HERE ARE UR ITEMS</h1>
-<div>
-    <table>
-         <thead>
-         <th>user</th>
-         <th>Food name</th>
-         <th>Price</th>
-         <th>Discount</th>
-         <th>Quantity</th>
-         </thead>
+  <section class="saction1">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="menu">
+            <nav>
+              <ul>
+                <li><a href="{% url 'Main_index' %}">Food Buggy</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="login">
+            <ul>
+              <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div style="width:100%;text-align:center;padding-top:80px;font-size:20px">
+  <h1>Your Cart</h1>
+</div>
+<div class="shopping-cart" style="padding-top:50px;padding-right:100px;padding-left:100px">
+
+  <div class="column-labels">
+    <label class="product-details">Product</label>
+    <label class="product-price">Price</label>
+      <label class="product-price">Discount</label>
+    <label class="product-quantity">Quantity</label>
+    <label class="product-removal">Remove</label>
+
+  </div>
     {% for item in items %}
-    <form method="POST" action="{% url 'Cus_delete' %}" >
-    {% csrf_token %}
-       <tr>
-            <td>{{ item.Cart_Customer_ID.user}}"</td>
-            <td><input type="number" value="{{ item.Cart_ID }}" name="Cart ID" hidden></td>
-            <td>{{ item.Cart_Food_ID.Food_Name }}</td>
-            <td>{{ item.Cart_Food_ID.Food_Price }}</td>
-            <td>{{ item.Cart_Food_ID.Food_Discount }}</td>
-            <td>{{ item.Quantity}}" name="Quantity" ></td>
-            <td><button type="submit" name="delete" value={{ item.menu }}>Delete</button></td>
-       </tr>
-    </form>
+        <form method="POST" action="{% url 'Cus_delete' %}" >
+        {% csrf_token %}
+
+          <div class="product">
+            <div class="product-details">
+              <div class="product-title"><p style="font-size: 19px;">{{ item.Cart_Food_ID.Food_Name }}</p></div>
+            </div>
+            <div class="product-price">{{ item.Cart_Food_ID.Food_Price }}</div>
+            <div class="product-quantity">
+              {{ item.Cart_Food_ID.Food_Discount }}
+            </div>
+              <div class="product-quantity">
+              {{ item.Quantity}}
+            </div>
+            <div class="product-removal">
+              <button class="remove-product" name="delete" type="submit" value="{{ item.Cart_ID }}">
+                Remove
+              </button>
+            </div>
+
+          </div>
+        </form>
     {% endfor %}
-    </table>
+
+      <a href="#"><button class="checkout">Checkout</button></a>
+
 </div>
 
-<a href="{% url 'Cus_receipt' %}">Confirm Order</a>
 </body>
+
 </html>

@@ -3,7 +3,7 @@
 {%  load staticfiles %}
 <head>
 <meta charset="utf-8">
-<title>food</title>
+<title>Search page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
 <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
 <!--CSS-->
 <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}"/>
@@ -56,19 +57,19 @@
 </section>
 
 
-                              <div class="col-xs-12">
+
+
+<div id="section1" class="container-fluid" style="padding-top:0;padding-bottom:40px">
+     <div class="col-xs-12">
                                     {% block content %}
                                     {% endblock content %}
                               </div>
 
 
-
-<div id="section1" class="container-fluid" style="backgroud-color:white" >
-
+</div>
     <!--//END FEATURED PLACES -->
-<br><br>
 <footer class="saction8">
-  <div class="container" id="contact">
+  <div class="container" id="contact" >
     <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-3">
         <div class="site">
@@ -97,58 +98,10 @@
           </ul>
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-3">
-        <div class="submit">
-          <h3>Subscribe Newsletter</h3>
-          <p>To get latest updates and food deals
-            every week</p>
-        </div>
-        <div class="submitbox">
-          <input type="text" />
-          <div class="sub"> <a href="#">Submit</a> </div>
-        </div>
-      </div>
     </div>
   </div>
 </footer>
 
 
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Restaurants</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-
-</head>
-<body>
-{% if user.is_authenticated %}
-            <a style="text-align: right ; color: maroon;font-family:'sans-serif';font-size: 20px"href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    {% endif %}
-    <br>
 </body>
 </html>
