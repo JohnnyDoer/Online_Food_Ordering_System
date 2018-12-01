@@ -1,12 +1,12 @@
 .idea
 HTML Templates/
-Customers/__pychache__/
-Delivery/__pychache__/
-ASE_Project/__pychache__/
-Restaurants/__pychache__/
-Main/__pychache__/
+Customers/__pycache__/
+Delivery/__pycache__/
+ASE_Project/__pycache__/
+Restaurants/__pycache__/
+Main/__pycache__/
 .vscode
-Customers/migrations/__pychache__/
-Restaurants/migrations/__pychache__/
-Main/migrations/__pychache__/
-Delivery/migrations/__pychache__/
+Customers/migrations/__pycache__/
+Restaurants/migrations/__pycache__/
+Main/migrations/__pycache__/
+Delivery/migrations/__pycache__/

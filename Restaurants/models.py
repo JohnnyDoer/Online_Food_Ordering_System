@@ -1,22 +1,49 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import RegexValidator, MaxValueValidator
+from django.core.validators import MaxValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
-# from Delivery.models import Delivery
-# from Customers.models import Customer, Address, Order, Item
 
 # Create your models here.
+
+Areas = (('Cunninghum Road', 'Cunninghum Road'),
+         ('Frazer Town', 'Frazer Town'),
+         ('Whitefield', 'Whitefield'),
+         ('Church Street', 'Church Street'),
+         ('Egmore', 'Egmore'),
+         ('Thirumalai', 'Thirumalai'),
+         ('Anna Salai', 'Anna Salai'),
+         ('Mount Road', 'Mount Road'),
+         ('Connaught Place', 'Connaught Place'),
+         ('Green Park', 'Green Park'),
+         ('Nehru Road', 'Nehru Road'),
+         ('Golf Course Road', 'Golf Course Road'),
+         ('Park Street', 'Park Street'),
+         ('Meredith Street', 'Meredith Street'),
+         ('Chittaranjan Avenue', 'Chittaranjan Avenue'),
+         ('S.N. Banerjee Road', 'S.N. Banerjee Road'),)
+
+Cities = (('Bangalore', 'Bangalore'),
+          ('Chennai', 'Chennai'),
+          ('Delhi', 'Delhi'),
+          ('Kolkata', 'Kolkata'),
+          )
+
+States = (('Karnataka', 'Karnataka'),
+          ('Tamil Nadu', 'Tamil Nadu'),
+          ('Delhi', 'Delhi'),
+          ('West Bengal', 'West Bengal'),
+          )
 
 
 class Restaurant(models.Model):
     Restaurant_ID = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     Restaurant_Name = models.CharField(max_length=250)
-    Restaurant_Area = models.CharField(max_length=250)
     Restaurant_Street = models.CharField(max_length=250)
+    Restaurant_Area = models.CharField(max_length=250, choices=Areas)
+    Restaurant_City = models.CharField(max_length=250, choices=Cities)
+    Restaurant_State = models.CharField(max_length=250, choices=States)
     Restaurant_Pin = models.CharField(max_length=6, default=132658)
-    Restaurant_City = models.CharField(max_length=250)
-    Restaurant_State = models.CharField(max_length=250)
     Restaurant_Phone_Number = PhoneNumberField()
     Restaurant_Logo = models.ImageField(upload_to='Restaurants/static/images/profiles',
                                         default='Restaurants/static/images/profiles/default_res.jpg')
