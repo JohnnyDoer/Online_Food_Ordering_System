@@ -1,10 +1,8 @@
-from django.core.mail import send_mail
-#from django.core.urlresolvers import reverse
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -17,6 +15,7 @@ from .tokens import account_activation_token
 from Restaurants.models import Restaurant, Food, FoodCategory
 
 cuisines = ['Lunch', 'Brunch', 'Dinner']
+
 
 def index(request):
     vals = Address.objects.filter(Customer_ID=Profile.objects.get(user=request.user))
@@ -44,14 +43,14 @@ def signup(request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return render(request,'Customers/checkemail.html')
+            return render(request, 'Customers/checkemail.html')
         else:
-            context={'form': form, }
-            return render(request, 'Customers/signup.html',context=context )
+            context = {'form': form, }
+            return render(request, 'Customers/signup.html', context=context)
     else:
         form = SignUpForm()
-        context={'form': form, }
-    return render(request, 'Customers/signup.html',context=context)
+        context = {'form': form, }
+    return render(request, 'Customers/signup.html', context=context)
 
 
 def profile_page(request):
@@ -86,12 +85,14 @@ def loginform(request):
             else:
                 return redirect('http://127.0.0.1:8000/customer/profile')
         else:
-            context = {'form': form}
-            return render(request, 'Customers/login.html', context=context)
+            print(form.errors)
+            contexts = {'form': form}
+            return render(request, 'Customers/login.html', context=contexts)
     else:
         form = AuthenticationForm()
         context = {'form': form}
         return render(request, 'Customers/login.html', context=context)
+
 
 def activate(request, uidb64, token):
     try:
@@ -102,9 +103,6 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        #login(request, user)
-        # return redirect('home')
-        #return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
         return render(request, 'Customers/After_Activation.html')
     else:
         return HttpResponse('Activation link is invalid!')
@@ -153,11 +151,11 @@ def add_address(request):
             return redirect('http://127.0.0.1:8000/customer')
         else:
             context={'address_form': address_form}
-            return render(request,'Customers/add_address.html',context=context)
+            return render(request, 'Customers/add_address.html', context=context)
     else:
         address_form=AddressInfoForm(data=request.POST)
         context={'address_form': address_form}
-        return render(request,'Customers/add_address.html',context=context)
+        return render(request, 'Customers/add_address.html', context=context)
 
 
 def add_to_cart(request):
@@ -169,7 +167,7 @@ def add_to_cart(request):
         cart_object.Quantity = int(request.POST.get('Quantity'))
         if cart_object.Quantity > 0:
             cart_object.save()
-        my_dict = {'items': CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))}
+#        my_dict = {'items': CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))}
         return redirect('Cus_resinfo')
 
 
@@ -184,5 +182,31 @@ def delete(request):
     CartItems.objects.get(Cart_ID=Cart_ID).delete()
     return redirect('Cus_cart')
 
+
 def receipt(request):
-    pass
+    c_items = CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))
+    order = Order()
+    order.save()
+    for c_item in c_items:
+        item = Item()
+        item.Food_ID = c_item.Cart_Food_ID
+        item.Item_Order_ID = order.Order_ID
+        item.Item_Quantity = c_item.Quantity
+        item.Item_Price = (c_item.Cart_Food_ID.Food_Price -
+                           (c_item.Cart_Food_ID.Food_Discount*100 /
+                            c_item.Cart_Food_ID.Food_Price))*c_item.Quantity
+        item.save()
+
+    items = Item.objects.filter(Item_Order_ID=order.Order_ID)
+    for item in items:
+        order.Order_Customer_ID = Profile.objects.get(user=request.user)
+        order.Order_Restaurant_ID = item.Item_Food_ID.Food_Res_ID
+        order.Order_Status = 1
+        order.save()
+        break
+    for item in items:
+        order.Order_Total_Price += item.Item_Price
+    order.save()
+    c_items.delete()
+    context = {'order': order}
+    return render(request, 'Customers/receipt.html', context=context)

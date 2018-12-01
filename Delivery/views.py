@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import DeliveryGuyProfileInfoForm, SignUpForm
 from .models import Delivery
@@ -77,6 +77,7 @@ def profile_page(request):
         profile_form = DeliveryGuyProfileInfoForm()
         context = {'Profile_form': profile_form}
     return render(request, 'Delivery/profile.html', context=context)
+
 
 def activate(request, uidb64, token):
     try:

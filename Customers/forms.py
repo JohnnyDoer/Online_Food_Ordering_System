@@ -6,8 +6,6 @@ from Customers.models import Profile, Address
 
 # Form for Signing Up.
 class SignUpForm(UserCreationForm):
-    # first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    # last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 
     class Meta:
@@ -19,11 +17,11 @@ class SignUpForm(UserCreationForm):
 class UserProfileInfoForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('Customer_FName', 'Customer_LName', 'Customer_Num')
+        fields = ('Customer_First_Name', 'Customer_Last_Name', 'Customer_Phone_Number')
 
 
 # Form to get user's address.
 class AddressInfoForm(forms.ModelForm):
     class Meta:
         model = Address
-        fields = ('Home', 'Society', 'Area', 'City', 'State', 'Pin')
+        fields = ('Home', 'Street', 'Area', 'City', 'State', 'Pin')

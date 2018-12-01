@@ -6,3 +6,7 @@ ASE_Project/__pychache__/
 Restaurants/__pychache__/
 Main/__pychache__/
 .vscode
+Customers/migrations/__pychache__/
+Restaurants/migrations/__pychache__/
+Main/migrations/__pychache__/
+Delivery/migrations/__pychache__/
