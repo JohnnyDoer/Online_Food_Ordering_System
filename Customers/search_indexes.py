@@ -6,8 +6,7 @@ from .models import Restaurant, FoodCategory, Food
 class FoodIndex(indexes.ModelSearchIndex, indexes.Indexable):
     class Meta:
         model = Food
-        excludes = ['Food_ID', 'Food_Pic', 'Food_Discount', 'Food_Price', 'Restaurant_Email',
-                    'Restaurant_Regex', 'Restaurant_Pin']
+        excludes = ['Food_ID', 'Food_Pic', 'Food_Discount', 'Food_Price']
 
     def get_model(self):
         return Food
