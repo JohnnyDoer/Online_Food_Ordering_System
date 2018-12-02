@@ -11,7 +11,7 @@ urlpatterns = [
     path('categories/', views.categories, name='Cus_categories'),
     path('res_area/', views.restaurants, name='res_area'),
     re_path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-            views.activate, name='activate'),
+            views.activate, name='Cus_activate'),
     path('res_info/', views.res_info, name='Cus_resinfo'),
     path('add_address/',views.add_address,name='add_address'),
     path('add_to_cart/',views.add_to_cart,name='Cus_add_cart'),

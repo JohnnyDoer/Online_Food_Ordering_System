@@ -9,5 +9,5 @@ urlpatterns = [
     path('signup/', views.signup, name='Del_signup'),
     path('profile/', views.profile_page, name='Del_profile'),
     re_path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-            views.activate, name='activate'),
+            views.activate, name='Del_activate'),
 ]
