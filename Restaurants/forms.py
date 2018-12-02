@@ -17,7 +17,7 @@ class RestaurantProfileInfoForm(forms.ModelForm):
     class Meta:
         model = Restaurant
         fields = ('Restaurant_Name',
-                  'Restaurant_Num',
+                  'Restaurant_Phone_Number',
                   'Restaurant_Area',
                   'Restaurant_City',
                   'Restaurant_State')

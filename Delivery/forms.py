@@ -16,9 +16,9 @@ class SignUpForm(UserCreationForm):
 class DeliveryGuyProfileInfoForm(forms.ModelForm):
     class Meta:
         model = Delivery
-        fields = ('Delivery_Fname',
-                  'Delivery_Lname',
-                  'Delivery_Num',
+        fields = ('Delivery_First_Name',
+                  'Delivery_Last_Name',
+                  'Delivery_Phone_Number',
                   'Delivery_Area',
                   'Delivery_City',
                   'Delivery_State',)

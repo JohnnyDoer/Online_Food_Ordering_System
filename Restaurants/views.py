@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Restaurant, Food, FoodCategory
-from .forms import SignUpForm, RestaurantProfileInfoForm ,AddItemForm
+from .models import Restaurant, Food
+from .forms import SignUpForm, RestaurantProfileInfoForm, AddItemForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -56,7 +56,7 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            return render(request,'Restaurant/checkemail.html')
+            return render(request, 'Restaurant/checkemail.html')
         else:
             context = {'form': form}
             return render(request, 'Restaurant/signup.html', context=context)
@@ -76,11 +76,11 @@ def profile_page(request):
             profile.save()
             user = profile.user
             if Restaurant.objects.filter(user=user).exists():
-               redirect('Res_info')
+                return redirect('Res_info')
             else:
                 return redirect('http://127.0.0.1:8000/restaurant/profile')
-            #redirect('http://127.0.0.1:8000/restaurant/')
-            #return render(request, 'Restaurant/res_profile.html')
+            # redirect('http://127.0.0.1:8000/restaurant/')
+            # return render(request, 'Restaurant/res_profile.html')
         else:
             context = {'Profile_form': profile_form}
             return render(request, 'Restaurant/profile.html', context=context)
@@ -111,11 +111,9 @@ def restaurant(request):
     return render(request, 'Restaurant/res_profile.html', context=context)
 
 
-
-
 def add_item(request):
     if request.method == 'POST':
-        form =AddItemForm(data=request.POST)
+        form = AddItemForm(data=request.POST)
         if form.is_valid():
             form.save(commit=False)
             form.save()
@@ -124,6 +122,6 @@ def add_item(request):
             context = {'form': form}
             return render(request, 'Restaurant/add_item.html', context=context)
     else:
-        form=AddItemForm()
-        context={'form':form}
-        return render(request,'Restaurant/add_item.html',context=context)
+        form = AddItemForm()
+        context = {'form': form}
+        return render(request, 'Restaurant/add_item.html', context=context)

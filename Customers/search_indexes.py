@@ -1,13 +1,12 @@
 from haystack import indexes
-
 from .models import Restaurant, FoodCategory, Food
-
 
 
 class RestaurantIndex(indexes.ModelSearchIndex, indexes.Indexable):
     class Meta:
         model = Restaurant
-        excludes = ['Restaurant_ID', 'user', 'Restaurant_Logo', 'Restaurant_Num', 'Restaurant_Email', 'Restaurant_Regex', 'Restaurant_Pin']
+        excludes = ['Restaurant_ID', 'user', 'Restaurant_Logo', 'Restaurant_Phone_Number', 'Restaurant_Email',
+                    'Restaurant_Regex', 'Restaurant_Pin']
 
     def get_model(self):
         return Restaurant
@@ -19,7 +18,8 @@ class RestaurantIndex(indexes.ModelSearchIndex, indexes.Indexable):
 class FoodIndex(indexes.ModelSearchIndex, indexes.Indexable):
     class Meta:
         model = Food
-        excludes = ['Food_ID', 'Food_Pic', 'Food_Discount', 'Food_Price', 'Restaurant_Email', 'Restaurant_Regex', 'Restaurant_Pin']
+        excludes = ['Food_ID', 'Food_Pic', 'Food_Discount', 'Food_Price', 'Restaurant_Email',
+                    'Restaurant_Regex', 'Restaurant_Pin']
 
     def get_model(self):
         return Food
