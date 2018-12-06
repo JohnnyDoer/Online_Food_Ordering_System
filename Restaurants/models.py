@@ -45,8 +45,8 @@ class Restaurant(models.Model):
     Restaurant_State = models.CharField(max_length=250, choices=States)
     Restaurant_Pin = models.CharField(max_length=6, default=132658)
     Restaurant_Phone_Number = PhoneNumberField()
-    Restaurant_Logo = models.ImageField(upload_to='Restaurants/static/images/profiles',
-                                        default='Restaurants/static/images/profiles/default_res.jpg')
+    Restaurant_Logo = models.ImageField(upload_to='media',
+                                        default='media/default_res.jpg')
     Restaurant_Ratings_Count = models.IntegerField(default=0)
     Restaurant_Rating = models.IntegerField(MaxValueValidator(10), default=0)
 
@@ -68,8 +68,8 @@ class Food(models.Model):
     Food_Res_ID = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     Food_Category_ID = models.ForeignKey(FoodCategory, on_delete=models.CASCADE)
     Food_Price = models.IntegerField()
-    Food_Pic = models.ImageField(upload_to='Restaurants/static/images/food',
-                                 default='Restaurants/static/images/food/default_food.jpg')
+    Food_Pic = models.ImageField(upload_to='media',
+                                 default='media/default_food.jpg')
     Food_Discount = models.IntegerField(default=0)
 
     def __str__(self):

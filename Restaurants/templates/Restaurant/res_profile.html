@@ -74,7 +74,7 @@
                       </div>
                   </div>
               </div>
-              <img src="{% static 'images/aboutus.jpg'%}" style="height:300px;width:350px;" align="left">
+              <img src="/media/{{ data.Restaurant_Logo }}" style="height:300px;width:350px;" align="left">
               <div style="padding-left:300px;color:black;">
               <p style="color:black;padding-left:150px;padding-top:100px;font-size:17px;text-align:left">
                             {{ data.Restaurant_Area }}
@@ -107,7 +107,7 @@
             {% for dt in food %}
                     <div class="col-md-4 featured-responsive">
                         <div class="featured-place-wrap">
-                                <img src="{% static 'images/featured2.jpg' %}" class="img-fluid" alt="#">
+                                <img src="/media/{{ dt.Food_Pic }}" class="img-fluid" alt="#">
                                 <div class="featured-title-box">
                                     <h5 style="color: black">{{ dt.Food_Name }}</h5><br><span>• </span>
                                     <p>Category: {{ dt.Food_Category_ID.FoodCategory_Name }}</p> <span>• </span>
