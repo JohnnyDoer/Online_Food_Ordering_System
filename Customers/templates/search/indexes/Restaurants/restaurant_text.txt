@@ -1,6 +1,0 @@
-{{ object.Restaurant_Name }}
-{{ object.Restaurant_Area }}
-{{ object.Restaurant_City }}
-{{ object.Restaurant_State }}
-{{ object.Restaurant_Ratings_Count }}
-{{ object.Restaurant_Rating }}
