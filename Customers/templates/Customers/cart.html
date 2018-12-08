@@ -3,7 +3,7 @@
 {% load staticfiles %}
 <head>
   <meta charset="UTF-8">
-  <title>Responsive Shopping Cart</title>
+  <title>Cart</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
       <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
@@ -73,9 +73,11 @@
           </div>
         </form>
     {% endfor %}
-
-      <a href="#"><button class="checkout">Checkout</button></a>
-
+    {% if items %}
+      <a href={% url 'Cus_receipt' %}><button class="checkout">Checkout</button></a>
+    {% else %}
+        <bold><p style="text-align: center;color: #FF0000;font-family: 'Bitstream Vera Sans Mono';font-size: 25px">Your cart is empty</p></bold>
+    {% endif %}
 </div>
 
 </body>

@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -66,6 +67,7 @@ def signup(request):
     return render(request, 'Restaurant/signup.html', context=context)
 
 
+@login_required(login_url='Res_index')
 def profile_page(request):
     if request.method == 'POST':
         profile_form = RestaurantProfileInfoForm(data=request.POST)
@@ -104,6 +106,7 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 
+@login_required(login_url='Res_index')
 def restaurant(request):
     data = Restaurant.objects.get(user=request.user)
     food = Food.objects.filter(Food_Res_ID=Restaurant.objects.get(user=request.user))
@@ -111,6 +114,7 @@ def restaurant(request):
     return render(request, 'Restaurant/res_profile.html', context=context)
 
 
+@login_required(login_url='Res_index')
 def add_item(request):
     if request.method == 'POST':
         form = AddItemForm(data=request.POST)

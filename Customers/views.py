@@ -16,7 +16,7 @@ from Restaurants.models import Restaurant, Food, FoodCategory
 
 cuisines = ['Lunch', 'Brunch', 'Dinner']
 
-
+@login_required(login_url='Main_index')
 def index(request):
     vals = Address.objects.filter(Customer_ID=Profile.objects.get(user=request.user))
     pic=Profile.objects.get(user=request.user)
@@ -53,7 +53,7 @@ def signup(request):
         context = {'form': form, }
     return render(request, 'Customers/signup.html', context=context)
 
-
+@login_required(login_url='Cus_login')
 def profile_page(request):
     if request.method == 'POST':
         profile_form = UserProfileInfoForm(data=request.POST)
@@ -121,7 +121,7 @@ def categories(request):
     context = {'cuisines': cuisines, }
     return render(request, 'Customers/categories.html', context)
 
-
+@login_required(login_url='Cus_login')
 def restaurants(request):
     global res_id
     if request.GET.get('res_id'):
@@ -133,7 +133,7 @@ def restaurants(request):
         context = {'filter_res': filter_res, 'data':data}
         return render(request, 'Customers/filter_res.html', context=context)
 
-
+@login_required(login_url='Cus_login')
 def res_info(request):
     data = Food.objects.filter(Food_Res_ID=res_id).order_by('Food_ID')
     rest_data = Restaurant.objects.all()
@@ -142,6 +142,7 @@ def res_info(request):
     return render(request, 'Customers/res_info.html', context=context)
 
 
+@login_required(login_url='Cus_login')
 def add_address(request):
     if request.method == 'POST':
         address_form = AddressInfoForm(data=request.POST)
@@ -159,6 +160,7 @@ def add_address(request):
         return render(request, 'Customers/add_address.html', context=context)
 
 
+@login_required(login_url='Cus_login')
 def add_to_cart(request):
     if request.method == 'POST':
         Food_ID = request.POST.get('Food ID')
@@ -172,26 +174,29 @@ def add_to_cart(request):
         return redirect('Cus_resinfo')
 
 
+@login_required(login_url='Cus_login')
 def cart(request):
     items = CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))
     context = {'items': items}
     return render(request, 'Customers/cart.html', context=context)
 
 
+@login_required(login_url='Cus_login')
 def delete(request):
     Cart_ID = request.POST.get('delete')
     CartItems.objects.get(Cart_ID=Cart_ID).delete()
     return redirect('Cus_cart')
 
 
+@login_required(login_url='Cus_login')
 def receipt(request):
     c_items = CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))
     order = Order()
     order.save()
     for c_item in c_items:
         item = Item()
-        item.Food_ID = c_item.Cart_Food_ID
-        item.Item_Order_ID = order.Order_ID
+        item.Item_Food_ID = c_item.Cart_Food_ID
+        item.Item_Order_ID = Order.objects.get(Order_ID=order.Order_ID)
         item.Item_Quantity = c_item.Quantity
         item.Item_Price = (c_item.Cart_Food_ID.Food_Price -
                            (c_item.Cart_Food_ID.Food_Discount*100 /

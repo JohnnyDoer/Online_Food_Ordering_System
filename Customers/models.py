@@ -74,8 +74,6 @@ class Order(models.Model):
     Order_Time = models.DateTimeField(default=timezone.now, null=True)
     Order_Total_Price = models.IntegerField(default=0, null=True)
 
-    def __str__(self):
-        return self.Order_Customer_ID.Customer_Email + ' from ' + self.Order_Restaurant_ID.Restaurant_Name
 
 
 class Item(models.Model):
