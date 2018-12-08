@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('Delivery_City', models.CharField(max_length=250)),
                 ('Delivery_State', models.CharField(max_length=250)),
                 ('Delivery_Pin', models.CharField(default=0, max_length=6)),
-                ('Delivery_Pic', models.ImageField(default='Delivery/static/images/profiles/default_del.jpg', upload_to='Delivery/static/images/profiles')),
+                ('Delivery_Pic', models.ImageField(default='Delivery/static/images/profiles/default_profile.jpg', upload_to='Delivery/static/images/profiles')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

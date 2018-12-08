@@ -45,5 +45,5 @@ class Delivery(models.Model):
     Delivery_City = models.CharField(max_length=250, choices=Cities)
     Delivery_State = models.CharField(max_length=250, choices=States)
     Delivery_Pin = models.CharField(max_length=6, default=000000)
-    Delivery_Pic = models.ImageField(upload_to='Delivery/static/images/profiles',
-                                     default='Delivery/static/images/profiles/default_del.jpg')
+    Delivery_Pic = models.ImageField(upload_to='media',
+                                     default='media/default_profile.jpg')

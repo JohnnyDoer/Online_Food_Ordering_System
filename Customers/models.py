@@ -43,8 +43,8 @@ class Profile(models.Model):
     Customer_First_Name = models.CharField(max_length=200)
     Customer_Last_Name = models.CharField(max_length=200)
     Customer_Phone_Number = PhoneNumberField(max_length=13)
-    Customer_Picture = models.ImageField(upload_to='Customers/static/images/profiles',
-                                         default='Customers/static/images/profiles/default_cus.jpg')
+    Customer_Picture = models.ImageField(upload_to='media',
+                                         default='media/default_res.jpg')
     Customer_Email = models.EmailField(default="asd@rew.com")
 
     def __str__(self):

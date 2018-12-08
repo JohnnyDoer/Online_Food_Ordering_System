@@ -33,11 +33,13 @@
                         {{ field }}
 						<span class="focus-input100"></span>
 					</div>
-                        {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                        {% endfor %}
+                        {% if field.help_text %}
+                            <small ></small>
+                            {% endif %}
                     {% endfor %}
-
+                    {% if form.errors %}
+                        <p style="font-size: 12px;color: red">{{ form.get_invalid_login_error }}</p>
+                    {% endif %}
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" type="submit" value="Login">
 							Login
