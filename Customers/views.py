@@ -67,6 +67,8 @@ def profile_page(request):
             address.Customer_ID = Profile.objects.get(user=request.user)
             address.save()
             return redirect('http://127.0.0.1:8000/customer')
+        elif not profile_form.is_valid():
+            print(profile_form.errors)
         else:
             return render(request, 'customers/profile.html', {'Profile_form': profile_form, 'address_form': address_form})
     else:
