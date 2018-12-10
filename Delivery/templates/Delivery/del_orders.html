@@ -9,45 +9,61 @@
 </head>
 
 <body>
+<a class="txt2" href="{% url 'logout' %}">
+							Log out
+						</a>
 
   <center><h1>Delivery Orders</h1></center>
 
-<table class="container">
+{% if orders or accepted %}
+    <table class="container">
 
-		<tr bgcolor="#99d5ff">
-			<th><h1>Customer ID</h1></th>
-			<th><h1>Address ID</h1></th>
-			<th><h1>Order ID</h1></th>
-			<th><h1>Discount</h1></th>
-			<th><h1>Total Price</h1></th>
-			<th><h1>Order Status</h1></th>
-		</tr>
-        {% for order in orders %}
-		<tr>
-			<td>{{ order.customer.Customer_ID }}</td>
-			<td>{{ order.address.Address_ID }}</td>
-			<td>{{ order.Order_ID7 }}</td>
-			<td>{{ order.Discount }}</td>
-			<td>{{ order.Total_Price }}</td>
-            <td>
-                <form action="{% url 'D_delivery:result1' %}" method="post">
-                    {%  csrf_token %}
-                    {% if order.Status == 1 %}
-                                            <button type="submit" name="Delivered" value={{ order.Order_ID }}>Just Delivered</button>
-
-                        {% else %}
-
-                                            Already Delivered
-
-                    {% endif %}
-                </form>
-            </td>
-		</tr>
-        {% endfor %}
-</table>
-
-
-
+            <tr bgcolor="#99d5ff">
+                <th><h1>Customer ID</h1></th>
+                <th><h1>Address ID</h1></th>
+                <th><h1>Order ID</h1></th>
+                <th><h1>Discount</h1></th>
+                <th><h1>Total Price</h1></th>
+                <th><h1>Order Status</h1></th>
+            </tr>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.Order_Customer_ID.Customer_First_Name }}{{ order.Order_Customer_ID.Customer_Last_Name }}</td>
+                <td>{{ order.Order_Address.Home }}{{ order.Order_Address.Area }}{{ order.Order_Address.City }}</td>
+                <td>{{ order.Order_ID }}</td>
+                <td>{{ order.Order_Time }}</td>
+                <td>{{ order.Order_Total_Price }}</td>
+                <td>
+                    <form action="{% url 'Del_orders' %}" method="post">
+                        {%  csrf_token %}
+                        {% if order.Order_Status == 1 %}
+                            <button type="submit" name="Accepted" value={{ order.Order_ID }}>Accept Order</button>
+                        {% endif %}
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            {% for order in accepted %}
+            <tr>
+                <td>{{ order.Order_Customer_ID.Customer_First_Name }}{{ order.Order_Customer_ID.Customer_Last_Name }}</td>
+                <td>{{ order.Order_Address.Home }}{{ order.Order_Address.Area }}{{ order.Order_Address.City }}</td>
+                <td>{{ order.Order_ID }}</td>
+                <td>{{ order.Order_Time }}</td>
+                <td>{{ order.Order_Total_Price }}</td>
+                <td>
+                    <form action="{% url 'Del_orders' %}" method="post">
+                        {%  csrf_token %}
+                        {% if order.Order_Status == 3 %}
+                            <button type="submit" name="Accepted" value={{ order.Order_ID }}>Delivered</button>
+                        {% endif %}
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+{% else %}
+                        No orders available in your area
+{% endif %}
 </body>
 
 </html>

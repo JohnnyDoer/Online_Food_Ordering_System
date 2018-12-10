@@ -11,5 +11,5 @@ def index(request):
         elif Restaurant.objects.filter(user=request.user).exists():
             return redirect('Res_info')
         elif Delivery.objects.filter(user=request.user).exists():
-            return redirect('#')
+            return redirect('Del_orders')
     return render(request, 'Main/index.html')

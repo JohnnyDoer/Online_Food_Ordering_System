@@ -133,9 +133,10 @@ def restaurants(request):
         res_id=request.GET.get('res_id')
         return redirect('http://127.0.0.1:8000/customer/res_info')
     else:
-        data = request.POST['area']
-        filter_res = Restaurant.objects.filter(Restaurant_Area=data)
-        context = {'filter_res': filter_res, 'data':data}
+        global data_address
+        data_address = request.POST['area']
+        filter_res = Restaurant.objects.filter(Restaurant_Area=Address.objects.get(pk=data_address).Area)
+        context = {'filter_res': filter_res, 'data':data_address}
         return render(request, 'Customers/filter_res.html', context=context)
 
 
@@ -197,32 +198,35 @@ def delete(request):
 @login_required(login_url='Cus_login')
 def receipt(request):
     c_items = CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))
-    order = Order()
-    order.save()
-    for c_item in c_items:
-        item = Item()
-        item.Item_Food_ID = c_item.Cart_Food_ID
-        item.Item_Order_ID = Order.objects.get(Order_ID=order.Order_ID)
-        item.Item_Quantity = c_item.Quantity
-        item.Item_Price = (c_item.Cart_Food_ID.Food_Price -
-                           (c_item.Cart_Food_ID.Food_Discount*100 /
-                            c_item.Cart_Food_ID.Food_Price))*c_item.Quantity
-        item.save()
-
-    items = Item.objects.filter(Item_Order_ID=order.Order_ID)
-    for item in items:
-        order.Order_Customer_ID = Profile.objects.get(user=request.user)
-        order.Order_Restaurant_ID = item.Item_Food_ID.Food_Res_ID
-        order.Order_Status = 1
+    if c_items:
+        order = Order()
         order.save()
-        break
-    for item in items:
-        order.Order_Total_Price += item.Item_Price
-    order.save()
-    c_items.delete()
-    context = {'order': order}
-    return render(request, 'Customers/receipt.html', context=context)
+        for c_item in c_items:
+            item = Item()
+            item.Item_Food_ID = c_item.Cart_Food_ID
+            item.Item_Order_ID = Order.objects.get(Order_ID=order.Order_ID)
+            item.Item_Quantity = c_item.Quantity
+            item.Item_Price = (c_item.Cart_Food_ID.Food_Price -
+                               (c_item.Cart_Food_ID.Food_Discount*100 /
+                                c_item.Cart_Food_ID.Food_Price))*c_item.Quantity
+            item.save()
 
+        items = Item.objects.filter(Item_Order_ID=order.Order_ID)
+        for item in items:
+            order.Order_Customer_ID = Profile.objects.get(user=request.user)
+            order.Order_Restaurant_ID = item.Item_Food_ID.Food_Res_ID
+            order.Order_Address = Address.objects.get(pk=data_address)
+            order.Order_Status = 1
+            order.save()
+            break
+        for item in items:
+            order.Order_Total_Price += item.Item_Price
+        order.save()
+        c_items.delete()
+        context = {'order': order}
+        return render(request, 'Customers/receipt.html', context=context)
+    else :
+        return redirect('Cus_index')
 
 @login_required(login_url='Cus_login')
 def edit_profile(request):

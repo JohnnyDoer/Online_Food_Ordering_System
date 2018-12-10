@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -21,9 +22,9 @@ def index(request):
             user = form.get_user()
             login(request, user)
             if Delivery.objects.filter(user=user).exists():
-                return render(request, 'Delivery/del_orders.html')
+                return redirect('Del_orders')
             else:
-                return redirect('http://127.0.0.1:8000/delivery/profile')
+                return redirect('Del_profile')
         else:
             context = {'form': form}
             return render(request, 'Delivery/index.html', context=context)
@@ -63,6 +64,7 @@ def signup(request):
     return render(request, 'Delivery/signup.html', context=context)
 
 
+@login_required(login_url='Del_index')
 def profile_page(request):
     if request.method == 'POST':
         profile_form = DeliveryGuyProfileInfoForm(data=request.POST)
@@ -70,7 +72,7 @@ def profile_page(request):
             profile = profile_form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return render(request, 'Delivery/filter_order.html')
+            return redirect('Del_orders')
         else:
             context = {'Profile_form': profile_form}
             return render(request, 'Delivery/profile.html', context=context)
@@ -93,9 +95,20 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
-def del_orders(request):
 
-    orders = Order.objects.filter(Order_Status=1).filter(Order_Customer_ID__address__Area=Delivery.objects.get(user=request.user).Delivery_Area)
-    context = {'orders': orders}
+@login_required(login_url='Del_index')
+def del_orders(request):
+    if request.method=='POST':
+        order = Order.objects.get(pk=request.POST['Accepted'])
+        if order.Order_Status==1:
+            order.Order_Status = 3
+            order.Order_Delivery_ID=Delivery.objects.get(user=request.user)
+            order.save()
+        elif order.Order_Status == 3:
+            order.Order_Status = 4
+            order.save()
+    orders = Order.objects.filter(Order_Status=1).filter(Order_Address__Area=Delivery.objects.get(user=request.user).Delivery_Area)
+    accepted = Order.objects.filter(Order_Status=3).filter(Order_Delivery_ID=Delivery.objects.get(user=request.user))
+    context = {'orders': orders,'accepted':accepted}
     return render(request, 'Delivery/del_orders.html', context=context)
 

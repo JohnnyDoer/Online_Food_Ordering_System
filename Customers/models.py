@@ -68,6 +68,7 @@ class Address(models.Model):
 class Order(models.Model):
     Order_ID = models.AutoField(primary_key=True)
     Order_Customer_ID = models.ForeignKey(Profile, on_delete=models.PROTECT, null=True)
+    Order_Address = models.ForeignKey(Address, on_delete=models.PROTECT, null=True)
     Order_Restaurant_ID = models.ForeignKey(Restaurant, on_delete=models.PROTECT, null=True)
     Order_Delivery_ID = models.ForeignKey(Delivery, on_delete=models.PROTECT, null=True)
     Order_Status = models.IntegerField(MaxValueValidator(5), null=True)
