@@ -23,20 +23,12 @@
 					<img src="{% static "img-01.png" %}" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" method="POST" action="{% url "Cus_profile" %}">
+				<form class="login100-form validate-form" method="POST" action="{% url "Cus_edit_profile" %}">
                     {% csrf_token %}
 					<span class="login100-form-title">
                         Edit Profile
 					</span>
-                    {% for field in Profile_form %}
-                        {{ field.label_tag }}<br>
-					<div class="wrap-input100 validate-input input100">
-                        {{ field }}
-						<span class="focus-input100"></span>
-					</div>
-                    {% endfor %}
-
-                    {% for field in address_form %}
+                    {% for field in form %}
                         {{ field.label_tag }}<br>
 					<div class="wrap-input100 validate-input input100">
                         {{ field }}

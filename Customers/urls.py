@@ -18,5 +18,6 @@ urlpatterns = [
     path('cart/', views.cart, name='Cus_cart'),
     path('delete/', views.delete, name='Cus_delete'),
     path('Receipt/', views.receipt, name='Cus_receipt'),
+    path('edit/', views.edit_profile, name='Cus_edit_profile'),
     path('search/', include('haystack.urls')),
 ]

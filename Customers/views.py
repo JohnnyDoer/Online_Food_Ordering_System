@@ -10,11 +10,12 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from .models import Address, Profile, CartItems, Item, Order
-from .forms import SignUpForm, UserProfileInfoForm, AddressInfoForm
+from .forms import SignUpForm, UserProfileInfoForm, AddressInfoForm, CustomUserEditForm
 from .tokens import account_activation_token
 from Restaurants.models import Restaurant, Food, FoodCategory
 
 cuisines = ['Lunch', 'Brunch', 'Dinner']
+
 
 @login_required(login_url='Main_index')
 def index(request):
@@ -52,6 +53,7 @@ def signup(request):
         form = SignUpForm()
         context = {'form': form, }
     return render(request, 'Customers/signup.html', context=context)
+
 
 @login_required(login_url='Cus_login')
 def profile_page(request):
@@ -123,6 +125,7 @@ def categories(request):
     context = {'cuisines': cuisines, }
     return render(request, 'Customers/categories.html', context)
 
+
 @login_required(login_url='Cus_login')
 def restaurants(request):
     global res_id
@@ -134,6 +137,7 @@ def restaurants(request):
         filter_res = Restaurant.objects.filter(Restaurant_Area=data)
         context = {'filter_res': filter_res, 'data':data}
         return render(request, 'Customers/filter_res.html', context=context)
+
 
 @login_required(login_url='Cus_login')
 def res_info(request):
@@ -218,3 +222,13 @@ def receipt(request):
     c_items.delete()
     context = {'order': order}
     return render(request, 'Customers/receipt.html', context=context)
+
+
+@login_required(login_url='Cus_login')
+def edit_profile(request):
+    instance = Profile.objects.get(user=request.user)
+    form = CustomUserEditForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect('Main_index')
+    return render(request, 'Customers/edit_profile.html', {'form': form})

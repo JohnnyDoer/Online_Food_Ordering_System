@@ -25,3 +25,9 @@ class AddressInfoForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = ('Home', 'Street', 'Area', 'City', 'State', 'Pin')
+
+
+class CustomUserEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('Customer_First_Name', 'Customer_Last_Name', 'Customer_Phone_Number')
