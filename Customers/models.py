@@ -7,7 +7,7 @@ from Delivery.models import Delivery
 from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
-Areas = (('Cunninghum Road', 'Cunninghum Road'),
+areas = (('Cunninghum Road', 'Cunninghum Road'),
          ('Frazer Town', 'Frazer Town'),
          ('Whitefield', 'Whitefield'),
          ('Church Street', 'Church Street'),
@@ -51,18 +51,28 @@ class Profile(models.Model):
         return self.user.username
 
 
+class City(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+class Area(models.Model):
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
 class Address(models.Model):
     Address_ID = models.AutoField(primary_key=True)
     Customer_ID = models.ForeignKey(Profile, on_delete=models.CASCADE)
     Home = models.CharField(max_length=250)
     Street = models.CharField(max_length=250)
-    Area = models.CharField(max_length=250, choices=Areas)
-    City = models.CharField(max_length=250, choices=Cities)
-    State = models.CharField(max_length=250, choices=States)
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    area = models.ForeignKey(Area, on_delete=models.SET_NULL, null=True)
     Pin = models.CharField(max_length=6, default=000000)
 
-    def __str__(self):
-        return self.Area + ' ' + self.City
 
 
 class Order(models.Model):

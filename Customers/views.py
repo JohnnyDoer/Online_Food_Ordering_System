@@ -9,10 +9,12 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-from .models import Address, Profile, CartItems, Item, Order
+from .models import Address, Profile, CartItems, Item, Order, Area, City
 from .forms import SignUpForm, UserProfileInfoForm, AddressInfoForm, CustomUserEditForm
 from .tokens import account_activation_token
 from Restaurants.models import Restaurant, Food, FoodCategory
+from django.views.generic import  CreateView
+from django.urls import reverse_lazy
 
 cuisines = ['Lunch', 'Brunch', 'Dinner']
 
@@ -77,6 +79,14 @@ def profile_page(request):
         profile_form = UserProfileInfoForm()
         address_form = AddressInfoForm()
     return render(request, 'customers/profile.html', {'Profile_form': profile_form, 'address_form': address_form})
+
+
+
+
+def load_areas(request):
+    city_id = request.GET.get('city')
+    areas = Area.objects.filter(city_id=city_id).order_by('name')
+    return render(request, 'Customers/area_dropdown_list_options.html', {'areas': areas})
 
 
 def loginform(request):
