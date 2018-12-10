@@ -1,0 +1,7 @@
+{{ object.Food_Name }}
+{{ object.Food_Category_ID.FoodCategory_Name }}
+{{ object.Food_Res_ID.Restaurant_Name }}
+{{ object.Food_Res_ID.Restaurant_Street }}
+{{ object.Food_Res_ID.Restaurant_Area }}
+{{ object.Food_Res_ID.Restaurant_City }}
+{{ object.Food_Res_ID.Restaurant_State }}
