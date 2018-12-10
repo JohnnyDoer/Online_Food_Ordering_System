@@ -23,7 +23,7 @@
 					<img src="{% static "img-01.png" %}" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" method="POST" action="{% url "Res_profile" %}">
+				<form class="login100-form validate-form" method="POST" id="AddressForm" data-areas-url="{% url 'Res_ajax_load_areas' %}" action="{% url "Res_profile" %}">
                     {% csrf_token %}
 					<span class="login100-form-title">
                         Restaurant Profile
@@ -37,7 +37,7 @@
                     {% endfor %}
                      {% if Profile_form.errors %}
                         <p style="font-size: 12px;color: red">{{ Profile_form.errors.Restaurant_Phone_Number }}
-                            please make sure to add +91 before </p>
+                            {{ Profile_form.errors }} </p>
                     {% endif %}
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" type="submit" value="signup">
@@ -62,6 +62,30 @@
 		</div>
 	</div>
 </body>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_Restaurant_City").change(function () {
+      var url = $("#AddressForm").attr("data-areas-url");  // get the url of the `load_cities` view
+      var cityId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'city': cityId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_Restaurant_Area").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
+</html>
+
+
 
 </html>
 

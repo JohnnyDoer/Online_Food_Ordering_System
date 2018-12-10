@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
-
 # Create your models here.
 
 Areas = (('Cunninghum Road', 'Cunninghum Road'),
@@ -35,14 +34,27 @@ States = (('Karnataka', 'Karnataka'),
           )
 
 
+
+class City(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+class Area(models.Model):
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
 class Restaurant(models.Model):
     Restaurant_ID = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     Restaurant_Name = models.CharField(max_length=250)
     Restaurant_Street = models.CharField(max_length=250)
-    Restaurant_Area = models.CharField(max_length=250, choices=Areas)
-    Restaurant_City = models.CharField(max_length=250, choices=Cities)
-    Restaurant_State = models.CharField(max_length=250, choices=States)
+    Restaurant_Area = models.ForeignKey(Area, on_delete=models.SET_NULL, null=True)
+    Restaurant_City = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
     Restaurant_Pin = models.CharField(max_length=6, default=132658)
     Restaurant_Phone_Number = PhoneNumberField()
     Restaurant_Logo = models.ImageField(upload_to='media',

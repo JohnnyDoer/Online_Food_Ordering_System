@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Restaurant, Food
+from .models import Restaurant, Food ,Area
 from .forms import SignUpForm, RestaurantProfileInfoForm, AddItemForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -80,7 +80,7 @@ def profile_page(request):
             if Restaurant.objects.filter(user=user).exists():
                 return redirect('Res_info')
             else:
-                return redirect('http://127.0.0.1:8000/restaurant/profile')
+                return redirect('Res_profile')
             # redirect('http://127.0.0.1:8000/restaurant/')
             # return render(request, 'Restaurant/res_profile.html')
         else:
@@ -90,6 +90,12 @@ def profile_page(request):
         profile_form = RestaurantProfileInfoForm()
         context = {'Profile_form': profile_form}
         return render(request, 'Restaurant/profile.html', context=context)
+
+
+def load_areas(request):
+    city_id = request.GET.get('city')
+    areas = Area.objects.filter(city_id=city_id).order_by('name')
+    return render(request, 'Restaurant/area_dropdown_list_options.html', {'areas': areas})
 
 
 def activate(request, uidb64, token):
