@@ -4,6 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import DeliveryGuyProfileInfoForm, SignUpForm
 from .models import Delivery
+from Customers.models import Order
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -20,7 +21,7 @@ def index(request):
             user = form.get_user()
             login(request, user)
             if Delivery.objects.filter(user=user).exists():
-                return render(request, 'Delivery/filter_order.html')
+                return render(request, 'Delivery/del_orders.html')
             else:
                 return redirect('http://127.0.0.1:8000/delivery/profile')
         else:
@@ -91,4 +92,10 @@ def activate(request, uidb64, token):
         return render(request, 'Delivery/After_Activation.html')
     else:
         return HttpResponse('Activation link is invalid!')
+
+def del_orders(request):
+
+    orders = Order.objects.filter(Order_Status=1).filter(Order_Customer_ID__address__Area=Delivery.objects.get(user=request.user).Delivery_Area)
+    context = {'orders': orders}
+    return render(request, 'Delivery/del_orders.html', context=context)
 
