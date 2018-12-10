@@ -100,14 +100,14 @@ def activate(request, uidb64, token):
 def del_orders(request):
     if request.method=='POST':
         order = Order.objects.get(pk=request.POST['Accepted'])
-        if order.Order_Status==1:
+        if order.Order_Status==2:
             order.Order_Status = 3
             order.Order_Delivery_ID=Delivery.objects.get(user=request.user)
             order.save()
         elif order.Order_Status == 3:
             order.Order_Status = 4
             order.save()
-    orders = Order.objects.filter(Order_Status=1).filter(Order_Address__Area=Delivery.objects.get(user=request.user).Delivery_Area)
+        orders = Order.objects.filter(Order_Status=2).filter(Order_Address__Area=Delivery.objects.get(user=request.user).Delivery_Area)
     accepted = Order.objects.filter(Order_Status=3).filter(Order_Delivery_ID=Delivery.objects.get(user=request.user))
     context = {'orders': orders,'accepted':accepted}
     return render(request, 'Delivery/del_orders.html', context=context)

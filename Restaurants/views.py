@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
+
+from Customers.models import Order
 from .models import Restaurant, Food
 from .forms import SignUpForm, RestaurantProfileInfoForm, AddItemForm
 from django.contrib.sites.shortcuts import get_current_site
@@ -129,3 +131,17 @@ def add_item(request):
         form = AddItemForm()
         context = {'form': form}
         return render(request, 'Restaurant/add_item.html', context=context)
+
+@login_required(login_url='Res_index')
+def view_orders(request):
+    if request.method=='POST':
+        order = Order.objects.get(pk=request.POST['Accepted'])
+        if order.Order_Status==1:
+            order.Order_Status = 2
+            order.Order_Restaurant_ID=Restaurant.objects.get(user=request.user)
+            order.save()
+    orders = Order.objects.filter(Order_Status=1).filter(Order_Address__Area=Restaurant.objects.get(user=request.user).Restaurant_Area)
+
+    context = {'orders': orders,}
+    return render(request, 'Restaurant/view.orders.html', context=context)
+
