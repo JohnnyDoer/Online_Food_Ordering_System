@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Add item</title>
-</head>
+<link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}"> </head>
 <body>
     <form  method="POST" action="{% url "Res_add_item" %}">
     {% csrf_token %}
-      {% for field in form %}
-        {{ field.label_tag }}<br>
-        {{ field }}<br>
-      {% endfor %}
-        <form></form>
+        <input type="text" name="Food_Name">
+        <select name="Food_Category">
+            {% for op in data %}
+            <option value="{{ op.FoodCategory_Name }}">{{ op.FoodCategory_Name }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" name="Food_Price" min="0">
+        <input type="number" name="Food_Discount" min="0" max="100">
     <button type="submit" value="submit">Submit</button>
   </form>
 

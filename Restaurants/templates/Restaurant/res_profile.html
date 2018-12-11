@@ -33,7 +33,7 @@
 <script type="text/javascript" src="{% static 'js/modernizr.js' %}"></script>
 <script src="{% static 'js/scripts.js' %}"></script>
 <script src="{% static 'js/waypoints.min.js' %}"></script>
-</head>
+<link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}"> </head>
 
 <body>
 <section class="saction1">
@@ -116,6 +116,9 @@
                                             <center> <p>Discount: {{ dt.Food_Discount }}%</p> </center>
                                         </li>
                                         <br>
+                                        <center>
+                                        <a href="/restaurant/edit_item/?food_id={{ dt.Food_ID }}">edit</a>
+                                        </center>
                                     </ul>
                                 </div>
                         </div>

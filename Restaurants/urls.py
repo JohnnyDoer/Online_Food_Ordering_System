@@ -11,8 +11,8 @@ urlpatterns = [
     path('info/',views.restaurant,name='Res_info'),
     path('add_item/',views.add_item,name='Res_add_item'),
     path('view_orders/', views.view_orders, name='View_order'),
-path('edit/', views.edit_profile, name='Res_edit_profile'),
+    path('edit/', views.edit_profile, name='Res_edit_profile'),
+    path('edit_item/', views.edit_food, name='Res_edit_food'),
 ]
-
 
 
