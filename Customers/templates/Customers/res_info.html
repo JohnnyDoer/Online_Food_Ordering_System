@@ -82,9 +82,8 @@
               <div style="padding-left:300px;color:black;">
               <p style="color:black;padding-left:150px;padding-top:100px;font-size:17px;text-align:left">
                   {%  for name in data|slice:":1" %}
-                            {{ name.Food_Res_ID.Restaurant_Area }}
-                            {{ name.Food_Res_ID.Restaurant_City }}<br>
-                            {{ name.Food_Res_ID.Restaurant_State }}<br>
+                            {{ name.Food_Res_ID.area.name }}
+                            {{ name.Food_Res_ID.city.name }}<br>
                             {{ name.Food_Res_ID.Restaurant_Phone_Number }}<br>
                             {{ name.Food_Res_ID.Restaurant_Email }}
 

@@ -29,14 +29,14 @@
             {% for order in orders %}
             <tr>
                 <td>{{ order.Order_Customer_ID.Customer_First_Name }}{{ order.Order_Customer_ID.Customer_Last_Name }}</td>
-                <td>{{ order.Order_Address.Home }}{{ order.Order_Address.Area }}{{ order.Order_Address.City }}</td>
+                <td>{{ order.Order_Address.Home }}{{ order.Order_Address.area.name }}{{ order.Order_Address.city.name }}</td>
                 <td>{{ order.Order_ID }}</td>
                 <td>{{ order.Order_Time }}</td>
                 <td>{{ order.Order_Total_Price }}</td>
                 <td>
                     <form action="{% url 'Del_orders' %}" method="post">
                         {%  csrf_token %}
-                        {% if order.Order_Status == 2 %}
+                        {% if order.Order_Status == 1 %}
                             <button type="submit" name="Accepted" value={{ order.Order_ID }}>Accept Order</button>
                         {% endif %}
                     </form>
@@ -46,7 +46,7 @@
             {% for order in accepted %}
             <tr>
                 <td>{{ order.Order_Customer_ID.Customer_First_Name }}{{ order.Order_Customer_ID.Customer_Last_Name }}</td>
-                <td>{{ order.Order_Address.Home }}{{ order.Order_Address.Area }}{{ order.Order_Address.City }}</td>
+                <td>{{ order.Order_Address.Home }}{{ order.Order_Address.area.name }}{{ order.Order_Address.city.name }}</td>
                 <td>{{ order.Order_ID }}</td>
                 <td>{{ order.Order_Time }}</td>
                 <td>{{ order.Order_Total_Price }}</td>

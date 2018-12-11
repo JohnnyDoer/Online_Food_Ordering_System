@@ -7,6 +7,7 @@ urlpatterns = [
     path('signup/', views.signup, name='Cus_signup'),
     path('login/', views.loginform, name='Cus_login'),
     path('profile/', views.profile_page, name='Cus_profile'),
+    path('ajax/load-areas/', views.load_areas, name='Cus_ajax_load_areas'),
     path('logout/', views.user_logout, name='logout'),
     path('categories/', views.categories, name='Cus_categories'),
     path('res_area/', views.restaurants, name='res_area'),

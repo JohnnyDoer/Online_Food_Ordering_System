@@ -23,7 +23,7 @@
 					<img src="{% static "img-01.png" %}" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" method="POST" action="{% url "Del_profile" %}">
+				<form class="login100-form validate-form" method="POST" id="AddressForm" data-areas-url="{% url 'Del_ajax_load_areas' %}" action="{% url "Del_profile" %}">
                     {% csrf_token %}
 					<span class="login100-form-title">
                         Delivery Profile
@@ -62,6 +62,25 @@
 		</div>
 	</div>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_city").change(function () {
+      var url = $("#AddressForm").data("areas-url");  // get the url of the `load_cities` view
+      var cityId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'city': cityId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_area").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
 
 </html>
 

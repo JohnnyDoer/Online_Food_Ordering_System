@@ -75,7 +75,7 @@
                                   <div class="btn-group" role="group" aria-label="Basic example">
                                       <select class="btn-group1" placeholder="Select an address" name="area" form="formid">
                                       {% for value in vals %}
-                                        <option value="{{ value.Address_ID }}"><span>• </span>{{ value.Home }}, {{ value.Street }}, {{ value.Area}}, {{ value.City }}</option>
+                                        <option value="{{ value.Address_ID }}"><span>• </span>{{ value.Home }}, {{ value.Street }}, {{ value.area.name}}, {{ value.city.name }}</option>
                                       {% endfor %}<br>
                                       </select>
 

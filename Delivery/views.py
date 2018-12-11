@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import DeliveryGuyProfileInfoForm, SignUpForm
-from .models import Delivery
+from .models import Delivery, Area
 from Customers.models import Order
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -82,6 +82,12 @@ def profile_page(request):
     return render(request, 'Delivery/profile.html', context=context)
 
 
+def load_areas(request):
+    city_id = request.GET.get('city')
+    areas = Area.objects.filter(city_id=city_id).order_by('name')
+    return render(request, 'Delivery/area_dropdown_list_options.html', {'areas': areas})
+
+
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -98,16 +104,16 @@ def activate(request, uidb64, token):
 
 @login_required(login_url='Del_index')
 def del_orders(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         order = Order.objects.get(pk=request.POST['Accepted'])
-        if order.Order_Status==2:
+        if order.Order_Status == 1:
             order.Order_Status = 3
-            order.Order_Delivery_ID=Delivery.objects.get(user=request.user)
+            order.Order_Delivery_ID = Delivery.objects.get(user=request.user)
             order.save()
         elif order.Order_Status == 3:
             order.Order_Status = 4
             order.save()
-        orders = Order.objects.filter(Order_Status=2).filter(Order_Address__Area=Delivery.objects.get(user=request.user).Delivery_Area)
+    orders = Order.objects.filter(Order_Status=1).filter(Order_Address__area__name=Delivery.objects.get(user=request.user).area.name)
     accepted = Order.objects.filter(Order_Status=3).filter(Order_Delivery_ID=Delivery.objects.get(user=request.user))
     context = {'orders': orders,'accepted':accepted}
     return render(request, 'Delivery/del_orders.html', context=context)

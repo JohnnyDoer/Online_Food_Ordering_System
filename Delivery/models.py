@@ -35,15 +35,28 @@ States = (('Karnataka', 'Karnataka'),
           )
 
 
+class City(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+class Area(models.Model):
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+
 class Delivery(models.Model):
     Delivery_ID = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     Delivery_First_Name = models.CharField(max_length=250)
     Delivery_Last_Name = models.CharField(max_length=250)
     Delivery_Phone_Number = PhoneNumberField()
-    Delivery_Area = models.CharField(max_length=250, choices=Areas)
-    Delivery_City = models.CharField(max_length=250, choices=Cities)
-    Delivery_State = models.CharField(max_length=250, choices=States)
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    area = models.ForeignKey(Area, on_delete=models.SET_NULL, null=True)
     Delivery_Pin = models.CharField(max_length=6, default=000000)
     Delivery_Pic = models.ImageField(upload_to='media',
                                      default='media/default_profile.jpg')

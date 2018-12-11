@@ -77,9 +77,8 @@
               <img src="/media/{{ data.Restaurant_Logo }}" style="height:300px;width:350px;" align="left">
               <div style="padding-left:300px;color:black;">
               <p style="color:black;padding-left:150px;padding-top:100px;font-size:17px;text-align:left">
-                            {{ data.Restaurant_Area }}
-                            {{ data.Restaurant_City }}<br>
-                            {{ data.Restaurant_State }}<br>
+                            {{ data.area.name }}
+                            {{ data.city.name }}<br>
                             {{ data.Restaurant_Phone_Number }}<br>
                             {{ data.Restaurant_Email }}
 
@@ -157,19 +156,6 @@
           </ul>
         </div>
       </div>
-
-      <div class="col-lg-3 col-md-3 col-sm-3">
-        <div class="site">
-          <h3>View orders here</h3>
-        </div>
-        <div class="social">
-          <ul>
-            <li> <a href={% url 'View_order'  %}>View-Orders</a></li>
-          </ul>
-        </div>
-      </div>
-
-
     </div>
   </div>
 </footer>
