@@ -10,7 +10,8 @@ urlpatterns = [
             views.activate, name='Res_activate'),
     path('info/',views.restaurant,name='Res_info'),
     path('add_item/',views.add_item,name='Res_add_item'),
-    path('view_orders/', views.view_orders, name='View_order')
+    path('view_orders/', views.view_orders, name='View_order'),
+path('edit/', views.edit_profile, name='Res_edit_profile'),
 ]
 
 

@@ -149,3 +149,14 @@ def view_orders(request):
     orders = Order.objects.filter(Order_Status=1).filter(Order_Address__area__name=Restaurant.objects.get(user=request.user).area.name)
     context = {'orders': orders,}
     return render(request, 'Restaurant/view.orders.html', context=context)
+
+
+@login_required(login_url='Del_login')
+def edit_profile(request):
+    print(request.user)
+    instance = Restaurant.objects.get(user=request.user)
+    form = RestaurantProfileInfoForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect('Main_index')
+    return render(request, 'Restaurant/edit_profile.html', {'form': form})
