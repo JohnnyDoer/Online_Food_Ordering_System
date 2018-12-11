@@ -40,3 +40,9 @@ class AddItemForm(forms.ModelForm):
     class Meta:
         model = Food
         fields = ('Food_Name', 'Food_Pic', 'Food_Price', 'Food_Discount','Food_Category_ID', 'Food_Res_ID')
+
+
+class FoodEditForm(forms.ModelForm):
+    class Meta:
+        model = Food
+        fields = ('Food_Name', 'Food_Category_ID', 'Food_Price', 'Food_Discount', 'Food_Res_ID')
