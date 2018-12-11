@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Restaurant, Food, Area
-from .forms import SignUpForm, RestaurantProfileInfoForm, AddItemForm
+from .models import Restaurant, Food, Area, FoodCategory
+from .forms import SignUpForm, RestaurantProfileInfoForm, FoodEditForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -123,15 +123,35 @@ def restaurant(request):
 @login_required(login_url='Res_index')
 def add_item(request):
     if request.method == 'POST':
-        form = AddItemForm(data=request.POST)
+        item = Food()
+        item.Food_Res_ID = Restaurant.objects.get(user=request.user)
+        item.Food_Name = request.POST.get('Food_Name')
+        print(request.POST.get('Food_Category'))
+        print(type(request.POST.get('Food_Category')))
+        item.Food_Category_ID = FoodCategory.objects.get(FoodCategory_Name=request.POST.get('Food_Category'))
+        item.Food_Price = request.POST.get('Food_Price')
+        item.Food_Discount = request.POST.get('Food_Discount')
+        item.save()
+        return redirect('Res_info')
+    else:
+        data = FoodCategory.objects.all()
+        context = {'data': data}
+        return render(request, 'Restaurant/add_item.html', context=context)
+
+
+@login_required(login_url='Cus_login')
+def edit_food(request):
+    global data_item
+    global instance
+    if request.GET.get('food_id'):
+        data_item=request.GET.get('food_id')
+        instance = Food.objects.get(pk=data_item)
+        form = FoodEditForm(request.POST or None, instance=instance)
+        return render(request, 'Restaurant/edit_food.html', {'form': form})
+    elif request.method == 'POST':
+        form = FoodEditForm(data=request.POST or None, instance=instance)
         if form.is_valid():
-            form.save(commit=False)
             form.save()
             return redirect('Res_info')
         else:
-            context = {'form': form}
-            return render(request, 'Restaurant/add_item.html', context=context)
-    else:
-        form = AddItemForm()
-        context = {'form': form}
-        return render(request, 'Restaurant/add_item.html', context=context)
+            return render(request, 'Restaurant/edit_food.html', {'form': form})
