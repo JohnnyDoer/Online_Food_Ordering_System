@@ -145,10 +145,11 @@ def edit_food(request):
     global data_item
     global instance
     if request.GET.get('food_id'):
-        data_item=request.GET.get('food_id')
+        data_item = request.GET.get('food_id')
         instance = Food.objects.get(pk=data_item)
         form = FoodEditForm(request.POST or None, instance=instance)
-        return render(request, 'Restaurant/edit_food.html', {'form': form})
+        context = {'form': form, 'data': instance}
+        return render(request, 'Restaurant/edit_food.html', context=context)
     elif request.method == 'POST':
         form = FoodEditForm(data=request.POST or None, instance=instance)
         if form.is_valid():
@@ -156,6 +157,13 @@ def edit_food(request):
             return redirect('Res_info')
         else:
             return render(request, 'Restaurant/edit_food.html', {'form': form})
+
+
+@login_required(login_url='Res_login')
+def del_item(request):
+    Food_ID = request.POST.get('delete')
+    Food.objects.get(Food_ID=Food_ID).delete()
+    return redirect('Res_info')
 
 
 @login_required(login_url='Res_index')
@@ -171,7 +179,7 @@ def view_orders(request):
     return render(request, 'Restaurant/view.orders.html', context=context)
 
 
-@login_required(login_url='Del_login')
+@login_required(login_url='Res_login')
 def edit_profile(request):
     print(request.user)
     instance = Restaurant.objects.get(user=request.user)
@@ -180,3 +188,4 @@ def edit_profile(request):
         form.save()
         return redirect('Main_index')
     return render(request, 'Restaurant/edit_profile.html', {'form': form})
+

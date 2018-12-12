@@ -13,6 +13,8 @@ urlpatterns = [
     path('view_orders/', views.view_orders, name='View_order'),
     path('edit/', views.edit_profile, name='Res_edit_profile'),
     path('edit_item/', views.edit_food, name='Res_edit_food'),
+    path('delete_item/', views.del_item, name='Res_del_item'),
+
 ]
 
 

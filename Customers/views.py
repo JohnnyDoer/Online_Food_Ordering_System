@@ -22,8 +22,8 @@ cuisines = ['Lunch', 'Brunch', 'Dinner']
 @login_required(login_url='Main_index')
 def index(request):
     vals = Address.objects.filter(Customer_ID=Profile.objects.get(user=request.user))
-    pic=Profile.objects.get(user=request.user)
-    context = {'vals': vals,'pic':pic}
+    pic = Profile.objects.get(user=request.user)
+    context = {'vals': vals, 'pic': pic}
     return render(request, 'Customers/index.html', context=context)
 
 
