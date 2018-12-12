@@ -46,6 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phonenumber_field',
     'haystack',
+    'django_nose',
+]
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=Customer',
 ]
 
 MIDDLEWARE = [
