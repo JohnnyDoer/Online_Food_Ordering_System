@@ -144,7 +144,8 @@ def restaurants(request):
         global data_address
         data_address = request.POST['area']
         filter_res = Restaurant.objects.filter(area__name=Address.objects.get(pk=data_address).area.name)
-        context = {'filter_res': filter_res, 'data':data_address}
+        address = Address.objects.get(pk=data_address).area.name
+        context = {'filter_res': filter_res, 'data':address}
         return render(request, 'Customers/filter_res.html', context=context)
 
 
@@ -231,7 +232,7 @@ def receipt(request):
             order.Order_Total_Price += item.Item_Price
         order.save()
         c_items.delete()
-        context = {'order': order}
+        context = {'order': order,'items':order.item_set.all()}
         return render(request, 'Customers/receipt.html', context=context)
     else :
         return redirect('Cus_index')
@@ -244,3 +245,11 @@ def edit_profile(request):
         form.save()
         return redirect('Main_index')
     return render(request, 'Customers/edit_profile.html', {'form': form})
+
+@login_required(login_url='Cus_login')
+def show_profile(request):
+    show=Profile.objects.get(user=request.user)
+    add=Address.objects.filter(Customer_ID__user=request.user)
+    print(add)
+    dict={'profile':show,'address':add}
+    return render(request, 'Customers/show_profile.html', context=dict)
