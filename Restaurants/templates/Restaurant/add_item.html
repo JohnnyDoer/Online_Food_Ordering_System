@@ -28,10 +28,12 @@
 					<span class="login100-form-title">
                         Edit Food Details
 					</span>
+                            <p>Food Name</p>
 					        <div class="wrap-input100 validate-input input100">
                                 <input type="text" name="Food_Name">
                             <span class="focus-input100"></span>
 					        </div>
+                            <p>Food Category</p>
                             <div class="wrap-input100 validate-input input100">
                             <select name="Food_Category">
                                 {% for op in data %}
@@ -40,10 +42,12 @@
                             </select>
                                 <span class="focus-input100"></span>
 					        </div>
+                            <p>Food Price</p>
                             <div class="wrap-input100 validate-input input100">
                             <input type="number" name="Food_Price" min="0">
                             <span class="focus-input100"></span>
 					        </div>
+                            <p>Food Discount</p>
                             <div class="wrap-input100 validate-input input100">
                             <input type="number" name="Food_Discount" min="0" max="100">
                             <span class="focus-input100"></span>
