@@ -1,70 +1,104 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+{% load staticfiles %}
+  <head>
+    <meta charset="utf-8">
+    <title>Deliverer's Homepage</title>
 
-<head>
-    {% load staticfiles %}
-  <meta charset="UTF-8">
-  <title>Orders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="{% static 'css/style7.css' %}" media="all" />
+    <link rel="stylesheet" href="{% static 'css/style6.css' %}" media="all" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" media="all" />
+
+  </head>
+
+  <body style="width:98%;padding-left:30px;height:30px;">
+  <section class="saction1">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="menu">
+          <nav>
+            <ul>
+              <li><a href="#" style="text-decoration:none">FOODBUGGY</a></li>
+              <li><a href="#" style="text-decoration:none">Contact Us</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="login">
+          <ul>
+            <li><a href="#" style="text-decoration:none">Profile</a></li>
+            <li><a href="{% url 'logout' %}" style="text-decoration:none">Log out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
-<link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}"> </head>
 
-<body>
-<a class="txt2" href="{% url 'logout' %}">
-							Log out
-						</a>
+    <main>
+      <div id="details" class="clearfix">
 
-  <center><h1>Delivery Orders</h1></center>
+      </div>
 
-{% if orders or accepted %}
-    <table class="container">
-
-            <tr bgcolor="#99d5ff">
-                <th><h1>Customer ID</h1></th>
-                <th><h1>Address ID</h1></th>
-                <th><h1>Order ID</h1></th>
-                <th><h1>Discount</h1></th>
-                <th><h1>Total Price</h1></th>
-                <th><h1>Order Status</h1></th>
-            </tr>
+        {% if orders or accepted %}
+            <header class="clearfix1" style="padding-top:100px;margin-bottom: 5px;border-bottom: 1px solid #AAAAAA;font-family:sans-serif;">
+              <div id="company1" >
+                <h2 class="name1">Delivery Orders</h2>
+              </div>
+            </header>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="unit">ORDER ID</th>
+            <th class="desc" style="text-align:center">DESCRIPTION</th>
+            <th class="unit">TOTAL PRICE</th>
+            <th class="total" style="background-color:#DDDDDD;color:#595959;">STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
             {% for order in orders %}
-            <tr>
-                <td>{{ order.Order_Customer_ID.Customer_First_Name }}{{ order.Order_Customer_ID.Customer_Last_Name }}</td>
-                <td>{{ order.Order_Address.Home }}{{ order.Order_Address.area.name }}{{ order.Order_Address.city.name }}</td>
-                <td>{{ order.Order_ID }}</td>
-                <td>{{ order.Order_Time }}</td>
-                <td>{{ order.Order_Total_Price }}</td>
-                <td>
+          <tr>
+            <td class="no" style="background-color:#DDDDDD;color:#595959;">{{ order.Order_ID }}<br>{{ order.Order_Time }}</td>
+            <td class="desc"><h3>{{ order.Order_Customer_ID.Customer_First_Name }}{{ order.Order_Customer_ID.Customer_Last_Name }}</h3>{{ order.Order_Address.Home }}{{ order.Order_Address.area.name }}{{ order.Order_Address.city.name }}</td>
+            <td class="unit">{{ order.Order_Total_Price }}</td>
+               <td style="background-color:#DDDDDD;padding-right:70px">
                     <form action="{% url 'Del_orders' %}" method="post">
                         {%  csrf_token %}
                         {% if order.Order_Status == 2 %}
-                            <button type="submit" name="Accepted" value={{ order.Order_ID }}>Accept Order</button>
+                            <button class="w3-btn w3-white w3-border w3-round-large" type="submit" name="Accepted" value={{ order.Order_ID }}>Accept Order</button>
                         {% endif %}
                     </form>
                 </td>
-            </tr>
+          </tr>
             {% endfor %}
+
             {% for order in accepted %}
             <tr>
-                <td>{{ order.Order_Customer_ID.Customer_First_Name }}{{ order.Order_Customer_ID.Customer_Last_Name }}</td>
-                <td>{{ order.Order_Address.Home }}{{ order.Order_Address.area.name }}{{ order.Order_Address.city.name }}</td>
-                <td>{{ order.Order_ID }}</td>
-                <td>{{ order.Order_Time }}</td>
-                <td>{{ order.Order_Total_Price }}</td>
-                <td>
+            <td class="no" style="background-color:#DDDDDD;color:#595959;">{{ order.Order_ID }}</td>
+            <td class="desc"><h3>{{ order.Order_Customer_ID.Customer_First_Name }}{{ order.Order_Customer_ID.Customer_Last_Name }}</h3>{{ order.Order_Address.Home }}{{ order.Order_Address.area.name }}{{ order.Order_Address.city.name }}</td>
+            <td class="unit">{{ order.Order_Total_Price }}</td>
+               <td style="background-color:#DDDDDD;padding-right:70px">
                     <form action="{% url 'Del_orders' %}" method="post">
                         {%  csrf_token %}
                         {% if order.Order_Status == 3 %}
-                            <button type="submit" name="Accepted" value={{ order.Order_ID }}>Delivered</button>
+                            <button class="w3-btn w3-white w3-border w3-round-large" type="submit" name="Accepted" value={{ order.Order_ID }}>Delivered</button>
                         {% endif %}
                     </form>
                 </td>
-            </tr>
+            <td style="background-color:#DDDDDD;padding-right:70px"><form action="#" method="get"><button class="w3-btn w3-white w3-border w3-round-large">Delivered</button></form></td>
+          </tr>
             {% endfor %}
-    </table>
-{% else %}
-                        No orders available in your area
-{% endif %}
-</body>
+        </tbody>
+      </table>
+    {% else %}
+                        <h2 class="name1" style="padding-top:100px">No orders available in your area</h2>
+    {% endif %}
 
+    </main>
+  </body>
 </html>
