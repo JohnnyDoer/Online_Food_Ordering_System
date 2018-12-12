@@ -1,17 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    {% load staticfiles %}
-    <meta charset="UTF-8">
-    <title>Receipt</title>
-<link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}"> </head>
-<body>
+{% load staticfiles %}
+  <head>
+    <meta charset="utf-8">
+    <title>Invoice letter</title>
+    <link rel="stylesheet" href="{% static "css/style7.css" %}" media="all" />
+  </head>
 
-    {{ order.Order_Customer_ID.Customer_First_Name }} {{ order.Order_Customer_ID.Customer_Last_Name }}
-    {{ order.Order_Customer_ID.Customer_Email }} {{ order.Order_Customer_ID.Customer_Phone_Number }}
-    {{ order.Order_Time }} {{ order.Order_Total_Price }}
-
-Make a button to go to foodbuggy.
-
-</body>
+  <body>
+    <header class="clearfix">
+      <div id="company" >
+        <h2 class="name">Food Buggy</h2>
+      </div>
+    </header>
+    <main>
+      <div id="details" class="clearfix">
+        <div id="client">
+          <div class="to">INVOICE TO:</div>
+          <h2 class="name">{{ order.Order_Customer_ID.Customer_First_Name }} {{ order.Order_Customer_ID.Customer_Last_Name }}</h2>
+          <div class="address"></div>
+          <div>{{ order.Order_Customer_ID.Customer_Phone_Number }}</div>
+          <div class="email">{{ order.Order_Customer_ID.Customer_Email }}</div>
+            <div class="date">Date and time of Invoice: {{ order.Order_Time }}</div>
+        </div>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="desc">Description</th>
+            <th class="unit">Unit Price</th>
+            <th class="qty">Quantity</th>
+            <th class="total">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for item in items  %}
+          <tr>
+            <td class="desc"><h3>{{ item.Item_Food_ID.Food_Name }}</h3>Creating a recognizable design solution based on the company's existing visual identity</td>
+            <td class="unit">{{ item.Item_Food_ID.Food_Price }}</td>
+            <td class="qty">{{ item.Item_Quantity }}</td>
+            <td class="total">{{ item.Item_Price }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">GRAND TOTAL</td>
+            <td>Rs. {{ order.Order_Total_Price }}</td>
+          </tr>
+        </tfoot>
+      </table>
+      <div id="thanks">Return to <a href="{% url 'Main_index' %}">homepage</a> Thank you!</div>
+    </main>
+    <footer>
+      Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+  </body>
 </html>
