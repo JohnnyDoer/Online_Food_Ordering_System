@@ -237,6 +237,7 @@ def receipt(request):
     else :
         return redirect('Cus_index')
 
+
 @login_required(login_url='Cus_login')
 def edit_profile(request):
     instance = Profile.objects.get(user=request.user)
@@ -245,6 +246,7 @@ def edit_profile(request):
         form.save()
         return redirect('Main_index')
     return render(request, 'Customers/edit_profile.html', {'form': form})
+
 
 @login_required(login_url='Cus_login')
 def show_profile(request):

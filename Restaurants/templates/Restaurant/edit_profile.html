@@ -23,7 +23,7 @@
 					<img src="{% static "img-01.png" %}" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" method="POST" action="{% url "Res_edit_profile" %}">
+				<form class="login100-form validate-form" method="POST" id="AddressForm" data-areas-url="{% url 'Res_ajax_load_areas' %}"  action="{% url "Res_edit_profile" %}">
                     {% csrf_token %}
 					<span class="login100-form-title">
                         Edit Profile
@@ -35,7 +35,10 @@
 						<span class="focus-input100"></span>
 					</div>
                     {% endfor %}
-
+                    {% if form.errors %}
+                        <p style="font-size: 12px;color: red">{{ form.errors.Restaurant_Phone_Number }}
+                            please make sure to add +91 before </p>
+                    {% endif %}
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" type="submit" value="signup">
 							Submit
