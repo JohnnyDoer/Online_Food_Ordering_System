@@ -3,83 +3,76 @@
 {%  load staticfiles %}
 <head>
 <meta charset="utf-8">
-<title>Restaurants</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>Restaurants</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-<link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css' />
 
-<!--MOBILE DEVICE-->
+    <!--MOBILE DEVICE-->
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
 
-<!--CSS-->
-<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css'%}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css'%}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css'%}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css'%}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/simple-line-icons.css'%}"/>
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css'%}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/simple-line-icons.css'%}"/>
 
-<!--JS-->
+    <!--JS-->
 
-<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/modernizr.js' %}"></script>
-<script src="{% static 'js/scripts.js' %}"></script>
-<script src="{% static 'js/waypoints.min.js' %}"></script>
-<link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}"> </head>
-
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}">
+</head>
 <body>
 <section class="saction1">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="menu">
-          <nav>
-            <ul>
-              <li><a href="{%  url 'Main_index' %}">Food Buggy</a></li>
-              <li><a href="#contact">Contact Us</a></li>
-            </ul>
-          </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="menu">
+                    <nav>
+                        <ul>
+                            <li><a href="{%  url 'Main_index' %}">Food Buggy</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="login">
+                    <ul>
+                        <li> <a href="/customer/search/"><button type="submit" style="padding:10px;background-color:#4CAF50;border:none;color:white;display:inline-block"><span class="icon-magnifier search-icon"></span>  SEARCH</button></a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="login">
-          <ul>
-
-              <li> <a href="/customer/search/"><button type="submit" style="padding:10px;background-color:#4CAF50;border:none;color:white;display:inline-block"><span class="icon-magnifier search-icon"></span>  SEARCH</button></a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
 </section>
 <br><br><br>
 <div id="section1" class="container-fluid" style="backgroud-color:white" >
-
 <section id="menu" class="main-block light-bg">
-        <div class="container" id="restaurant">
-            <div class="row justify-content-center">
-                <div class="col-md-5">
-                    <div class="styled-heading">
-                        <h3>Featured places in {{ data }}</h3>
-                    </div>
+    <div class="container" id="restaurant">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="styled-heading">
+                    <h3>Featured places in {{ data }}</h3>
                 </div>
             </div>
-            <div class="row">
-
-
-
-                {% for items in filter_res %}
+        </div>
+        <div class="row">
+            {% for items in filter_res %}
                 <div class="col-md-4 featured-responsive">
                     <div class="featured-place-wrap">
                         <a href="/customer/res_area/?res_id={{ items.Restaurant_ID }}">
                             <img src="{% static 'images/featured2.jpg' %}" class="img-fluid" alt="#">
-
                             <div class="featured-title-box">
                                 <h6>{{ items.Restaurant_Name }}</h6>
                                 <ul>
@@ -89,69 +82,58 @@
                                     <li><span class="icon-link"></span>
                                         <p>{{ items.Restaurant_Email }}</p>
                                     </li>
-
                                 </ul>
                             </div>
                         </a>
                     </div>
                 </div>
-                {% endfor %}
-
-
-
-
-
-            </div>
+            {% endfor %}
         </div>
-    </section>
-    <!--//END FEATURED PLACES -->
+    </div>
+</section><!--//END FEATURED PLACES -->
 <br><br>
 <footer class="saction8">
-  <div class="container" id="contact">
-    <div class="row">
-      <div class="col-lg-3 col-md-3 col-sm-3">
-        <div class="site">
-          <h3>Site Link</h3>
+    <div class="container" id="contact">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="site">
+                    <h3>Site Link</h3>
+                </div>
+                <div class="sitelink">
+                    <ul>
+                        <li> <span>&#10152;</span><a href="#">About Us</a></li>
+                        <li><span>&#10152;</span><a href="#">Contact Us</a></li>
+                        <li><span>&#10152;</span><a href="#">Privacy Policy</a></li>
+                        <li><span>&#10152;</span><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="site">
+                    <h3>Follow us on...</h3>
+                </div>
+                <div class="social">
+                    <ul>
+                        <li> <i class="fa fa-facebook-square"></i><a href="#">Facebook</a></li>
+                        <li><i class="fa fa-twitter-square"></i><a href="#">Twitter</a></li>
+                        <li><i class="fa fa-linkedin-square"></i><a href="#">Linkedin</a></li>
+                        <li><i class="fa fa-google-plus-square"></i><a href="#">Google Plus</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="submit">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>To get latest updates and food deals every week</p>
+                </div>
+                <div class="submitbox">
+                    <input type="text" />
+                    <div class="sub"> <a href="#">Submit</a> </div>
+                </div>
+            </div>
         </div>
-        <div class="sitelink">
-          <ul>
-            <li> <span>&#10152;</span><a href="#">About Us</a></li>
-            <li><span>&#10152;</span><a href="#">Contact Us</a></li>
-            <li><span>&#10152;</span><a href="#">Privacy Policy</a></li>
-            <li><span>&#10152;</span><a href="#">Terms of Use</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-3 col-sm-3">
-        <div class="site">
-          <h3>Follow us on...</h3>
-        </div>
-        <div class="social">
-          <ul>
-            <li> <i class="fa fa-facebook-square"></i><a href="#">Facebook</a></li>
-            <li><i class="fa fa-twitter-square"></i><a href="#">Twitter</a></li>
-            <li><i class="fa fa-linkedin-square"></i><a href="#">Linkedin</a></li>
-            <li><i class="fa fa-google-plus-square"></i><a href="#">Google Plus</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-3">
-        <div class="submit">
-          <h3>Subscribe Newsletter</h3>
-          <p>To get latest updates and food deals
-            every week</p>
-        </div>
-        <div class="submitbox">
-          <input type="text" />
-          <div class="sub"> <a href="#">Submit</a> </div>
-        </div>
-      </div>
     </div>
-  </div>
 </footer>
-
-
 </body>
 </html>
 

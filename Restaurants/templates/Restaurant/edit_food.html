@@ -46,19 +46,26 @@
 							Submit
 						</button>
 					</div>
-
-					<div class="text-center p-t-12">
-                        {% if user.is_authenticated %}
-						<a class="txt2" href="{% url 'Res_info' %}">
-							Go Back
-						</a>
-                        {% else %}
-                        {% endif %}
-                        <span class="txt1">
-							here...
-						</span>
-					</div>
-
+                </form>
+                <div class="text-center p-t-12">
+                    {% if user.is_authenticated %}
+                    <a class="txt2" href="{% url 'Res_info' %}">
+                        Go Back
+                    </a>
+                    {% else %}
+                    {% endif %}
+                    <span class="txt1"></span>
+                </div>
+                <form  method="POST" action="{% url "Res_del_item" %}">
+                    {% csrf_token %}
+                        <div class="text-center p-t-12">
+                            {% if user.is_authenticated %}
+                            <button class="login100-form-btn" type="submit" value="{{ data.Food_ID }}" name="delete">
+	    						Delete Item
+		    				</button>
+                            {% endif %}
+                            <span class="txt1"></span>
+                        </div>
                 </form>
 			</div>
 		</div>
