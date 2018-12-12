@@ -22,136 +22,108 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/simple-line-icons.css' %}">
     <link rel="stylesheet" href="{% static 'css/style2.css' %}">
-<link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}"> </head>
-
+    <link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}">
+</head>
 <body>
-
-  <div class="saction1">
+<div class="saction1">
     <div class="container" style="height:65px">
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          <div class="menu">
-            <nav>
-              <ul>
-                <li><a href="{% url 'Main_index' %}">Food Buggy</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-              </ul>
-            </nav>
-          </div>
-          <div class="login">
-            <ul>
-                <li> <a href="/customer/search/"><button type="submit" style="padding:10px;background-color:#4CAF50;border:none;color:white;display:inline-block"><span class="icon-magnifier search-icon"></span>  SEARCH</button></a></li>
-              <li><a href="{% url 'logout' %}">Logout</a></li>
-            </ul>
-          </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="menu">
+                    <nav>
+                        <ul>
+                            <li><a href="{% url 'Main_index' %}">Food Buggy</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="login">
+                    <ul>
+                        <li> <a href="/customer/search/"><button type="submit" style="padding:10px;background-color:#4CAF50;border:none;color:white;display:inline-block"><span class="icon-magnifier search-icon"></span>  SEARCH</button></a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-
-
-  <!-- SLIDER -->
-  <section class="slider d-flex align-items-center">
-      <!-- <img src="images/slider.jpg" class="img-fluid" alt="#"> -->
-      <div class="container">
-          <div class="row d-flex justify-content-center">
-              <div class="col-md-12">
-                  <div class="slider-title_box">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <div class="slider-content_wrap">
-                                  <h2>Select one of your Address</h2>
-                                  <h5>Let's uncover the best places to eat and drink, nearest to you...</h5>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div>
-                      <div class="row d-flex justify-content-center" >
-                          <div class="col-md-10" style="padding-left:190px" >
-                              <form class="form-wrap mt-4" method="post" id="formid" action="{% url "res_area" %}">
-                                  {% csrf_token %}
-                                  <div class="btn-group" role="group" aria-label="Basic example">
-                                      <select class="btn-group1" placeholder="Select an address" name="area" form="formid">
-                                      {% for value in vals %}
-                                        <option value="{{ value.Address_ID }}"><span>• </span>{{ value.Home }}, {{ value.Street }}, {{ value.area.name}}, {{ value.city.name }}</option>
-                                      {% endfor %}<br>
-                                      </select>
-
-
-                                      <button type="submit" class="btn-form"><span class="icon-check search-icon"></span>SUBMIT<i class="pe-7s-angle-right"></i></button>
-                                  </div>
-                              </form>
-                              <div class="slider-link" style="padding-right:170px">
-                                  <span>Want to add a new address...</span><a href="{% url 'add_address' %}">Click here</a>
-                              </div>
-                          </div>
-                      </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <footer class="saction8">
+</div>
+<!-- SLIDER -->
+<section class="slider d-flex align-items-center">
+    <!-- <img src="images/slider.jpg" class="img-fluid" alt="#"> -->
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12">
+                <div class="slider-title_box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="slider-content_wrap">
+                                <h2>Select one of your Address</h2>
+                                <h5>Let's uncover the best places to eat and drink, nearest to you...</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row d-flex justify-content-center" >
+                            <div class="col-md-10" style="padding-left:190px" >
+                                <form class="form-wrap mt-4" method="post" id="formid" action="{% url "res_area" %}">
+                                    {% csrf_token %}
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <select class="btn-group1" placeholder="Select an address" name="area" form="formid">
+                                            {% for value in vals %}
+                                                <option value="{{ value.Address_ID }}"><span>• </span>{{ value.Home }}, {{ value.Street }}, {{ value.area.name}}, {{ value.city.name }}</option>
+                                            {% endfor %}<br>
+                                        </select>
+                                        <button type="submit" class="btn-form"><span class="icon-check search-icon"></span>SUBMIT<i class="pe-7s-angle-right"></i></button>
+                                    </div>
+                                </form>
+                                <div class="slider-link" style="padding-right:170px">
+                                    <span>Want to add a new address...</span><a href="{% url 'add_address' %}">Click here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="saction8">
     <div class="container" id="contact" style="padding-left:50px">
-      <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <div class="site" >
-            <h3 style="font-family:Roboto">Site Link</h3>
-          </div>
-          <div class="sitelink">
-            <ul>
-              <li> <span>&#10152;</span><a href="#">About Us</a></li>
-              <li><span>&#10152;</span><a href="#">Contact Us</a></li>
-              <li><span>&#10152;</span><a href="#">Privacy Policy</a></li>
-              <li><span>&#10152;</span><a href="#">Terms of Use</a></li>
-            </ul>
-          </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="site" >
+                    <h3 style="font-family:Roboto">Site Link</h3>
+                </div>
+                <div class="sitelink">
+                    <ul>
+                        <li> <span>&#10152;</span><a href="#">About Us</a></li>
+                        <li><span>&#10152;</span><a href="#">Contact Us</a></li>
+                        <li><span>&#10152;</span><a href="#">Privacy Policy</a></li>
+                        <li><span>&#10152;</span><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="site">
+                    <h3 style="font-family:Roboto">Follow us on...</h3>
+                </div>
+                <div class="social">
+                    <ul>
+                        <li> <i class="fa fa-facebook-square"></i><a href="#">Facebook</a></li>
+                        <li><i class="fa fa-twitter-square"></i><a href="#">Twitter</a></li>
+                        <li><i class="fa fa-linkedin-square"></i><a href="#">Linkedin</a></li>
+                        <li><i class="fa fa-google-plus-square"></i><a href="#">Google Plus</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="submit" style="padding-top:85px;padding-left:110px">
+                    <h3>Made with love <span class="icon-heart search-icon"></span>by IIIT, Sricity</h3>
+                </div>
+            </div>
         </div>
-
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <div class="site">
-            <h3 style="font-family:Roboto">Follow us on...</h3>
-          </div>
-          <div class="social">
-            <ul>
-              <li> <i class="fa fa-facebook-square"></i><a href="#">Facebook</a></li>
-              <li><i class="fa fa-twitter-square"></i><a href="#">Twitter</a></li>
-              <li><i class="fa fa-linkedin-square"></i><a href="#">Linkedin</a></li>
-              <li><i class="fa fa-google-plus-square"></i><a href="#">Google Plus</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <div class="submit" style="padding-top:85px;padding-left:110px">
-            <h3>Made with love <span class="icon-heart search-icon"></span>by IIIT, Sricity</h3>
-          </div>
-        </div>
-      </div>
     </div>
-  </footer>
-
+</footer>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

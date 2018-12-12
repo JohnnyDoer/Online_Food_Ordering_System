@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>Add new address</title>
+    <title>Edit Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" type="text/css" href="{% static  "css/bootstrap.min.css" %}">
@@ -12,8 +12,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static  "css/main.css" %}">
 	<link rel="stylesheet" type="text/css" href="{% static  "css/util.css" %}">
 
-    <link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}">
 </head>
+
 <body>
 
 	<div class="limiter">
@@ -23,17 +23,17 @@
 					<img src="{% static "img-01.png" %}" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" method="POST" id="AddressForm" data-areas-url="{% url 'Cus_ajax_load_areas' %}" action="{% url "add_address" %}">
+				<form class="login100-form validate-form" method="POST" action="{% url "Del_edit_profile" %}">
                     {% csrf_token %}
 					<span class="login100-form-title">
-                        Add address
+                        Edit Profile
 					</span>
-                    {% for field in address_form %}
+                    {% for field in form %}
                         {{ field.label_tag }}<br>
-                        <div class="wrap-input100 validate-input input100">
-                            {{ field }}
-                            <span class="focus-input100"></span>
-					    </div>
+					<div class="wrap-input100 validate-input input100">
+                        {{ field }}
+						<span class="focus-input100"></span>
+					</div>
                     {% endfor %}
 
 					<div class="container-login100-form-btn">

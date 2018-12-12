@@ -1,3 +1,5 @@
+import profile
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
@@ -118,3 +120,12 @@ def del_orders(request):
     context = {'orders': orders,'accepted':accepted}
     return render(request, 'Delivery/del_orders.html', context=context)
 
+@login_required(login_url='Del_login')
+def edit_profile(request):
+    print(request.user)
+    instance = Delivery.objects.get(user=request.user)
+    form = DeliveryGuyProfileInfoForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect('Main_index')
+    return render(request, 'Delivery/edit_profile.html', {'form': form})
