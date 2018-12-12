@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Receipt</title>
+    {% load staticfiles %}
 <link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}"> </head>
 <body>
 
@@ -10,7 +11,7 @@
     {{ order.Order_Customer_ID.Customer_Email }} {{ order.Order_Customer_ID.Customer_Phone_Number }}
     {{ order.Order_Time }} {{ order.Order_Total_Price }}
 
-Make a button to go to foodbuggy.
-
+<br>
+<p><a href="{% url 'Cus_index' %}">Back to home</a></p>
 </body>
 </html>

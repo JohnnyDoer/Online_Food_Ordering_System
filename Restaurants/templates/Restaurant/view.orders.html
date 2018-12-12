@@ -8,7 +8,7 @@
 <a class="txt2" href="{% url 'logout' %}">
 							Log out
 						</a>
-  <center><h1>Delivery Orders</h1></center>
+  <center><h1>Restaurant Orders</h1></center>
 {% if orders or accepted %}
     <table class="container">
             <tr bgcolor="#99d5ff">
@@ -30,12 +30,13 @@
                     <form action="{% url 'View_order' %}" method="post">
                         {%  csrf_token %}
                         {% if order.Order_Status == 1 %}
-                            <button type="submit" name="Accepted" value={{ order.Order_ID }}>Accept Order</button>
+                            <button type="submit" name="Accepted" value={{ order.Order_ID }} >Accept Order</button>
                         {% endif %}
                     </form>
                 </td>
             </tr>
             {% endfor %}
+
     </table>
 {% else %}
                         No orders available in Resturant

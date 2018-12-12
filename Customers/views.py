@@ -244,3 +244,11 @@ def edit_profile(request):
         form.save()
         return redirect('Main_index')
     return render(request, 'Customers/edit_profile.html', {'form': form})
+
+@login_required(login_url='Cus_login')
+def show_profile(request):
+    show=Profile.objects.get(user=request.user)
+    add=Address.objects.filter(Customer_ID__user=request.user)
+    print(add)
+    dict={'profile':show,'address':add}
+    return render(request, 'Customers/show_profile.html', context=dict)
