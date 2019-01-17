@@ -17,20 +17,21 @@ class RestaurantPageTests(TestCase):
 
     def test_restaurant_home(self):
         response = self.client.get('/')
-        self.assertEquals(response.status_code,200)
+        self.assertEquals(response.status_code, 200)
 
     def test_restaurant_signup(self):
         c = Client()
-        response = c.post('/restaurant/signup/', {'username': 'save12', 'email': 'eede@gmail.com', 'password': 'asdfghjkl12'})
-        self.assertEquals(response.status_code,200)
+        response = c.post(
+            '/restaurant/signup/', {'username': 'save12', 'email': 'eede@gmail.com', 'password': 'asdfghjkl12'})
+        self.assertEquals(response.status_code, 200)
 
     def test_restaurant_random_url(self):
         response = self.client.get('/randomname/')
-        self.assertEquals(response.status_code,404)
+        self.assertEquals(response.status_code, 404)
 
     def test_restaurant_random_urlentrywithnumbers(self):
         response = self.client.get('/wheer4354e/')
-        self.assertEquals(response.status_code,404)
+        self.assertEquals(response.status_code, 404)
 
 
 class RestaurantAreaViewTests(TestCase):
@@ -60,7 +61,3 @@ class RestaurantindexViewTests(TestCase):
     def test_post_detail_success(self):
         response = self.client.get(reverse(index))
         self.assertEqual(response.status_code, 200)
-
-
-
-

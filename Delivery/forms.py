@@ -6,7 +6,8 @@ from Delivery.models import Delivery, Area, City
 
 class SignUpForm(UserCreationForm):
 
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    email = forms.EmailField(
+        max_length=254, help_text='Required. Inform a valid email address.')
 
     class Meta:
         model = User
@@ -30,8 +31,10 @@ class DeliveryGuyProfileInfoForm(forms.ModelForm):
         if 'city' in self.data:
             try:
                 city_id = int(self.data.get('city'))
-                self.fields['area'].queryset = Area.objects.filter(city_id=city_id).order_by('name')
+                self.fields['area'].queryset = Area.objects.filter(
+                    city_id=city_id).order_by('name')
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty city queryset
         elif self.instance.pk:
-            self.fields['area'].queryset = self.instance.city.area_set.order_by('name')
+            self.fields['area'].queryset = self.instance.city.area_set.order_by(
+                'name')

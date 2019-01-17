@@ -1,7 +1,8 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from Customers.models import Profile
 from Restaurants.models import Restaurant
 from Delivery.models import Delivery
+
 
 def index(request):
 

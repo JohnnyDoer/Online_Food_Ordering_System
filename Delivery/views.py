@@ -56,7 +56,7 @@ def signup(request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return render(request,'Delivery/checkemail.html')
+            return render(request, 'Delivery/checkemail.html')
         else:
             context = {'form': form, }
             return render(request, 'Delivery/signup.html', context=context)
@@ -115,10 +115,13 @@ def del_orders(request):
         elif order.Order_Status == 3:
             order.Order_Status = 4
             order.save()
-    orders = Order.objects.filter(Order_Status=2).filter(Order_Address__area__name=Delivery.objects.get(user=request.user).area.name)
-    accepted = Order.objects.filter(Order_Status=3).filter(Order_Delivery_ID=Delivery.objects.get(user=request.user))
-    context = {'orders': orders,'accepted':accepted}
+    orders = Order.objects.filter(Order_Status=2).filter(
+        Order_Address__area__name=Delivery.objects.get(user=request.user).area.name)
+    accepted = Order.objects.filter(Order_Status=3).filter(
+        Order_Delivery_ID=Delivery.objects.get(user=request.user))
+    context = {'orders': orders, 'accepted': accepted}
     return render(request, 'Delivery/del_orders.html', context=context)
+
 
 @login_required(login_url='Del_login')
 def edit_profile(request):

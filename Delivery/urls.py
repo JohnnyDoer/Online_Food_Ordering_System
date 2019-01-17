@@ -9,6 +9,6 @@ urlpatterns = [
     path('ajax/load-areas/', views.load_areas, name='Del_ajax_load_areas'),
     re_path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
             views.activate, name='Del_activate'),
-    path('del_orders/',views.del_orders,name='Del_orders'),
-path('edit/', views.edit_profile, name='Del_edit_profile'),
+    path('del_orders/', views.del_orders, name='Del_orders'),
+    path('edit/', views.edit_profile, name='Del_edit_profile'),
 ]

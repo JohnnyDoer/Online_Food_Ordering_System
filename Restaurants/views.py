@@ -39,7 +39,7 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user=form.save(commit=False)
+            user = form.save(commit=False)
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
@@ -116,7 +116,8 @@ def activate(request, uidb64, token):
 @login_required(login_url='Res_index')
 def restaurant(request):
     data = Restaurant.objects.get(user=request.user)
-    food = Food.objects.filter(Food_Res_ID=Restaurant.objects.get(user=request.user))
+    food = Food.objects.filter(
+        Food_Res_ID=Restaurant.objects.get(user=request.user))
     context = {'data': data, 'food': food}
     return render(request, 'Restaurant/res_profile.html', context=context)
 
@@ -129,7 +130,8 @@ def add_item(request):
         item.Food_Name = request.POST.get('Food_Name')
         print(request.POST.get('Food_Category'))
         print(type(request.POST.get('Food_Category')))
-        item.Food_Category_ID = FoodCategory.objects.get(FoodCategory_Name=request.POST.get('Food_Category'))
+        item.Food_Category_ID = FoodCategory.objects.get(
+            FoodCategory_Name=request.POST.get('Food_Category'))
         item.Food_Price = request.POST.get('Food_Price')
         item.Food_Discount = request.POST.get('Food_Discount')
         item.save()
@@ -168,14 +170,16 @@ def del_item(request):
 
 @login_required(login_url='Res_index')
 def view_orders(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         order = Order.objects.get(pk=request.POST['Accepted'])
-        if order.Order_Status==1:
+        if order.Order_Status == 1:
             order.Order_Status = 2
-            order.Order_Restaurant_ID=Restaurant.objects.get(user=request.user)
+            order.Order_Restaurant_ID = Restaurant.objects.get(
+                user=request.user)
             order.save()
-    orders = Order.objects.filter(Order_Status=1).filter(Order_Address__area__name=Restaurant.objects.get(user=request.user).area.name)
-    context = {'orders': orders,}
+    orders = Order.objects.filter(Order_Status=1).filter(
+        Order_Address__area__name=Restaurant.objects.get(user=request.user).area.name)
+    context = {'orders': orders, }
     return render(request, 'Restaurant/view.orders.html', context=context)
 
 
@@ -188,4 +192,3 @@ def edit_profile(request):
         form.save()
         return redirect('Main_index')
     return render(request, 'Restaurant/edit_profile.html', {'form': form})
-
