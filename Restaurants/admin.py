@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Restaurant, Food, FoodCategory, Area, City
 
 # Register your models here.

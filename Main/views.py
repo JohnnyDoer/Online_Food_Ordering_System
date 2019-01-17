@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
+
 from Customers.models import Profile
-from Restaurants.models import Restaurant
 from Delivery.models import Delivery
+from Restaurants.models import Restaurant
 
 
 def index(request):
-
     if request.user.is_authenticated:
         if Profile.objects.filter(user=request.user).exists():
             return redirect('Cus_index')

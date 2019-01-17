@@ -18,7 +18,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = "/media/"
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ SECRET_KEY = '+!m)!sp)hsu+f1!$i$ba1zrbd+rke!+7a_*%#-q^-%-^v+$zp8'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -84,7 +82,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ASE_Project.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -106,8 +103,6 @@ DATABASES = {
     }
 }
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -126,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -140,13 +134,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS=[
+STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
@@ -156,7 +149,6 @@ EMAIL_HOST_USER = 'aseproject321@gmail.com'
 EMAIL_HOST_PASSWORD = 'ucandoit456'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
 
 HAYSTACK_CONNECTIONS = {
     'default': {

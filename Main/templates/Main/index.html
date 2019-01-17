@@ -2,181 +2,192 @@
 <html>
 {% load staticfiles %}
 <head>
-<meta charset="utf-8">
-<title>Home Page</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta charset="utf-8">
+    <title>Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-<link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet'
+          type='text/css'/>
 
-<!--MOBILE DEVICE-->
+    <!--MOBILE DEVICE-->
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
 
-<!--CSS-->
-<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css'%}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css'%}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}"/>
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}"/>
 
-<!--JS-->
+    <!--JS-->
 
-<script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/modernizr.js' %}"></script>
-<script src="{% static 'js/scripts.js'%}"></script>
-<script src="{% static 'js/waypoints.min.js'%}"></script>
-<link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}"> </head>
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}">
+</head>
 
 <body>
 <div class="saction1">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="menu">
-          <nav>
-            <ul>
-              <li><a href="#section1">Home</a></li>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#contact">Contact Us</a></li>
-            </ul>
-          </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="menu">
+                    <nav>
+                        <ul>
+                            <li><a href="#section1">Home</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="login">
+                    <ul>
+                        <li><span>•   </span>Login as <a href="{% url 'Cus_login' %}">Customer</a></li>
+                        <li><a href="{% url 'Res_index' %}">Restaurant Manager</a></li>
+                        <li><a href="{% url 'Del_index' %}">Delivery Guy</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="login">
-          <ul>
-            <li><span>•   </span>Login as <a href="{% url 'Cus_login' %}">Customer</a></li>
-            <li><a href="{% url 'Res_index' %}">Restaurant Manager</a></li>
-            <li><a href="{% url 'Del_index' %}">Delivery Guy</a></li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 
-<div id="section1" class="container-fluid" >
-<div id="section9" class="container-fluid">
-   <div class="center">FoodBuggy</div>
-  </div>
+<div id="section1" class="container-fluid">
+    <div id="section9" class="container-fluid">
+        <div class="center">FoodBuggy</div>
+    </div>
 
-<section class="saction3">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="ordaring">
-          <h2 class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.50s" style="color:white;font-family: Allura">Ordering food was never so easy</h2>
+    <section class="saction3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="ordaring">
+                        <h2 class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.50s"
+                            style="color:white;font-family: Allura">Ordering food was never so easy</h2>
 
-          <p class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.50s">Just 4 step process</p>
+                        <p class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.50s">Just 4 step
+                            process</p>
 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <figure class="step os-animation" data-os-animation="fadeInLeft" data-os-animation-delay="0.50s">
+                        <img src="{% static 'images/one.png' %}" alt=""/></figure>
+                    <div class="arrow"><img src="{% static 'images/arrow.png' %}" alt=""/></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <figure class="step os-animation" data-os-animation="fadeInLeft" data-os-animation-delay="1.0s"><img
+                            src="{% static 'images/two.png' %}" alt=""/></figure>
+                    <div class="arrow1 "><img src="{% static 'images/arrow.png' %}" alt=""/></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <figure class="step os-animation" data-os-animation="fadeInLeft" data-os-animation-delay="1.5s"><img
+                            src="{% static 'images/three.png' %}" alt=""/></figure>
+                    <div class="arrow"><img src="{% static 'images/arrow.png' %}" alt=""/></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <figure class="step1 os-animation" data-os-animation="fadeInLeft" data-os-animation-delay="2.0s">
+                        <img src="{% static 'images/four.png' %}" alt=""/></figure>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-3 col-md-3 col-sm-6">
-        <figure class="step os-animation" data-os-animation="fadeInLeft" data-os-animation-delay="0.50s"> <img src="{% static 'images/one.png'%}" alt="" /> </figure>
-        <div class="arrow" > <img src="{% static 'images/arrow.png'%}" alt="" /> </div>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-6">
-        <figure class="step os-animation" data-os-animation="fadeInLeft" data-os-animation-delay="1.0s"> <img src="{% static 'images/two.png'%}" alt="" /> </figure>
-        <div class="arrow1 "> <img src="{% static 'images/arrow.png'%}" alt="" /> </div>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-6">
-        <figure class="step os-animation" data-os-animation="fadeInLeft" data-os-animation-delay="1.5s"> <img src="{% static 'images/three.png'%}" alt="" /> </figure>
-        <div class="arrow"> <img src="{% static 'images/arrow.png'%}" alt="" /> </div>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-6">
-        <figure class="step1 os-animation" data-os-animation="fadeInLeft" data-os-animation-delay="2.0s"> <img src="{% static 'images/four.png'%}" alt="" /> </figure>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="menu" class="main-block light-bg">
+    <section id="menu" class="main-block light-bg">
         <div class="container" id="about">
             <div class="row justify-content-center">
-              <div class="row justify-content-center">
-                  <div class="col-md-5">
-                      <div class="styled-heading">
-                          <h3>About Us</h3>
-                      </div>
-                  </div>
-              </div>
-              <img src="{% static 'images/aboutus.jpg' %}" style="height:300px;width:350px;" align="left">
-              <div style="padding-left:300px;color:black;">
-              <p style="color:black;padding-left:150px;padding-top:100px;font-size:17px;text-align:center">Who are in extremely love with eco friendly system. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-              </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <div class="styled-heading">
+                            <h3>About Us</h3>
+                        </div>
+                    </div>
+                </div>
+                <img src="{% static 'images/aboutus.jpg' %}" style="height:300px;width:350px;" align="left">
+                <div style="padding-left:300px;color:black;">
+                    <p style="color:black;padding-left:150px;padding-top:100px;font-size:17px;text-align:center">Who are
+                        in extremely love with eco friendly system. Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
             </div>
         </div>
-</section>
+    </section>
 
-<section id="menu" class="main-block light-bg">
+    <section id="menu" class="main-block light-bg">
         <div class="container" id="restaurant">
             <div class="row justify-content-center">
-              <div class="col-lg-4 col-md-4 col-sm-4  col-xs-12">
-                  <img src="{% static 'images/plan.png' %}" alt=""/>
-                          <div class="det os-animation">
-                  <h3>100% Service Guarantee </h3>
-                  <p style="color:black">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+                <div class="col-lg-4 col-md-4 col-sm-4  col-xs-12">
+                    <img src="{% static 'images/plan.png' %}" alt=""/>
+                    <div class="det os-animation">
+                        <h3>100% Service Guarantee </h3>
+                        <p style="color:black">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+                    </div>
                 </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-4  col-xs-12">
-                 <img src="{% static 'images/mak.png' %}" alt="" />
-                <div class="det os-animation">
-                  <h3>100% Service Guarantee </h3>
-                  <p style="color:black">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+                <div class="col-lg-4 col-md-4 col-sm-4  col-xs-12">
+                    <img src="{% static 'images/mak.png' %}" alt=""/>
+                    <div class="det os-animation">
+                        <h3>100% Service Guarantee </h3>
+                        <p style="color:black">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+                    </div>
                 </div>
-              </div>
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <img src="{% static 'images/kljj.png' %}" alt=""/>
-                <div class="det os-animation" >
-                  <h3>100% Service Guarantee </h3>
-                  <p style="color:black">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <img src="{% static 'images/kljj.png' %}" alt=""/>
+                    <div class="det os-animation">
+                        <h3>100% Service Guarantee </h3>
+                        <p style="color:black">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+                    </div>
                 </div>
-              </div>
 
             </div>
         </div>
-</section>
+    </section>
 
-<p></p><br><br>
+    <p></p><br><br>
 
-<footer class="saction8">
-  <div class="container" id="contact">
-    <div class="row">
-      <div class="col-lg-3 col-md-3 col-sm-3">
-        <div class="site">
-          <h3>Site Link</h3>
-        </div>
-        <div class="sitelink">
-          <ul>
-            <li> <span>&#10152;</span><a href="#">About Us</a></li>
-            <li><span>&#10152;</span><a href="#">Contact Us</a></li>
-            <li><span>&#10152;</span><a href="#">Privacy Policy</a></li>
-            <li><span>&#10152;</span><a href="#">Terms of Use</a></li>
-          </ul>
-        </div>
-      </div>
+    <footer class="saction8">
+        <div class="container" id="contact">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="site">
+                        <h3>Site Link</h3>
+                    </div>
+                    <div class="sitelink">
+                        <ul>
+                            <li><span>&#10152;</span><a href="#">About Us</a></li>
+                            <li><span>&#10152;</span><a href="#">Contact Us</a></li>
+                            <li><span>&#10152;</span><a href="#">Privacy Policy</a></li>
+                            <li><span>&#10152;</span><a href="#">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                </div>
 
-      <div class="col-lg-3 col-md-3 col-sm-3">
-        <div class="site">
-          <h3>Follow us on...</h3>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="site">
+                        <h3>Follow us on...</h3>
+                    </div>
+                    <div class="social">
+                        <ul>
+                            <li><i class="fa fa-facebook-square"></i><a href="#">Facebook</a></li>
+                            <li><i class="fa fa-twitter-square"></i><a href="#">Twitter</a></li>
+                            <li><i class="fa fa-linkedin-square"></i><a href="#">Linkedin</a></li>
+                            <li><i class="fa fa-google-plus-square"></i><a href="#">Google Plus</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="social">
-          <ul>
-            <li> <i class="fa fa-facebook-square"></i><a href="#">Facebook</a></li>
-            <li><i class="fa fa-twitter-square"></i><a href="#">Twitter</a></li>
-            <li><i class="fa fa-linkedin-square"></i><a href="#">Linkedin</a></li>
-            <li><i class="fa fa-google-plus-square"></i><a href="#">Google Plus</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
+    </footer>
 </div>
 </body>
 </html>

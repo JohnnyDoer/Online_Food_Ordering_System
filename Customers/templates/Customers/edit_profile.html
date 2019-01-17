@@ -7,10 +7,10 @@
     <title>Edit Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" type="text/css" href="{% static  "css/bootstrap.min.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static  "css/font-awesome.min.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static  "css/main1.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static  "css/util.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static  "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static  "css/font-awesome.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static  "css/main1.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static  "css/util.css" %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}">
 </head>
 <body>
@@ -27,10 +27,10 @@
                 </span>
                 {% for field in form %}
                     {{ field.label_tag }}<br>
-                <div class="wrap-input100 validate-input input100">
-                    {{ field }}
-                    <span class="focus-input100"></span>
-                </div>
+                    <div class="wrap-input100 validate-input input100">
+                        {{ field }}
+                        <span class="focus-input100"></span>
+                    </div>
                 {% endfor %}
                 {% if form.errors %}
                     <p style="font-size: 12px;color: red">{{ form.errors.Customer_Phone_Number }}
@@ -43,9 +43,9 @@
                 </div>
                 <div class="text-center p-t-12">
                     {% if user.is_authenticated %}
-                    <a class="txt2" href="{% url 'logout' %}">
-                        Log out
-                    </a>
+                        <a class="txt2" href="{% url 'logout' %}">
+                            Log out
+                        </a>
                     {% else %}
                     {% endif %}
                     <span class="txt1">

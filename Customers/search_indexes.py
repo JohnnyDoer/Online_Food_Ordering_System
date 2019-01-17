@@ -1,5 +1,6 @@
 from haystack import indexes
-from .models import Restaurant, FoodCategory, Food
+
+from .models import Food
 
 
 class FoodIndex(indexes.ModelSearchIndex, indexes.Indexable):

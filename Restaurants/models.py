@@ -1,6 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
+from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
@@ -88,5 +88,5 @@ class Food(models.Model):
     Food_Discount = models.IntegerField(default=0)
 
     def __str__(self):
-        return str(self.Food_Name) + ' in ' + str(self.Food_Category_ID.FoodCategory_Name)\
-            + ' from ' + str(self.Food_Res_ID.Restaurant_Name)
+        return str(self.Food_Name) + ' in ' + str(self.Food_Category_ID.FoodCategory_Name) \
+               + ' from ' + str(self.Food_Res_ID.Restaurant_Name)

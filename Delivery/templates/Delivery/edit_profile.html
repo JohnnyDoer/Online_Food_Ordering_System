@@ -7,77 +7,77 @@
     <title>Edit Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" type="text/css" href="{% static  "css/bootstrap.min.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static  "css/font-awesome.min.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static  "css/main3.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static  "css/util.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static  "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static  "css/font-awesome.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static  "css/main3.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static  "css/util.css" %}">
 
 </head>
 
 <body>
 
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
-					<img src="{% static "img-01.png" %}" alt="IMG">
-				</div>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="{% static "img-01.png" %}" alt="IMG">
+            </div>
 
-				<form class="login100-form validate-form" method="POST" action="{% url "Del_edit_profile" %}">
-                    {% csrf_token %}
-					<span class="login100-form-title">
+            <form class="login100-form validate-form" method="POST" action="{% url "Del_edit_profile" %}">
+                {% csrf_token %}
+                <span class="login100-form-title">
                         Edit Profile
 					</span>
-                    {% for field in form %}
-                        {{ field.label_tag }}<br>
-					<div class="wrap-input100 validate-input input100">
+                {% for field in form %}
+                    {{ field.label_tag }}<br>
+                    <div class="wrap-input100 validate-input input100">
                         {{ field }}
-						<span class="focus-input100"></span>
-					</div>
-                    {% endfor %}
+                        <span class="focus-input100"></span>
+                    </div>
+                {% endfor %}
 
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" type="submit" value="signup">
-							Submit
-						</button>
-					</div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit" value="signup">
+                        Submit
+                    </button>
+                </div>
 
-					<div class="text-center p-t-12">
-                        {% if user.is_authenticated %}
-						<a class="txt2" href="{% url 'logout' %}">
-							Log out
-						</a>
-                        {% else %}
-                        {% endif %}
-                        <span class="txt1">
+                <div class="text-center p-t-12">
+                    {% if user.is_authenticated %}
+                        <a class="txt2" href="{% url 'logout' %}">
+                            Log out
+                        </a>
+                    {% else %}
+                    {% endif %}
+                    <span class="txt1">
 							here...
 						</span>
-					</div>
+                </div>
 
-                </form>
-			</div>
-		</div>
-	</div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script>
+<script>
     $("#id_city").change(function () {
-      var url = $("#AddressForm").data("areas-url");  // get the url of the `load_cities` view
-      var cityId = $(this).val();  // get the selected country ID from the HTML input
+        var url = $("#AddressForm").data("areas-url");  // get the url of the `load_cities` view
+        var cityId = $(this).val();  // get the selected country ID from the HTML input
 
-      $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-        data: {
-          'city': cityId       // add the country id to the GET parameters
-        },
-        success: function (data) {   // `data` is the return of the `load_cities` view function
-          $("#id_area").html(data);  // replace the contents of the city input with the data that came from the server
-        }
-      });
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+            data: {
+                'city': cityId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_area").html(data);  // replace the contents of the city input with the data that came from the server
+            }
+        });
 
     });
-  </script>
+</script>
 
 </html>
 

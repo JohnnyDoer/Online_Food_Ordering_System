@@ -1,13 +1,14 @@
 <!doctype html>
 <html>
-{%  load staticfiles %}
+{% load staticfiles %}
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <title>Restaurants</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
     <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet'
+          type='text/css'/>
 
     <!--MOBILE DEVICE-->
 
@@ -17,13 +18,13 @@
     <link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
 
     <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css'%}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css'%}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css'%}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/simple-line-icons.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/simple-line-icons.css' %}"/>
 
     <!--JS-->
 
@@ -41,14 +42,19 @@
                 <div class="menu">
                     <nav>
                         <ul>
-                            <li><a href="{%  url 'Main_index' %}">Food Buggy</a></li>
+                            <li><a href="{% url 'Main_index' %}">Food Buggy</a></li>
                             <li><a href="#contact">Contact Us</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="login">
                     <ul>
-                        <li> <a href="/customer/search/"><button type="submit" style="padding:4px;background-color:#4CAF50;border:none;color:white;display:inline-block"><span class="icon-magnifier search-icon"></span>Search</button></a></li>
+                        <li><a href="/customer/search/">
+                            <button type="submit"
+                                    style="padding:4px;background-color:#4CAF50;border:none;color:white;display:inline-block">
+                                <span class="icon-magnifier search-icon"></span>Search
+                            </button>
+                        </a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </div>
@@ -57,73 +63,73 @@
     </div>
 </section>
 <br><br><br>
-<div id="section1" class="container-fluid" style="backgroud-color:white" >
-<section id="menu" class="main-block light-bg">
-    <div class="container" id="restaurant">
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="styled-heading">
-                    <h3>Featured places in {{ data }}</h3>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            {% for items in filter_res %}
-                <div class="col-md-4 featured-responsive">
-                    <div class="featured-place-wrap">
-                        <a href="/customer/res_area/?res_id={{ items.Restaurant_ID }}">
-                            <img src="{% static 'images/featured2.jpg' %}" class="img-fluid" alt="#">
-                            <div class="featured-title-box">
-                                <h6>{{ items.Restaurant_Name }}</h6>
-                                <ul>
-                                    <li><span class="icon-screen-smartphone"></span>
-                                        <p>{{ items.Restaurant_Phone_Number }}</p>
-                                    </li>
-                                    <li><span class="icon-link"></span>
-                                        <p>{{ items.Restaurant_Email }}</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </a>
+<div id="section1" class="container-fluid" style="backgroud-color:white">
+    <section id="menu" class="main-block light-bg">
+        <div class="container" id="restaurant">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="styled-heading">
+                        <h3>Featured places in {{ data }}</h3>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    </div>
-</section><!--//END FEATURED PLACES -->
-<br><br>
-<footer class="saction8">
-    <div class="container" id="contact">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="site">
-                    <h3>Site Link</h3>
-                </div>
-                <div class="sitelink">
-                    <ul>
-                        <li> <span>&#10152;</span><a href="#">About Us</a></li>
-                        <li><span>&#10152;</span><a href="#">Contact Us</a></li>
-                        <li><span>&#10152;</span><a href="#">Privacy Policy</a></li>
-                        <li><span>&#10152;</span><a href="#">Terms of Use</a></li>
-                    </ul>
-                </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="site">
-                    <h3>Follow us on...</h3>
-                </div>
-                <div class="social">
-                    <ul>
-                        <li> <i class="fa fa-facebook-square"></i><a href="#">Facebook</a></li>
-                        <li><i class="fa fa-twitter-square"></i><a href="#">Twitter</a></li>
-                        <li><i class="fa fa-linkedin-square"></i><a href="#">Linkedin</a></li>
-                        <li><i class="fa fa-google-plus-square"></i><a href="#">Google Plus</a></li>
-                    </ul>
-                </div>
+            <div class="row">
+                {% for items in filter_res %}
+                    <div class="col-md-4 featured-responsive">
+                        <div class="featured-place-wrap">
+                            <a href="/customer/res_area/?res_id={{ items.Restaurant_ID }}">
+                                <img src="{% static 'images/featured2.jpg' %}" class="img-fluid" alt="#">
+                                <div class="featured-title-box">
+                                    <h6>{{ items.Restaurant_Name }}</h6>
+                                    <ul>
+                                        <li><span class="icon-screen-smartphone"></span>
+                                            <p>{{ items.Restaurant_Phone_Number }}</p>
+                                        </li>
+                                        <li><span class="icon-link"></span>
+                                            <p>{{ items.Restaurant_Email }}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
-</footer>
+    </section><!--//END FEATURED PLACES -->
+    <br><br>
+    <footer class="saction8">
+        <div class="container" id="contact">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="site">
+                        <h3>Site Link</h3>
+                    </div>
+                    <div class="sitelink">
+                        <ul>
+                            <li><span>&#10152;</span><a href="#">About Us</a></li>
+                            <li><span>&#10152;</span><a href="#">Contact Us</a></li>
+                            <li><span>&#10152;</span><a href="#">Privacy Policy</a></li>
+                            <li><span>&#10152;</span><a href="#">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="site">
+                        <h3>Follow us on...</h3>
+                    </div>
+                    <div class="social">
+                        <ul>
+                            <li><i class="fa fa-facebook-square"></i><a href="#">Facebook</a></li>
+                            <li><i class="fa fa-twitter-square"></i><a href="#">Twitter</a></li>
+                            <li><i class="fa fa-linkedin-square"></i><a href="#">Linkedin</a></li>
+                            <li><i class="fa fa-google-plus-square"></i><a href="#">Google Plus</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 

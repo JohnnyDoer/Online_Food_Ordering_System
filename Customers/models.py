@@ -1,10 +1,12 @@
-from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 from django.core.validators import MaxValueValidator
-from Restaurants.models import Restaurant, FoodCategory, Food
-from Delivery.models import Delivery
+from django.db import models
+from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
+
+from Delivery.models import Delivery
+from Restaurants.models import Restaurant, FoodCategory, Food
+
 # Create your models here.
 
 areas = (('Cunninghum Road', 'Cunninghum Road'),

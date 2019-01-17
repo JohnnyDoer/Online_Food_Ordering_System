@@ -1,10 +1,8 @@
-
 # Create your tests here.
 import unittest
+
 from django.contrib.auth.models import User
 from django.test import TestCase, Client
-from Customers.models import Area, City, Item, Order, Food, Restaurant, FoodCategory, Profile, Address
-from django.contrib.auth.models import User
 
 
 class DeliveryPageTests(TestCase):

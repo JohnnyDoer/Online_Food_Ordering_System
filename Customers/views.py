@@ -1,20 +1,19 @@
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
-from .models import Address, Profile, CartItems, Item, Order, Area, City
-from .forms import SignUpForm, UserProfileInfoForm, AddressInfoForm, CustomUserEditForm
-from .tokens import account_activation_token
+
 from Restaurants.models import Restaurant, Food, FoodCategory
-from django.views.generic import CreateView
-from django.urls import reverse_lazy
+from .forms import SignUpForm, UserProfileInfoForm, AddressInfoForm, CustomUserEditForm
+from .models import Address, Profile, CartItems, Item, Order, Area
+from .tokens import account_activation_token
 
 cuisines = ['Lunch', 'Brunch', 'Dinner']
 
@@ -75,7 +74,8 @@ def profile_page(request):
         elif not profile_form.is_valid():
             print(profile_form.errors)
         else:
-            return render(request, 'customers/profile.html', {'Profile_form': profile_form, 'address_form': address_form})
+            return render(request, 'customers/profile.html',
+                          {'Profile_form': profile_form, 'address_form': address_form})
     else:
         profile_form = UserProfileInfoForm()
         address_form = AddressInfoForm()
@@ -188,7 +188,7 @@ def add_to_cart(request):
         cart_object.Quantity = int(request.POST.get('Quantity'))
         if cart_object.Quantity > 0:
             cart_object.save()
-#        my_dict = {'items': CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))}
+        #        my_dict = {'items': CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))}
         return redirect('Cus_resinfo')
 
 
@@ -220,8 +220,8 @@ def receipt(request):
             item.Item_Order_ID = Order.objects.get(Order_ID=order.Order_ID)
             item.Item_Quantity = c_item.Quantity
             item.Item_Price = (c_item.Cart_Food_ID.Food_Price -
-                               (c_item.Cart_Food_ID.Food_Discount*100 /
-                                c_item.Cart_Food_ID.Food_Price))*c_item.Quantity
+                               (c_item.Cart_Food_ID.Food_Discount * 100 /
+                                c_item.Cart_Food_ID.Food_Price)) * c_item.Quantity
             item.save()
 
         items = Item.objects.filter(Item_Order_ID=order.Order_ID)

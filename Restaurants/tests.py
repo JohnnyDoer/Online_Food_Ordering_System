@@ -1,11 +1,10 @@
-
 # Create your tests here.
-from django.test import TestCase
-from .models import Area, City
 # Create your tests here.
 from django.test import TestCase, Client
 from django.urls import reverse
+
 from Restaurants.views import load_areas, index
+from .models import Area, City
 
 
 # The function 'reverse' resolves a view name and its arguments into a path

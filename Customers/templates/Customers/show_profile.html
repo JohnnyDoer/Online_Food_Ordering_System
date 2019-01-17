@@ -5,86 +5,88 @@
 
 <div class="container">
     <h3><a href="{% url 'Cus_index' %}">Back to home</a></h3>
-	    <div class="col-md-9">
-		    <div class="card">
-		        <div class="card-body">
-		            <div class="row">
-		                <div class="col-md-12">
-		                    <h4>Your Profile</h4>
-		                    <hr>
-		                </div>
-		            </div>
-		            <div class="row">
-		                <div class="col-md-12">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Your Profile</h4>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
 
-                              <div class="form-group row">
-                                <label for="name" class="col-4 col-form-label">First Name</label>
-                                <div class="col-8">
-                                    :{{ profile.Customer_First_Name }}
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="lastname" class="col-4 col-form-label">Last Name</label>
-                                <div class="col-8">
-                                    :{{ profile.Customer_Last_Name }}
-                                </div>
-                              </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-4 col-form-label">First Name</label>
+                            <div class="col-8">
+                                :{{ profile.Customer_First_Name }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lastname" class="col-4 col-form-label">Last Name</label>
+                            <div class="col-8">
+                                :{{ profile.Customer_Last_Name }}
+                            </div>
+                        </div>
 
-                              <div class="form-group row">
-                                <label for="Number" class="col-4 col-form-label">Number</label>
-                                <div class="col-8">
-                                    :{{ profile.Customer_Phone_Number }}
-                                </div>
-                              </div>
-                        <p style="color:orangered">You have  {{ address.count }} Addresses</p>
-                            {% for addre in address %}
+                        <div class="form-group row">
+                            <label for="Number" class="col-4 col-form-label">Number</label>
+                            <div class="col-8">
+                                :{{ profile.Customer_Phone_Number }}
+                            </div>
+                        </div>
+                        <p style="color:orangered">You have {{ address.count }} Addresses</p>
+                        {% for addre in address %}
 
-                              <div class="form-group row">
+                            <div class="form-group row">
                                 <label for="Home" class="col-4 col-form-label">Home</label>
                                 <div class="col-8">
                                     :{{ addre.Home }}
                                 </div>
-                              </div>
+                            </div>
 
-                              <div class="form-group row">
+                            <div class="form-group row">
                                 <label for="Street" class="col-4 col-form-label">Street</label>
                                 <div class="col-8">
                                     :{{ addre.Street }}
                                 </div>
-                              </div>
+                            </div>
 
-                              <div class="form-group row">
+                            <div class="form-group row">
                                 <label for="city" class="col-4 col-form-label">City</label>
                                 <div class="col-8">
                                     :{{ addre.city }}
                                 </div>
-                              </div>
+                            </div>
 
-                              <div class="form-group row">
+                            <div class="form-group row">
                                 <label for="area" class="col-4 col-form-label">Area</label>
                                 <div class="col-8">
                                     :{{ addre.area }}
                                 </div>
-                              </div>
+                            </div>
 
-                              <div class="form-group row">
+                            <div class="form-group row">
                                 <label for="pin" class="col-4 col-form-label">PIN</label>
                                 <div class="col-8">
                                     :{{ addre.Pin }}
                                 </div>
-                              </div>
-                            {% endfor %}
-                              <div class="form-group row">
-                                <div class="offset-4 col-8">
-                                    <br><p style="font-size: 20px; " ><a href="{% url 'Cus_edit_profile' %}" style="text-align:left">Edit My Profile</a></p>
-                                </div>
-                              </div>
-                              </div>
-		                </div>
-		            </div>
+                            </div>
+                        {% endfor %}
+                        <div class="form-group row">
+                            <div class="offset-4 col-8">
+                                <br>
+                                <p style="font-size: 20px; "><a href="{% url 'Cus_edit_profile' %}"
+                                                                style="text-align:left">Edit My Profile</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-		        </div>
-		    </div>
-		</div>
-	</div>
+        </div>
+    </div>
+</div>
+</div>
 </div>

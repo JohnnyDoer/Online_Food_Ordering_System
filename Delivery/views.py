@@ -1,20 +1,19 @@
-import profile
-
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import DeliveryGuyProfileInfoForm, SignUpForm
-from .models import Delivery, Area
-from Customers.models import Order
-from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
+
+from Customers.models import Order
+from .forms import DeliveryGuyProfileInfoForm, SignUpForm
+from .models import Delivery, Area
 from .tokens import account_activation_token
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 
 
 def index(request):

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 {% load staticfiles %}
 <head>
     <meta charset="UTF-8">
@@ -45,8 +45,8 @@
         <label class="product-removal">Remove</label>
     </div>
     {% for item in items %}
-        <form method="POST" action="{% url 'Cus_delete' %}" >
-        {% csrf_token %}
+        <form method="POST" action="{% url 'Cus_delete' %}">
+            {% csrf_token %}
             <div class="product">
                 <div class="product-details">
                     <div class="product-title"><p style="font-size: 19px;">{{ item.Cart_Food_ID.Food_Name }}</p></div>
@@ -56,7 +56,7 @@
                     {{ item.Cart_Food_ID.Food_Discount }}
                 </div>
                 <div class="product-quantity">
-                    {{ item.Quantity}}
+                    {{ item.Quantity }}
                 </div>
                 <div class="product-removal">
                     <button class="remove-product" name="delete" type="submit" value="{{ item.Cart_ID }}">
@@ -67,9 +67,12 @@
         </form>
     {% endfor %}
     {% if items %}
-        <a href={% url 'Cus_receipt' %}><button class="checkout">Checkout</button></a>
+        <a href={% url 'Cus_receipt' %}>
+            <button class="checkout">Checkout</button>
+        </a>
     {% else %}
-        <bold><p style="text-align: center;color: #FF0000;font-family: 'Bitstream Vera Sans Mono';font-size: 25px">Your cart is empty</p></bold>
+        <bold><p style="text-align: center;color: #FF0000;font-family: 'Bitstream Vera Sans Mono';font-size: 25px">Your
+            cart is empty</p></bold>
     {% endif %}
 </div>
 </body>

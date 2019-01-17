@@ -1,18 +1,19 @@
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
-from Customers.models import Order
-from .models import Restaurant, Food, Area, FoodCategory
-from .forms import SignUpForm, RestaurantProfileInfoForm, FoodEditForm
-from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
+
+from Customers.models import Order
+from .forms import SignUpForm, RestaurantProfileInfoForm, FoodEditForm
+from .models import Restaurant, Food, Area, FoodCategory
 from .tokens import account_activation_token
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 
 
 def index(request):

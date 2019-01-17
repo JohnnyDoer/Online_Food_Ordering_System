@@ -1,7 +1,8 @@
-from django.db import models
 from django.contrib.auth.models import User
-from Restaurants.models import Restaurant, FoodCategory, Food
+from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+
+from Restaurants.models import Restaurant, FoodCategory, Food
 
 # Create your models here.
 

@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Categories</title>
-<link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}"> </head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'food-logos.jpg' %}">
+</head>
 <body>
 <p>All types of cuisine is shown here.</p>
 
-    {% for cuisine in cuisines %}
-        <h4><a href="#">{{ cuisine }}</a></h4>
-    {% endfor %}
+{% for cuisine in cuisines %}
+    <h4><a href="#">{{ cuisine }}</a></h4>
+{% endfor %}
 </body>
 </html>
