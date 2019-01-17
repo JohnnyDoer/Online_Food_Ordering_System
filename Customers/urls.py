@@ -20,6 +20,6 @@ urlpatterns = [
     path('delete/', views.delete, name='Cus_delete'),
     path('Receipt/', views.receipt, name='Cus_receipt'),
     path('edit/', views.edit_profile, name='Cus_edit_profile'),
-path('your_profile/', views.show_profile, name='Cus_show_profile'),
+    path('your_profile/', views.show_profile, name='Cus_show_profile'),
     path('search/', include('haystack.urls')),
 ]

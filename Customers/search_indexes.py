@@ -2,7 +2,6 @@ from haystack import indexes
 from .models import Restaurant, FoodCategory, Food
 
 
-
 class FoodIndex(indexes.ModelSearchIndex, indexes.Indexable):
     class Meta:
         model = Food
@@ -13,4 +12,3 @@ class FoodIndex(indexes.ModelSearchIndex, indexes.Indexable):
 
     def index_queryset(self, using=None):
         return self.get_model().objects.all()
-

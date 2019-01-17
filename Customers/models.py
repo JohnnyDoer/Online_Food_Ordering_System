@@ -57,6 +57,7 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
+
 class Area(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
@@ -77,19 +78,23 @@ class Address(models.Model):
 
 class Order(models.Model):
     Order_ID = models.AutoField(primary_key=True)
-    Order_Customer_ID = models.ForeignKey(Profile, on_delete=models.PROTECT, null=True)
-    Order_Address = models.ForeignKey(Address, on_delete=models.PROTECT, null=True)
-    Order_Restaurant_ID = models.ForeignKey(Restaurant, on_delete=models.PROTECT, null=True)
-    Order_Delivery_ID = models.ForeignKey(Delivery, on_delete=models.PROTECT, null=True)
+    Order_Customer_ID = models.ForeignKey(
+        Profile, on_delete=models.PROTECT, null=True)
+    Order_Address = models.ForeignKey(
+        Address, on_delete=models.PROTECT, null=True)
+    Order_Restaurant_ID = models.ForeignKey(
+        Restaurant, on_delete=models.PROTECT, null=True)
+    Order_Delivery_ID = models.ForeignKey(
+        Delivery, on_delete=models.PROTECT, null=True)
     Order_Status = models.IntegerField(MaxValueValidator(5), null=True)
     Order_Time = models.DateTimeField(default=timezone.now, null=True)
     Order_Total_Price = models.IntegerField(default=0, null=True)
 
 
-
 class Item(models.Model):
     Item_ID = models.AutoField(primary_key=True)
-    Item_Order_ID = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)
+    Item_Order_ID = models.ForeignKey(
+        Order, on_delete=models.CASCADE, null=True)
     Item_Food_ID = models.ForeignKey(Food, on_delete=models.CASCADE)
     Item_Quantity = models.IntegerField(MaxValueValidator(10))
     Item_Price = models.IntegerField(default=0)

@@ -41,6 +41,7 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
+
 class Area(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)

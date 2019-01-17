@@ -13,7 +13,7 @@ from .models import Address, Profile, CartItems, Item, Order, Area, City
 from .forms import SignUpForm, UserProfileInfoForm, AddressInfoForm, CustomUserEditForm
 from .tokens import account_activation_token
 from Restaurants.models import Restaurant, Food, FoodCategory
-from django.views.generic import  CreateView
+from django.views.generic import CreateView
 from django.urls import reverse_lazy
 
 cuisines = ['Lunch', 'Brunch', 'Dinner']
@@ -21,7 +21,8 @@ cuisines = ['Lunch', 'Brunch', 'Dinner']
 
 @login_required(login_url='Main_index')
 def index(request):
-    vals = Address.objects.filter(Customer_ID=Profile.objects.get(user=request.user))
+    vals = Address.objects.filter(
+        Customer_ID=Profile.objects.get(user=request.user))
     pic = Profile.objects.get(user=request.user)
     context = {'vals': vals, 'pic': pic}
     return render(request, 'Customers/index.html', context=context)
@@ -138,14 +139,15 @@ def categories(request):
 def restaurants(request):
     global res_id
     if request.GET.get('res_id'):
-        res_id=request.GET.get('res_id')
+        res_id = request.GET.get('res_id')
         return redirect('http://127.0.0.1:8000/customer/res_info')
     else:
         global data_address
         data_address = request.POST['area']
-        filter_res = Restaurant.objects.filter(area__name=Address.objects.get(pk=data_address).area.name)
+        filter_res = Restaurant.objects.filter(
+            area__name=Address.objects.get(pk=data_address).area.name)
         address = Address.objects.get(pk=data_address).area.name
-        context = {'filter_res': filter_res, 'data':address}
+        context = {'filter_res': filter_res, 'data': address}
         return render(request, 'Customers/filter_res.html', context=context)
 
 
@@ -168,11 +170,11 @@ def add_address(request):
             address.save()
             return redirect('http://127.0.0.1:8000/customer')
         else:
-            context={'address_form': address_form}
+            context = {'address_form': address_form}
             return render(request, 'Customers/add_address.html', context=context)
     else:
-        address_form=AddressInfoForm(data=request.POST)
-        context={'address_form': address_form}
+        address_form = AddressInfoForm(data=request.POST)
+        context = {'address_form': address_form}
         return render(request, 'Customers/add_address.html', context=context)
 
 
@@ -192,7 +194,8 @@ def add_to_cart(request):
 
 @login_required(login_url='Cus_login')
 def cart(request):
-    items = CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))
+    items = CartItems.objects.filter(
+        Cart_Customer_ID=Profile.objects.get(user=request.user))
     context = {'items': items}
     return render(request, 'Customers/cart.html', context=context)
 
@@ -206,7 +209,8 @@ def delete(request):
 
 @login_required(login_url='Cus_login')
 def receipt(request):
-    c_items = CartItems.objects.filter(Cart_Customer_ID=Profile.objects.get(user=request.user))
+    c_items = CartItems.objects.filter(
+        Cart_Customer_ID=Profile.objects.get(user=request.user))
     if c_items:
         order = Order()
         order.save()
@@ -232,9 +236,9 @@ def receipt(request):
             order.Order_Total_Price += item.Item_Price
         order.save()
         c_items.delete()
-        context = {'order': order,'items':order.item_set.all()}
+        context = {'order': order, 'items': order.item_set.all()}
         return render(request, 'Customers/receipt.html', context=context)
-    else :
+    else:
         return redirect('Cus_index')
 
 
@@ -250,8 +254,8 @@ def edit_profile(request):
 
 @login_required(login_url='Cus_login')
 def show_profile(request):
-    show=Profile.objects.get(user=request.user)
-    add=Address.objects.filter(Customer_ID__user=request.user)
+    show = Profile.objects.get(user=request.user)
+    add = Address.objects.filter(Customer_ID__user=request.user)
     print(add)
-    dict={'profile':show,'address':add}
+    dict = {'profile': show, 'address': add}
     return render(request, 'Customers/show_profile.html', context=dict)

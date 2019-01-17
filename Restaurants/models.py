@@ -41,6 +41,7 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
+
 class Area(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
@@ -79,7 +80,8 @@ class Food(models.Model):
     Food_ID = models.AutoField(primary_key=True)
     Food_Name = models.CharField(max_length=250)
     Food_Res_ID = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    Food_Category_ID = models.ForeignKey(FoodCategory, on_delete=models.CASCADE)
+    Food_Category_ID = models.ForeignKey(
+        FoodCategory, on_delete=models.CASCADE)
     Food_Price = models.IntegerField()
     Food_Pic = models.ImageField(upload_to='media',
                                  default='media/default_food.jpg')
@@ -87,4 +89,4 @@ class Food(models.Model):
 
     def __str__(self):
         return str(self.Food_Name) + ' in ' + str(self.Food_Category_ID.FoodCategory_Name)\
-               + ' from ' + str(self.Food_Res_ID.Restaurant_Name)
+            + ' from ' + str(self.Food_Res_ID.Restaurant_Name)
